@@ -18,3 +18,6 @@ export const routes: Routes = [
     { path: 'editProfile', component: EditProfileComponent },
     { path: 'favProduct', component: FavProductComponent },
 ];
+
+
+

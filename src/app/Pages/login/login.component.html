@@ -1,73 +1,3 @@
-<!-- <section class="container mx-auto flex justify-center items-center gap-20 h-screen">
-    <figure class="max-w-[500px] hidden md:block">
-        <img class="w-full" src="login.png" alt="" />
-    </figure>
-    <div class="md:min-w-[400px]">
-        <div class="flex items-center justify-center md:justify-start">
-            <img src="logo.svg" alt="logo" />
-            <span class="text-3xl text-main-500 font-bold">Craftopia</span>
-        </div>
-        <h1 class="font-bold text-main-800 text-5xl my-5 text-center md:text-left">Login</h1>
-        <form class="flex flex-col gap-7">
-            <div class="relative">
-                <input
-                    type="text"
-                    id="name"
-                    placeholder=" "
-                    class="peer w-full border-4 border-main pl-1 pt-2 pb-1 focus:outline-none"
-                />
-                <label
-                    for="name"
-                    class="absolute font-semibold text-lg left-1 top-1/2 -translate-y-1/2 text-gray-500 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:-translate-y-1/2 peer-focus:top-0 peer-focus:text-xs peer-focus:text-main bg-main-50 px-1"
-                >
-                    Email
-                </label>
-            </div>
-            <div class="relative">
-                <input
-                    type="text"
-                    id="password"
-                    placeholder=" "
-                    class="peer border-4 border-main pl-1 pt-2 pb-1 w-full focus:outline-none"
-                />
-                <label
-                    for="password"
-                    class="absolute font-semibold text-lg left-1 top-1/2 -translate-y-1/2 text-gray-500 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:-translate-y-1/2 peer-focus:top-0 peer-focus:text-xs peer-focus:text-main bg-main-50 px-1"
-                >
-                    Password
-                </label>
-            </div>
-            <div class="items-center flex gap-1.5">
-                <input
-                    type="checkbox"
-                    name="remember-me"
-                    id="remember-me"
-                    class="size-4 accent-main rounded-3xl"
-                />
-                <label for="remember-me" class="text-main text-lg">Remember me</label>
-            </div>
-            <button class="btn-primary"><a href="/">Login</a></button>
-            <div class="relative">
-                <div class="w-full h-[1px] bg-gray-300"></div>
-                <span
-                    class="absolute bg-main-50 px-3 text-gray-300 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                    >OR</span
-                >
-            </div>
-            <button class="btn-secondary">
-                <img src="google-icon.svg" alt="google-login" />
-                <a href="/">Login With Google</a>
-            </button>
-        </form>
-        <div class="mt-5 flex gap-1 justify-center">
-            <span class="text-gray-500 text-sm">Don’t have account?</span>
-            <a
-                class="text-main font-semibold cursor-pointer underline hover:text-main-500 transition active:text-main-800"
-                >Sign Up</a
-            >
-        </div>
-    </div>
-</section> -->
 
 <section class="container mx-auto flex justify-center items-center h-screen">
     <figure class="w-1/2 max-w-[30rem] hidden md:block">
@@ -81,7 +11,7 @@
                 <span class="text-3xl text-main-500 font-bold">Craftopia</span>
             </div>
             <h1 class="font-bold text-main-800 text-5xl my-5 text-center md:text-left">Login</h1>
-            <form [formGroup]="form" class="flex flex-col gap-7 md:max-w-[25rem]">
+            <form [formGroup]="form" class="flex flex-col gap-7 md:max-w-[25rem]" (ngSubmit)="onSubmit()">
                 <div>
                     <div class="relative">
                         <input
@@ -139,7 +69,7 @@
                     />
                     <label for="remember-me" class="text-main text-lg">Remember me</label>
                 </div>
-                <button class="btn-primary"><a href="/">Login</a></button>
+                <button class="btn-primary"><a>Login</a></button>
                 <div class="relative">
                     <div class="w-full h-[1px] bg-gray-300"></div>
                     <span
@@ -149,7 +79,7 @@
                 </div>
                 <button class="btn-secondary">
                     <img src="google-icon.svg" alt="google-login" />
-                    <a href="/">Login With Google</a>
+                    <a>Login With Google</a>
                 </button>
             </form>
             <div class="mt-5 flex gap-1 justify-center">
