@@ -7,6 +7,7 @@ import { ProductDetailsComponent } from './Pages/product-details/product-details
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { EditProfileComponent } from './Pages/edit-profile/edit-profile.component';
 import { FavProductComponent } from './Pages/fav-product/fav-product.component';
+import { HomeComponent } from './Pages/home/home.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -17,6 +18,8 @@ export const routes: Routes = [
     { path: 'contactus', component: ContactUsComponent },
     { path: 'editProfile', component: EditProfileComponent },
     { path: 'favProduct', component: FavProductComponent },
+    { path: 'home', component: HomeComponent },
+
 ];
 
 

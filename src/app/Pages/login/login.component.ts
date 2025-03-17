@@ -12,7 +12,7 @@ import { AuthService } from '../../Services/auth.service';
 export class LoginComponent {
    
     
-    
+    errorMessage = false;
     eye = 'icons/eye.svg';
     passType = 'password';
     form = new FormGroup({
@@ -45,12 +45,14 @@ export class LoginComponent {
                     console.log('login , successful', response);   
                 },
                 error: (error) => {
+                    this.errorMessage = true;
                     console.log(error);
+                    
                 }
             },
         )
     }   
-    }
+}
 }
 
 // {

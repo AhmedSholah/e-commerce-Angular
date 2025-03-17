@@ -9,7 +9,7 @@
                 <span class="text-3xl text-main-500 font-bold">Craftopia</span>
             </div>
             <h1 class="font-bold text-main-800 text-5xl my-5 text-center md:text-left">SignUp</h1>
-            <form [formGroup]="form" class="flex flex-col gap-5 md:max-w-[25rem]">
+            <form [formGroup]="form" class="flex flex-col gap-5 md:max-w-[25rem]" (ngSubmit)="onSubmit()">
                 <div>
                     <div class="relative">
                         <input
@@ -19,7 +19,7 @@
                             placeholder=" "
                             class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
                         />
-                        <label for="name" class="btn-label"> Name </label>
+                        <label for="name" class="btn btn-label"> Name </label>
                     </div>
                     <div
                         *ngIf="name?.invalid && name?.touched"
@@ -38,7 +38,7 @@
                             placeholder=" "
                             class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
                         />
-                        <label for="email" class="btn-label"> Email </label>
+                        <label for="email" class="btn btn-label"> Email </label>
                     </div>
                     <div
                         *ngIf="email?.invalid && email?.touched"
@@ -58,7 +58,7 @@
                             placeholder=" "
                             class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
                         />
-                        <label for="password" class="btn-label"> Password </label>
+                        <label for="password" class="btn btn-label"> Password </label>
                         <div
                             class="icon-Container absolute right-3 top-0 transform: transform translate-y-1/2 cursor-pointer"
                         >
@@ -86,7 +86,7 @@
                             placeholder=" "
                             class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
                         />
-                        <label for="confirmPassword" class="btn-label"> Confirm Password </label>
+                        <label for="confirmPassword" class="btn btn-label"> Confirm Password </label>
                         <div
                             class="icon-Container absolute right-3 top-0 transform: transform translate-y-1/2 cursor-pointer"
                         >

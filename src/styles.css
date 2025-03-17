@@ -97,10 +97,9 @@ html {
         h-8 w-full text-sm px-4;
 }
 
-.bt .btn-label {
+.btn.btn-label {
     @apply absolute font-semibold text-lg left-1 top-1/2 -translate-y-1/2 text-gray-500 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:-translate-y-1/2 peer-focus:top-0 peer-focus:text-sm peer-focus:text-main bg-main-50 px-1;
 }
-
 input:not(:placeholder-shown) ~ .btn-label {
     @apply top-0 text-sm text-main;
 }
