@@ -10,6 +10,8 @@ import { HomeComponent } from './Pages/home/home.component';
 import { MainLayoutComponent } from './Components/Layouts/main-layout/main-layout.component';
 import { AboutUsComponent } from './Components/about-us/about-us.component';
 
+
+
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
