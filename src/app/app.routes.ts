@@ -11,7 +11,6 @@ import { MainLayoutComponent } from './Components/Layouts/main-layout/main-layou
 import { AboutUsComponent } from './Components/about-us/about-us.component';
 
 
-
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
