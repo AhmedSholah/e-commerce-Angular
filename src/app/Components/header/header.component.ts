@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CartServiceService } from '../../Services/cart-service.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-header',
-    imports: [],
+    imports: [RouterModule],
     templateUrl: './header.component.html',
 })
 export class HeaderComponent {

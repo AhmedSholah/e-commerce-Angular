@@ -5,6 +5,5 @@ import { Component } from '@angular/core';
     selector: 'app-productdetails-second-section',
     imports: [CommonModule],
     templateUrl: './productdetails-second-section.component.html',
-    styleUrl: './productdetails-second-section.component.css',
 })
 export class ProductdetailsSecondSectionComponent {}

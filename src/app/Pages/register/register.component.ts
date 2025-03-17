@@ -41,14 +41,14 @@ export class RegisterComponent {
         const email = this.form.get('email')?.value|| '';
         const password = this.form.get('password')?.value || '';
 
-            this.auth.register({name, email , password }).subscribe({
-                next: (response) =>{
+            // this.auth.register({name, email , password }).subscribe({
+            //     next: (response) =>{
         
-                }, 
-                error: (error) => {
+            //     }, 
+            //     error: (error) => {
         
-                }
-            });
+            //     }
+            // });
 
     }
 
