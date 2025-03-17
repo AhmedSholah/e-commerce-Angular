@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
     selector: 'app-register',
@@ -11,6 +12,8 @@ import { RouterLink } from '@angular/router';
 export class RegisterComponent {
     eye = 'icons/eye.svg';
     passType = 'password';
+
+    constructor(private auth: AuthService, private Router: Router){}
 
     form = new FormGroup({
         name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -32,10 +35,27 @@ export class RegisterComponent {
         return this.form.get('confirmPassword');
     }
 
+
+    onSubmit(){
+        const name = this.form.get('name')?.value || '';
+        const email = this.form.get('email')?.value|| '';
+        const password = this.form.get('password')?.value || '';
+
+            // this.auth.register({name, email , password }).subscribe({
+            //     next: (response) =>{
+        
+            //     }, 
+            //     error: (error) => {
+        
+            //     }
+            // });
+
+    }
+
+    
     changIcon() {
         this.passType = this.passType == 'password' ? 'text' : 'password';
         this.eye = this.eye == 'icons/eye.svg' ? 'icons/hideEye.svg' : 'icons/eye.svg';
-        //    console.log(this.form.get('name'));
     }
     
 }

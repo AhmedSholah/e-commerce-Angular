@@ -12,9 +12,10 @@ export class AuthService {
   login(credentials: {email: string , password: string}) : Observable<any>{
     return this.http.post(`${this.baseUrl}${API.auth.login}`, credentials).pipe(
       tap((response: any) => {
-          if(response.token)
+          console.log(response.data.token);
+          if(response.data.token)
           {
-            localStorage.setItem('authToken', response.token);
+            localStorage.setItem('authToken', response.data.token);
           }
       })
     );
