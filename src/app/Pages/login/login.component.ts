@@ -59,3 +59,4 @@ export class LoginComponent {
 //     "email": "admin@mail.com",
 //     "password": "EH%Eqf^i3Q74Ht^2tHPOzqh&0goiNd"
 // }
+//  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Q1OGFlZWNjNzBkZjcxYTA4NTJjYzAiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDI0ODY2MjV9.DRt25-IPgxmEdoEWdSpRORtbpko_oa0I0_t4dnrgmYw"
