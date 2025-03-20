@@ -25,8 +25,22 @@
                         *ngIf="name?.invalid && name?.touched"
                         class="mt-2 ml-1 text-bold text-red-700"
                     >
-                        Name is required
+                        <div
+                        *ngIf="name?.errors?.['required'] "
+                    >
+                    Name is required
                     </div>
+
+                        <div
+                        *ngIf="name?.errors?.['minlength'] "
+                    >
+                        Minimum Length is 3 Characters
+                    </div>
+
+                    </div>
+
+                
+                    
                 </div>
 
                 <div>
@@ -47,7 +61,11 @@
                         <div *ngIf="email?.errors?.['required']">Email is Required</div>
                         <div *ngIf="email?.errors?.['email']">Enter a valid email address</div>
                     </div>
+                    <div *ngIf= "userExists && !password?.invalid" class="mt-2 text-bold text-red-700">
+                        Email Already Exists                    
+                    </div>
                 </div>
+
 
                 <div>
                     <div class="relative">
@@ -75,8 +93,12 @@
                             Password should be at least 9 characters
                         </div>
                     </div>
-                </div>
 
+                    <div *ngIf="!passwordCheck && submitClicked && !password?.invalid" class="mt-2 ml-1 text-bold text-red-700">
+                        Password must include at least one uppercase letter, lowercase letter, number, and special character, with no spaces.                       
+                    </div>
+
+                  </div>
                 <div>
                     <div class="relative">
                         <input
@@ -102,8 +124,26 @@
                             Password should be at least 9 characters
                         </div>
                     </div>
-                </div>
 
+                    <div *ngIf="!samePassword && passwordCheck && !password?.invalid" class="mt-2 ml-1 text-bold text-red-700">
+                        Passwords do not match.                      
+                    </div>
+
+                    
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex gap-2">
+                        <label for="gender" class="text-bold text-main">Male</label>
+                        <input type="radio" id="male" name="gender" value="male" formControlName="gender" class="accent-main w-[0.9rem]"/>
+                        <label for="gender" class="text-bold text-main">Female</label>
+                        <input type="radio" id="female" name="gender" value="female" formControlName="gender" class="accent-main w-[0.9rem]"/>
+                    </div>
+
+                    <div *ngIf="gender?.errors?.['required'] && submitClicked" class="mt-0  text-bold text-red-700">
+                     <div class="m-0" >Select Your gender</div>
+                   </div>
+
+                </div>
                 <div class="items-center flex gap-1.5">
                     <input
                         type="checkbox"
@@ -113,7 +153,7 @@
                     />
                     <label for="remember-me" class="text-main text-lg">Remember me</label>
                 </div>
-                <button class="btn-primary"><a href="/">SignUp</a></button>
+                <button class="btn-primary">SignUp</button>
                 <div class="relative">
                     <div class="w-full h-[1px] bg-gray-300"></div>
                     <span

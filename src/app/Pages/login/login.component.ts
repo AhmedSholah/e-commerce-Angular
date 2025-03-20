@@ -41,7 +41,7 @@ export class LoginComponent {
             const password = this.form.get('password')?.value || '';
             this.auth.login({email, password}).subscribe({
                 next: (response) => {
-                    this.Router.navigate(['/home']);
+                    this.Router.navigate(['/']);
                     console.log('login , successful', response);   
                 },
                 error: (error) => {
