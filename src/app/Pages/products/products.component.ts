@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from '../../Components/header/header.component';
 import { OurReviewsComponent } from '../../Components/our-reviews/our-reviews.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
+import { ProductsService } from '../../Services/products.service';
 
 @Component({
   selector: 'app-products',
@@ -11,6 +12,11 @@ import { FooterComponent } from '../../Components/footer/footer.component';
   styles: ``
 })
 export class ProductsComponent {
+
+  constructor(private product: ProductsService){
+
+  }
+
   cardsNumber: number = 4;
   cardsOrder = 'Z-A';
   displayP='hidden'; 
@@ -100,5 +106,35 @@ export class ProductsComponent {
   sortCards(order:string){
     this.displaySort = this.displaySort === 'hidden' ? 'block' : 'hidden';
     this.cardsOrder = order;
+  }
+
+  fetchOneProduct(id: string) {
+    this.product.oneProduct(id).subscribe({
+      next: (res:any) => {
+        const oneProduct = res.data.product;
+        console.log(res);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }  
+  
+  fetchProducts(options: { page: number, limit: number, category?: string, minPrice?: number, maxPrice?: number , inStock?: boolean, sortBy?:'name' | 'price' | 'createdAt', sortOrder?: 'asc' | 'desc'}) {
+   console.log('optionProduct',options);
+    this.product.getProducts(options).subscribe({
+      next: (res:any) => {
+        const Products = res.data.products;
+        console.log(Products);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+}
+
+  ngOnInit(){
+    // this.fetchOneProduct("67d4446da328b72e7b649725");
+    this.fetchProducts({page: 1, limit: 4 , sortOrder: 'asc'});
   }
 }
