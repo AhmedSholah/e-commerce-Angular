@@ -89,6 +89,7 @@ export class RegisterComponent {
             }
         }
     }
+
     changIcon() {
         this.passType = this.passType == 'password' ? 'text' : 'password';
         this.eye = this.eye == 'icons/eye.svg' ? 'icons/hideEye.svg' : 'icons/eye.svg';
