@@ -81,7 +81,7 @@ html {
 }
 
 .btn-primary {
-    @apply bg-main text-white rounded-2xl h-12 text-lg font-semibold;
+    @apply bg-main text-white rounded-2xl h-12 text-lg font-semibold cursor-pointer hover:bg-main-900 active:bg-main-950;
 }
 .btn-primary-small {
     @apply bg-main text-white rounded-[6px] font-semibold border border-main 
@@ -89,7 +89,7 @@ html {
 }
 
 .btn-secondary {
-    @apply bg-main-50 text-[#0E0E0E] rounded-2xl h-12 text-lg font-semibold border border-main flex items-center justify-center gap-2;
+    @apply bg-main-50 text-[#0E0E0E] rounded-2xl h-12 text-lg font-semibold border border-main flex items-center justify-center gap-2 cursor-pointer hover:bg-main-900 active:bg-main-950;
 }
 
 .btn-outline {
