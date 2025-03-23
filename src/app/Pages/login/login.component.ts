@@ -3,15 +3,16 @@ import { Router, RouterLink } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
+import { LoaderComponent } from '../../Components/loader/loader.component';
 
 @Component({
     selector: 'app-login',
-    imports: [RouterLink, ReactiveFormsModule, CommonModule],
+    imports: [RouterLink, ReactiveFormsModule, CommonModule, LoaderComponent],
     templateUrl: './login.component.html',
 })
 export class LoginComponent {
-   
-    
+    loading: boolean = false;
+
     errorMessage = false;
     eye = 'icons/eye.svg';
     passType = 'password';
@@ -19,9 +20,11 @@ export class LoginComponent {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required, Validators.minLength(9)]),
     });
-    
-    constructor(private auth: AuthService, private Router: Router) {}
 
+    constructor(
+        private auth: AuthService,
+        private Router: Router
+    ) {}
 
     get email() {
         return this.form.get('email');
@@ -37,22 +40,24 @@ export class LoginComponent {
 
     onSubmit() {
         if (this.form.valid) {
+            this.loading = true;
+            console.log(this.loading);
             const email = this.form.get('email')?.value || '';
             const password = this.form.get('password')?.value || '';
-            this.auth.login({email, password}).subscribe({
+            this.auth.login({ email, password }).subscribe({
                 next: (response) => {
                     this.Router.navigate(['/']);
-                    console.log('login , successful', response);   
+                    console.log('login , successful', response);
+                    this.loading = false;
                 },
                 error: (error) => {
                     this.errorMessage = true;
                     console.log(error);
-                    
-                }
-            },
-        )
-    }   
-}
+                    this.loading = false;
+                },
+            });
+        }
+    }
 }
 
 // {

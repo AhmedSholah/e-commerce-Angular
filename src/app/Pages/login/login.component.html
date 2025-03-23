@@ -10,7 +10,11 @@
                 <span class="text-3xl text-main-500 font-bold">Craftopia</span>
             </div>
             <h1 class="font-bold text-main-800 text-5xl my-5 text-center md:text-left">Login</h1>
-            <form [formGroup]="form" class="flex flex-col gap-7 md:max-w-[25rem]" (ngSubmit)="onSubmit()">
+            <form
+                [formGroup]="form"
+                class="flex flex-col gap-7 md:max-w-[25rem]"
+                (ngSubmit)="onSubmit()"
+            >
                 <div>
                     <div class="relative">
                         <input
@@ -21,7 +25,6 @@
                             class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
                         />
                         <label for="email" class="btn btn-label absolute left-0"> Email </label>
-                 
                     </div>
                     <div
                         *ngIf="email?.invalid && email?.touched"
@@ -41,8 +44,8 @@
                             placeholder=" "
                             class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
                         />
-                      
-                    <label for="password" class="btn btn-label"> Password </label>
+
+                        <label for="password" class="btn btn-label"> Password </label>
 
                         <div
                             class="icon-Container absolute right-3 top-0 transform: transform translate-y-1/2 cursor-pointer"
@@ -71,7 +74,15 @@
                     />
                     <label for="remember-me" class="text-main text-lg">Remember me</label>
                 </div>
-                <button class="btn-primary"><a>Login</a></button>
+                <button class="btn-primary flex justify-center items-center">
+                    <a>
+                        @if (!loading) {
+                            Login
+                        } @else {
+                            <app-loader></app-loader>
+                        }
+                    </a>
+                </button>
                 <div *ngIf="errorMessage" class="text-center text-red-500 text-bold">
                     Email or Password is Invalid
                 </div>
@@ -96,7 +107,6 @@
                     >SignUp</a
                 >
             </div>
-            
         </div>
     </div>
 </section>
