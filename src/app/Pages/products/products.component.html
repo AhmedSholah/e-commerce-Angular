@@ -8,218 +8,419 @@
     </div>
 </div>
 
-<section class="grid grid-cols-[auto_1fr]">
-    <div class="mt-3 ml-2">
-        <div class="mb-3">
-            <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Category</h1>
-            <div class="flex flex-col gap-1">
-                <div class="flex items-center">
-                    <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Bags" />
-                    <label
-                        class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                        for="Bags"
-                        >Bags</label
-                    >
-                </div>
-                <div class="flex items-center">
-                    <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Frames" />
-                    <label
-                        class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                        for="Frames"
-                        >Frames</label
-                    >
-                </div>
-                <div class="flex items-center">
-                    <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Accessories" />
-                    <label
-                        class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                        for="Accessories"
-                        >Accessories</label
-                    >
-                </div>
-                <div class="flex items-center">
-                    <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Tablecloth" />
-                    <label
-                        class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                        for="Tablecloth"
-                        >Tablecloth</label
-                    >
-                </div>
-                <div class="flex items-center">
-                    <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Clothes" />
-                    <label
-                        class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                        for="Clothes"
-                        >Clothes</label
-                    >
-                </div>
-                <div class="flex items-center">
-                    <input
-                        class="mr-1 w-4 h-4 accent-main peer"
-                        type="checkbox"
-                        id="Sock & Glove"
-                    />
-                    <label
-                        class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                        for="Sock & Glove"
-                        >Sock & Glove</label
-                    >
-                </div>
-                <div class="flex items-center">
-                    <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="All" />
-                    <label
-                        class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                        for="All"
-                        >All</label
-                    >
-                </div>
-            </div>
-        </div>
+<!-- add button filter if clicked toggle a side bar -->
 
-        <div class="mb-2">
-            <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Availability</h1>
+<section class="grid md:grid-cols-[auto_1fr] grid-cols-[1fr] justify-items-center">
+    <!-- Mobile side filter -->
+  <div *ngIf="filter" class="absolute md:relative">  
+      <div class="mt-3 ml-2  md:bg-main-50  z-1 bg-main-100 md:block translate-y-[4rem]  md:translate-y-[0] p-5 md:p-0 rounded-lg w-[80%]">
+          <div class="mb-3">
+              <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Category</h1>
+              <div class="flex flex-col gap-1">
+                  <div class="flex items-center">
+                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Bags" />
+                      <label
+                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                          for="Bags"
+                          >Bags</label
+                      >
+                  </div>
+                  <div class="flex items-center">
+                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Frames" />
+                      <label
+                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                          for="Frames"
+                          >Frames</label
+                      >
+                  </div>
+                  <div class="flex items-center">
+                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Accessories" />
+                      <label
+                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                          for="Accessories"
+                          >Accessories</label
+                      >
+                  </div>
+                  <div class="flex items-center">
+                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Tablecloth" />
+                      <label
+                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                          for="Tablecloth"
+                          >Tablecloth</label
+                      >
+                  </div>
+                  <div class="flex items-center">
+                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Clothes" />
+                      <label
+                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                          for="Clothes"
+                          >Clothes</label
+                      >
+                  </div>
+                  <div class="flex items-center">
+                      <input
+                          class="mr-1 w-4 h-4 accent-main peer"
+                          type="checkbox"
+                          id="Sock & Glove"
+                      />
+                      <label
+                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                          for="Sock & Glove"
+                          >Sock & Glove</label
+                      >
+                  </div>
+                  <div class="flex items-center">
+                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="All" />
+                      <label
+                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                          for="All"
+                          >All</label
+                      >
+                  </div>
+              </div>
+          </div>
+          <div class="mb-2">
+              <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Availability</h1>
+              <div class="flex items-center">
+                  <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="stock" />
+                  <label
+                      class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                      for="stock"
+                      >In stock (35)</label
+                  >
+              </div>
+              <div class="flex items-center">
+                  <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="outstock" />
+                  <label
+                      class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                      for="outstock"
+                      >Out of stock (5)</label
+                  >
+              </div>
+          </div>
+          <div class="mb-5">
+              <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Price</h1>
+              <p class="text-gray-500 text-[0.9rem]">The highest price is $350.00</p>
+              <div class="flex flex-col align-between">
+                  <div class="flex justify-between items-center mt-2">
+                      <label
+                          class="text-gray-500 text-[0.9rem] peer-checked:text-main"
+                          for="formPrice"
+                          >From $</label
+                      >
+                      <input
+                          class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
+                          type="text"
+                          id="formPrice"
+                      />
+                  </div>
+                  <div class="flex justify-between items-center mt-2">
+                      <label class="text-gray-500 text-[0.9rem] peer-checked:text-main" for="toPrice"
+                          >To $</label
+                      >
+                      <input
+                          class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:outline-none"
+                          type="text"
+                          id="toPrice"
+                      />
+                  </div>
+                  <div class="flex justify-between mt-7 gap-3">
+                      <button class="btn-primary-small">Apply</button>
+                      <button class="btn-outline">Clear All</button>
+                  </div>
+              </div>
+          </div>
+          <div class="mb-2 hidden md:block">
+              <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1 ">Best Selling</h1>
+              <div
+                  class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
+                  *ngFor="let card of cards | slice: 0 : 1; index as i"
+              >
+                  <div class="relative">
+                      <img class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" />
+                      <!-- <img
+                          class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
+                          [src]="
+                              card.loved ? 'images/trending/loved.svg' : 'images/trending/heart.svg'
+                          "
+                          (click)="toggleHeart(i)"
+                      /> -->
+                  </div>
+                  <div class="flex flex-col basis-0 grow justify-between p-4">
+                      <div class="flex flex-col gap-2">
+                          <div class="flex justify-between">
+                              <div class="text-bold text-white text-[1.2rem]">{{ card.name }}</div>
+                              <div class="flex">
+                                  <span *ngFor="let item of [1, 2, 3, 4, 5]; index as i">
+                                      <svg
+                                          class="text-yellow-400 w- h-6"
+                                          [ngClass]="{
+                                              'text-yellow-400': card.rating > i,
+                                              'text-gray-400': card.rating <= i,
+                                          }"
+                                          viewBox="0 0 24 24"
+                                          fill="currentColor"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                          <path
+                                              d="M8.5 0.5L10.2961 6.71885H16.1085L11.4062 10.5623L13.2023 16.7812L8.5 12.9377L3.79772 16.7812L5.59383 10.5623L0.891548 6.71885H6.70389L8.5 0.5Z"
+                                          />
+                                      </svg>
+                                  </span>
+                              </div>
+                          </div>
+                          <div class="trending-card-text">$ {{ card.price }}</div>
+                          <div class="trending-card-text max-h-[5rem] overflow-hidden text-ellipsis">
+                              {{ card.description }}
+                          </div>
+                      </div>
+                      <button class="bg-main-50 p-2 mt-4 rounded-[1rem] w-full">
+                          <div class="flex justify-center gap-2">
+                              <img src="images/trending/basket.svg" />
+                              <span class="text-main text-bold">Add to Cart</span>
+                          </div>
+                      </button>
+                  </div>
+              </div>
+              <div class="flex items-center justify-center mt-7 gap-3">
+                  <button class="btn-primary-small max-w-[2.5rem]">
+                      <svg
+                          width="8"
+                          height="11"
+                          viewBox="0 0 11 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                      >
+                          <path
+                              d="M10.3112 1.21787L10.3194 13.2179C10.3191 13.3394 10.2857 13.4585 10.2227 13.5624C10.1598 13.6663 10.0697 13.7511 9.96211 13.8076C9.85455 13.8641 9.73362 13.8902 9.61234 13.8831C9.49105 13.876 9.374 13.8359 9.27378 13.7672L0.603028 7.77315C0.243526 7.52473 0.243118 6.92606 0.602281 6.67648L9.26486 0.670579C9.36477 0.601061 9.48183 0.560254 9.60331 0.552592C9.72479 0.54493 9.84604 0.570706 9.9539 0.627119C10.0618 0.683533 10.1521 0.768426 10.2151 0.872575C10.2781 0.976724 10.3113 1.09615 10.3112 1.21787Z"
+                              fill="#FDF6F3"
+                          />
+                      </svg>
+                  </button>
+                  <button class="btn-primary-small max-w-[2.5rem]">
+                      <svg
+                          width="12"
+                          height="13"
+                          viewBox="0 0 16 17"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                      >
+                          <path
+                              d="M3.33721 2.21787L3.32903 14.2179C3.32933 14.3394 3.36276 14.4585 3.42572 14.5624C3.48867 14.6663 3.57878 14.7511 3.68633 14.8076C3.79389 14.8641 3.91481 14.8902 4.0361 14.8831C4.15739 14.876 4.27444 14.8359 4.37466 14.7672L13.0454 8.77315C13.4049 8.52473 13.4053 7.92606 13.0462 7.67648L4.38358 1.67058C4.28366 1.60106 4.16661 1.56025 4.04513 1.55259C3.92365 1.54493 3.80239 1.57071 3.69454 1.62712C3.58668 1.68353 3.49634 1.76843 3.43334 1.87258C3.37035 1.97672 3.3371 2.09615 3.33721 2.21787Z"
+                              fill="#FDF6F3"
+                          />
+                      </svg>
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Desktop -->
+  <div class="hidden mt-3 ml-2 md:block">
+    <div class="mb-3">
+        <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Category</h1>
+        <div class="flex flex-col gap-1">
             <div class="flex items-center">
-                <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="stock" />
+                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Bags" />
                 <label
                     class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="stock"
-                    >In stock (35)</label
+                    for="Bags"
+                    >Bags</label
                 >
             </div>
             <div class="flex items-center">
-                <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="outstock" />
+                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Frames" />
                 <label
                     class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="outstock"
-                    >Out of stock (5)</label
+                    for="Frames"
+                    >Frames</label
                 >
             </div>
-        </div>
-
-        <div class="mb-5">
-            <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Price</h1>
-            <p class="text-gray-500 text-[0.9rem]">The highest price is $350.00</p>
-
-            <div class="flex flex-col align-between">
-                <div class="flex justify-between items-center mt-2">
-                    <label
-                        class="text-gray-500 text-[0.9rem] peer-checked:text-main"
-                        for="formPrice"
-                        >From $</label
-                    >
-                    <input
-                        class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
-                        type="text"
-                        id="formPrice"
-                    />
-                </div>
-
-                <div class="flex justify-between items-center mt-2">
-                    <label class="text-gray-500 text-[0.9rem] peer-checked:text-main" for="toPrice"
-                        >To $</label
-                    >
-                    <input
-                        class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:outline-none"
-                        type="text"
-                        id="toPrice"
-                    />
-                </div>
-
-                <div class="flex justify-between mt-7 gap-3">
-                    <button class="btn-primary-small">Apply</button>
-                    <button class="btn-outline">Clear All</button>
-                </div>
+            <div class="flex items-center">
+                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Accessories" />
+                <label
+                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                    for="Accessories"
+                    >Accessories</label
+                >
             </div>
-        </div>
-
-        <div class="mb-2">
-            <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Best Selling</h1>
-
-            <div
-                class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
-                *ngFor="let card of cards | slice: 0 : 1; index as i"
-            >
-                <div class="relative">
-                    <img class="w-full h-full object-cover rounded-[1rem]" [src]="card.image" />
-                    <img
-                        class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
-                        [src]="
-                            card.loved ? 'images/trending/loved.svg' : 'images/trending/heart.svg'
-                        "
-                        (click)="toggleHeart(i)"
-                    />
-                </div>
-                <div class="flex flex-col basis-0 grow justify-between p-4">
-                    <div class="flex flex-col gap-2">
-                        <div class="flex justify-between">
-                            <div class="text-bold text-white text-[1.2rem]">{{ card.name }}</div>
-                            <div class="flex">
-                                <span *ngFor="let item of [1, 2, 3, 4, 5]; index as i">
-                                    <svg
-                                        class="text-yellow-400 w- h-6"
-                                        [ngClass]="{
-                                            'text-yellow-400': card.rating > i,
-                                            'text-gray-400': card.rating <= i,
-                                        }"
-                                        viewBox="0 0 24 24"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M8.5 0.5L10.2961 6.71885H16.1085L11.4062 10.5623L13.2023 16.7812L8.5 12.9377L3.79772 16.7812L5.59383 10.5623L0.891548 6.71885H6.70389L8.5 0.5Z"
-                                        />
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="trending-card-text">$ ذ{{ card.price }}</div>
-                        <div class="trending-card-text max-h-[5rem] overflow-hidden text-ellipsis">
-                            {{ card.description }}
-                        </div>
-                    </div>
-                    <button class="bg-main-50 p-2 mt-4 rounded-[1rem] w-full">
-                        <div class="flex justify-center gap-2">
-                            <img src="images/trending/basket.svg" />
-                            <span class="text-main text-bold">Add to Cart</span>
-                        </div>
-                    </button>
-                </div>
+            <div class="flex items-center">
+                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Tablecloth" />
+                <label
+                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                    for="Tablecloth"
+                    >Tablecloth</label
+                >
             </div>
-
-            <div class="flex items-center justify-center mt-7 gap-3">
-                <button class="btn-primary-small max-w-[2.5rem]">
-                    <svg
-                        width="8"
-                        height="11"
-                        viewBox="0 0 11 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M10.3112 1.21787L10.3194 13.2179C10.3191 13.3394 10.2857 13.4585 10.2227 13.5624C10.1598 13.6663 10.0697 13.7511 9.96211 13.8076C9.85455 13.8641 9.73362 13.8902 9.61234 13.8831C9.49105 13.876 9.374 13.8359 9.27378 13.7672L0.603028 7.77315C0.243526 7.52473 0.243118 6.92606 0.602281 6.67648L9.26486 0.670579C9.36477 0.601061 9.48183 0.560254 9.60331 0.552592C9.72479 0.54493 9.84604 0.570706 9.9539 0.627119C10.0618 0.683533 10.1521 0.768426 10.2151 0.872575C10.2781 0.976724 10.3113 1.09615 10.3112 1.21787Z"
-                            fill="#FDF6F3"
-                        />
-                    </svg>
-                </button>
-                <button class="btn-primary-small max-w-[2.5rem]">
-                    <svg
-                        width="12"
-                        height="13"
-                        viewBox="0 0 16 17"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M3.33721 2.21787L3.32903 14.2179C3.32933 14.3394 3.36276 14.4585 3.42572 14.5624C3.48867 14.6663 3.57878 14.7511 3.68633 14.8076C3.79389 14.8641 3.91481 14.8902 4.0361 14.8831C4.15739 14.876 4.27444 14.8359 4.37466 14.7672L13.0454 8.77315C13.4049 8.52473 13.4053 7.92606 13.0462 7.67648L4.38358 1.67058C4.28366 1.60106 4.16661 1.56025 4.04513 1.55259C3.92365 1.54493 3.80239 1.57071 3.69454 1.62712C3.58668 1.68353 3.49634 1.76843 3.43334 1.87258C3.37035 1.97672 3.3371 2.09615 3.33721 2.21787Z"
-                            fill="#FDF6F3"
-                        />
-                    </svg>
-                </button>
+            <div class="flex items-center">
+                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Clothes" />
+                <label
+                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                    for="Clothes"
+                    >Clothes</label
+                >
+            </div>
+            <div class="flex items-center">
+                <input
+                    class="mr-1 w-4 h-4 accent-main peer"
+                    type="checkbox"
+                    id="Sock & Glove"
+                />
+                <label
+                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                    for="Sock & Glove"
+                    >Sock & Glove</label
+                >
+            </div>
+            <div class="flex items-center">
+                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="All" />
+                <label
+                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                    for="All"
+                    >All</label
+                >
             </div>
         </div>
     </div>
+    <div class="mb-2">
+        <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Availability</h1>
+        <div class="flex items-center">
+            <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="stock" />
+            <label
+                class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                for="stock"
+                >In stock (35)</label
+            >
+        </div>
+        <div class="flex items-center">
+            <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="outstock" />
+            <label
+                class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                for="outstock"
+                >Out of stock (5)</label
+            >
+        </div>
+    </div>
+    <div class="mb-5">
+        <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Price</h1>
+        <p class="text-gray-500 text-[0.9rem]">The highest price is $350.00</p>
+        <div class="flex flex-col align-between">
+            <div class="flex justify-between items-center mt-2">
+                <label
+                    class="text-gray-500 text-[0.9rem] peer-checked:text-main"
+                    for="formPrice"
+                    >From $</label
+                >
+                <input
+                    class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
+                    type="text"
+                    id="formPrice"
+                />
+            </div>
+            <div class="flex justify-between items-center mt-2">
+                <label class="text-gray-500 text-[0.9rem] peer-checked:text-main" for="toPrice"
+                    >To $</label
+                >
+                <input
+                    class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:outline-none"
+                    type="text"
+                    id="toPrice"
+                />
+            </div>
+            <div class="flex justify-between mt-7 gap-3">
+                <button class="btn-primary-small">Apply</button>
+                <button class="btn-outline">Clear All</button>
+            </div>
+        </div>
+    </div>
+    <div class="mb-2 hidden md:block">
+        <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1 ">Best Selling</h1>
+        <div
+            class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
+            *ngFor="let card of cards | slice: 0 : 1; index as i"
+        >
+            <div class="relative">
+                <img class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" />
+                <!-- <img
+                    class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
+                    [src]="
+                        card.loved ? 'images/trending/loved.svg' : 'images/trending/heart.svg'
+                    "
+                    (click)="toggleHeart(i)"
+                /> -->
+            </div>
+            <div class="flex flex-col basis-0 grow justify-between p-4">
+                <div class="flex flex-col gap-2">
+                    <div class="flex justify-between">
+                        <div class="text-bold text-white text-[1.2rem]">{{ card.name }}</div>
+                        <div class="flex">
+                            <span *ngFor="let item of [1, 2, 3, 4, 5]; index as i">
+                                <svg
+                                    class="text-yellow-400 w- h-6"
+                                    [ngClass]="{
+                                        'text-yellow-400': card.rating > i,
+                                        'text-gray-400': card.rating <= i,
+                                    }"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M8.5 0.5L10.2961 6.71885H16.1085L11.4062 10.5623L13.2023 16.7812L8.5 12.9377L3.79772 16.7812L5.59383 10.5623L0.891548 6.71885H6.70389L8.5 0.5Z"
+                                    />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="trending-card-text">$ {{ card.price }}</div>
+                    <div class="trending-card-text max-h-[5rem] overflow-hidden text-ellipsis">
+                        {{ card.description }}
+                    </div>
+                </div>
+                <button class="bg-main-50 p-2 mt-4 rounded-[1rem] w-full">
+                    <div class="flex justify-center gap-2">
+                        <img src="images/trending/basket.svg" />
+                        <span class="text-main text-bold">Add to Cart</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="flex items-center justify-center mt-7 gap-3">
+            <button class="btn-primary-small max-w-[2.5rem]">
+                <svg
+                    width="8"
+                    height="11"
+                    viewBox="0 0 11 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M10.3112 1.21787L10.3194 13.2179C10.3191 13.3394 10.2857 13.4585 10.2227 13.5624C10.1598 13.6663 10.0697 13.7511 9.96211 13.8076C9.85455 13.8641 9.73362 13.8902 9.61234 13.8831C9.49105 13.876 9.374 13.8359 9.27378 13.7672L0.603028 7.77315C0.243526 7.52473 0.243118 6.92606 0.602281 6.67648L9.26486 0.670579C9.36477 0.601061 9.48183 0.560254 9.60331 0.552592C9.72479 0.54493 9.84604 0.570706 9.9539 0.627119C10.0618 0.683533 10.1521 0.768426 10.2151 0.872575C10.2781 0.976724 10.3113 1.09615 10.3112 1.21787Z"
+                        fill="#FDF6F3"
+                    />
+                </svg>
+            </button>
+            <button class="btn-primary-small max-w-[2.5rem]">
+                <svg
+                    width="12"
+                    height="13"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M3.33721 2.21787L3.32903 14.2179C3.32933 14.3394 3.36276 14.4585 3.42572 14.5624C3.48867 14.6663 3.57878 14.7511 3.68633 14.8076C3.79389 14.8641 3.91481 14.8902 4.0361 14.8831C4.15739 14.876 4.27444 14.8359 4.37466 14.7672L13.0454 8.77315C13.4049 8.52473 13.4053 7.92606 13.0462 7.67648L4.38358 1.67058C4.28366 1.60106 4.16661 1.56025 4.04513 1.55259C3.92365 1.54493 3.80239 1.57071 3.69454 1.62712C3.58668 1.68353 3.49634 1.76843 3.43334 1.87258C3.37035 1.97672 3.3371 2.09615 3.33721 2.21787Z"
+                        fill="#FDF6F3"
+                    />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
 
     <div class="flex flex-col">
+        <div class="text-2xl text-main text-center mt-5 font-bold hover:text-main-500 md:hidden"><button (click)="toggleFilter()" class="border-b-2">Filter</button></div>
         <div class="flex justify-between bg-main-100 p-3 m-3">
             <div class="flex justify-center items-center gap-3">
                 <p class="text-main text-lg text-nowrap">Paginated by</p>
@@ -337,8 +538,9 @@
                     *ngFor="let card of cards | slice: 0 : paginationNumber; index as i"
                 >
                     <div class="relative">
-                        <img class="w-full h-full object-cover rounded-[1rem]" [src]="card.image" />
-                        <img
+                        
+                        <img class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" /> 
+                        <!-- <img
                             class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
                             [src]="
                                 card.loved
@@ -346,7 +548,7 @@
                                     : 'images/trending/heart.svg'
                             "
                             (click)="toggleHeart(i)"
-                        />
+                        /> -->
                     </div>
                     <div class="flex flex-col basis-0 grow justify-between p-4">
                         <div class="flex flex-col gap-2">
@@ -425,4 +627,3 @@
 </section>
 
 <app-our-reviews></app-our-reviews>
-<app-footer></app-footer>
