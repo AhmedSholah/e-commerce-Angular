@@ -11,11 +11,22 @@
 <!-- add button filter if clicked toggle a side bar -->
 
 <section class="grid md:grid-cols-[auto_1fr] grid-cols-[1fr] justify-items-center">
+    <div class="text-2xl  text-main text-center mt-5 font-bold hover:text-main-500 md:hidden"><button (click)="toggleFilter()" class="border-b-2">Filter</button></div>
+
     <!-- Mobile side filter -->
-  <div *ngIf="filter" class="absolute md:relative">  
-      <div class="mt-3 ml-2  md:bg-main-50  z-1 bg-main-100 md:block translate-y-[4rem]  md:translate-y-[0] p-5 md:p-0 rounded-lg w-[80%]">
+  <div *ngIf="filter" class="fixed inset-0 -top-[4rem] bg-black bg-opacity-50 md:bg-main-50 z-1 bg-main-100 md:block translate-y-[4rem]  md:translate-y-[0] p-5 md:p-0 rounded-lg w-[80%] ">  
+      <div class="mt-3 ml-2  ">
           <div class="mb-3">
-              <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Category</h1>
+
+              <div class="flex justify-between items-center">
+                  <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Category</h1>
+                  <div (click)="toggleFilter()"><svg class="h-7 w-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="100" y="100" width="100" height="100" rx="50" transform="rotate(-180 100 100)" fill="#D9D9D9" fill-opacity="0.7"/>
+                    <path d="M33.4731 33.4731L66 66" stroke="#868080" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M66 33.4731L33.4731 66" stroke="#7F7F7F" stroke-width="5" stroke-linecap="round"/>
+                    </svg>
+                    </div>
+              </div>
               <div class="flex flex-col gap-1">
                   <div class="flex items-center">
                       <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Bags" />
@@ -420,7 +431,6 @@
 </div>
 
     <div class="flex flex-col">
-        <div class="text-2xl text-main text-center mt-5 font-bold hover:text-main-500 md:hidden"><button (click)="toggleFilter()" class="border-b-2">Filter</button></div>
         <div class="flex justify-between bg-main-100 p-3 m-3">
             <div class="flex justify-center items-center gap-3">
                 <p class="text-main text-lg text-nowrap">Paginated by</p>
