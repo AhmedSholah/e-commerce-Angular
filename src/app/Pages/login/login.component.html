@@ -74,7 +74,7 @@
                     />
                     <label for="remember-me" class="text-main text-lg">Remember me</label>
                 </div>
-                <button class="btn-primary flex justify-center items-center">
+                <button class="btn-primary flex justify-center items-center" [disabled]="loading">
                     <a>
                         @if (!loading) {
                             Login
