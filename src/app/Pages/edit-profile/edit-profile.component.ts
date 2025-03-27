@@ -2,15 +2,16 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserDataService } from '../../Services/user-data.service';
+import { LoaderComponent } from '../../Components/loader/loader.component';
 
 @Component({
     selector: 'app-edit-profile',
     standalone: true,
     templateUrl: './edit-profile.component.html',
-    styleUrls: ['./edit-profile.component.css'],
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, LoaderComponent],
 })
 export class EditProfileComponent {
+    loading: boolean = false;
     form: FormGroup;
     imagePreview: string | ArrayBuffer | null = null;
     defaultImage: string = 'person.svg';
@@ -47,10 +48,18 @@ export class EditProfileComponent {
     }
 
     loadUserData() {
-        this.userService.getUser().subscribe((res) => {
-            this.user = res.data.currentUser;
-            this.form.patchValue(this.user);
-            this.imagePreview = this.user.image ? this.user.image : this.defaultImage;
+        this.loading = true;
+        this.userService.getUser().subscribe({
+            next: (res) => {
+                this.user = res.data.currentUser;
+                this.form.patchValue(this.user);
+                this.imagePreview = this.user.image ? this.user.image : this.defaultImage;
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('Error loading user data:', error);
+                this.loading = false;
+            },
         });
     }
 
@@ -72,6 +81,7 @@ export class EditProfileComponent {
             return;
         }
 
+        this.loading = true;
         const formData = { ...this.form.value };
 
         Object.keys(formData).forEach((key) => {
@@ -82,14 +92,16 @@ export class EditProfileComponent {
 
         console.log('Final Data Sent to API:', formData);
 
-        this.userService.updateUser(formData).subscribe(
-            (res) => {
+        this.userService.updateUser(formData).subscribe({
+            next: (res) => {
                 console.log('Update Successful:', res);
                 this.showPopup = true;
+                this.loading = false;
             },
-            (error) => {
+            error: (error) => {
                 console.error('API Error:', error);
-            }
-        );
+                this.loading = false;
+            },
+        });
     }
 }

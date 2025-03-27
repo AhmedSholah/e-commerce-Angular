@@ -191,7 +191,6 @@
                         <option value="Kafr El Sheikh">Kafr El Sheikh</option>
                         <option value="Hurghada">Hurghada</option>
                         <option value="Marsa Matruh">Marsa Matruh</option>
-                        <option value="Arish">Arish</option>
                         <option value="Damanhour">Damanhour</option>
                     </select>
                     <p
@@ -227,18 +226,15 @@
             <div class="flex justify-center items-center gap-3 mt-5">
                 <button
                     (click)="onSubmit()"
-                    [disabled]="form.invalid"
-                    class="border border-main text-main-50 bg-main rounded-[15px] text-[18px] sm:text-[20px] px-8 py-1 lg:px-12 lg:py-2 transition-opacity duration-300"
+                    [disabled]="form.invalid || loading"
+                    class="flex justify-center items-center h-12 w-32 border border-main text-main-50 bg-main rounded-[15px] text-[18px] sm:text-[20px] transition-opacity duration-300 cursor-pointer"
                     [ngClass]="{ 'opacity-50 cursor-not-allowed': form.invalid }"
                 >
-                    Save
-                </button>
-                <button
-                    (click)="onSubmit()"
-                    [disabled]="form.invalid"
-                    class="border border-main text-main bg-main-50 rounded-[15px] text-[18px] sm:text-[20px] px-6 py-1 lg:px-10 lg:py-2 transition-opacity duration-300"
-                >
-                    cancel
+                    @if (loading) {
+                        <app-loader></app-loader>
+                    } @else {
+                        <span>Save</span>
+                    }
                 </button>
             </div>
         </form>
