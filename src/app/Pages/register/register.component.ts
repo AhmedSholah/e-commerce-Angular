@@ -3,11 +3,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
-import { LoaderComponent } from '../../Components/loader/loader.component';
 
 @Component({
     selector: 'app-register',
-    imports: [RouterLink, CommonModule, ReactiveFormsModule,LoaderComponent],
+    imports: [RouterLink, CommonModule, ReactiveFormsModule],
     templateUrl: './register.component.html',
 })
 export class RegisterComponent {
@@ -17,15 +16,13 @@ export class RegisterComponent {
     passwordCheck = false;
     samePassword = true;
     userExists = false;
-    loading = false;
     constructor(
         private auth: AuthService,
         private Router: Router
     ) {}
 
     form = new FormGroup({
-        firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-        lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+        name: new FormControl('', [Validators.required, Validators.minLength(3)]),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required, Validators.minLength(9)]),
         confirmPassword: new FormControl('', [
@@ -36,11 +33,8 @@ export class RegisterComponent {
         gender: new FormControl('', [Validators.required]),
     });
 
-    get firstName() {
-        return this.form.get('firstName');
-    }
-      get lastName() {
-        return this.form.get('lastName');
+    get name() {
+        return this.form.get('name');
     }
     get email() {
         return this.form.get('email');
@@ -67,8 +61,7 @@ export class RegisterComponent {
     }
     onSubmit() {
         this.submitClicked = true;
-        const firstName = this.firstName?.value || '';
-        const lastName = this.firstName?.value || '';
+        const username = this.name?.value || '';
         const email = this.email?.value || '';
         const password = this.password?.value || '';
         const gender = this.gender?.value || '';
@@ -76,21 +69,19 @@ export class RegisterComponent {
 
         console.log('passwordCheck', this.matchedPassword());
         console.log(this.matchedPassword());
-        console.log({ firstName, lastName, email, gender, password, role });
+        console.log({ username, email, gender, password, role });
         this.passwordCheck = this.validatePassword();
         this.samePassword = this.matchedPassword();
 
         if (this.passwordCheck && this.samePassword) {
             if (this.form.valid) {
-                this.loading = true;
-                this.auth.register({ firstName, lastName, email, gender, password, role }).subscribe({
+                this.auth.register({ username, email, gender, password, role }).subscribe({
                     next: (response) => {
                         this.Router.navigate(['/login']);
                     },
                     error: (error) => {
                         if (error.error.message === 'User Already Exists') {
                             this.userExists = true;
-                            this.loading = false;
                         }
                         console.log(error.error.message);
                     },
