@@ -60,9 +60,11 @@ export class CheckoutComponent {
       cardholderName: ['', Validators.required], 
       cardNumber: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]], 
       expirationDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])/(\\d{2})$')]], 
-      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]] 
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],
+      address:['',[Validators.required, Validators.pattern(/^[a-zA-Z0-9\s,.\-\/]+$/)]]
     });
   }
+  
 
   get cardholderName() {
     return this.paymentForm.get('cardholderName');
@@ -79,12 +81,15 @@ export class CheckoutComponent {
   get cvv() {
     return this.paymentForm.get('cvv');
   }
+  get address() {
+    return this.paymentForm.get('address');
+  }
 
   onSubmit() {
     if (this.paymentForm.valid) {
-      console.log('تم الدفع بنجاح!', this.paymentForm.value);
+      console.log(this.paymentForm.value);
     } else {
-      console.log('الرجاء إدخال بيانات صحيحة');
+      console.log('not valid');
     }
   }
   resetForm() {
