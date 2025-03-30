@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartServiceService } from '../../Services/cart-service.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cart',
@@ -49,7 +50,7 @@ export class CartComponent implements OnInit {
         },
     ];
 
-    constructor(private cartService: CartServiceService) {}
+    constructor(private cartService: CartServiceService,private router: Router) {}
 
     ngOnInit() {
         this.cartService.cartVisible$.subscribe((visible) => {
@@ -79,5 +80,10 @@ export class CartComponent implements OnInit {
         return `${this.cartItems
             .reduce((total, item) => total + item.price * item.quantity, 0)
             .toFixed(2)}`;
+    }
+
+    proceedToCheckout() {
+        this.cartService.setCart(this.cartItems); 
+        this.router.navigate(['checkout']); 
     }
 }

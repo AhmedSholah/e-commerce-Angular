@@ -2,13 +2,24 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class CartServiceService {
-    private cartVisible = new BehaviorSubject<boolean>(false);
-    cartVisible$ = this.cartVisible.asObservable();
+  private cartItems = new BehaviorSubject<any[]>([]);
+  cartItems$ = this.cartItems.asObservable();
 
-    toggleCart() {
-        this.cartVisible.next(!this.cartVisible.value);
-    }
+  private cartVisible = new BehaviorSubject<boolean>(false);
+  cartVisible$ = this.cartVisible.asObservable();
+
+  toggleCart() {
+    this.cartVisible.next(!this.cartVisible.value);
+  }
+
+  setCart(items: any[]) {
+    this.cartItems.next(items);
+  }
+
+  getCart() {
+    return this.cartItems.value;
+  }
 }
