@@ -12,23 +12,26 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   oneProduct(id : string): Observable<any>{
-    // console.log(`${API.productsEndpoint}/${id}`);
     return this.http.get(`${this.baseUrl}${API.productsEndpoint}/${id}`);
   }
 
-  getProducts(options: { page: number, limit: number, category?: string, minPrice?: number, maxPrice?: number , inStock?: boolean, sortBy?:'name' | 'price' | 'createdAt', sortOrder?: 'asc' | 'desc'}): Observable<any> {
+  getProducts(options: { page: number, limit: number, category?: string[], minPrice?: number, maxPrice?: number , inStock?: boolean, sortBy?:'name' | 'price' | 'createdAt', sortOrder?: 'asc' | 'desc'}): Observable<any> {
     let params = new HttpParams()
     .set('page', options.page)
     .set('limit', options.limit);
     
-    if(options?.category !== undefined) { params = params.set('category', options.category);}
+    if( options.category && options.category?.length > 0){
+      for(let i = 0; i < options.category.length; i++){
+        params = params.append('category', options.category[i]);
+      }
+    }
+    // if(options?.category !== undefined) { params = params.set('category', options.category);}
     if(options?.minPrice !== undefined) {params = params.set('minPrice', options.minPrice);}
     if(options?.maxPrice !== undefined) {params = params.set('maxPrice', options.maxPrice);}
     if(options?.inStock !== undefined){ params = params.set('inStock', options.inStock);}
     if(options?.sortBy !== undefined) {params = params.set('sortBy', options.sortBy);}
     if(options?.sortOrder !== undefined) {params = params.set('sortOrder', options.sortOrder);}
     
-    console.log('params', params);
     console.log('service option',options);
 
     return this.http.get(`${this.baseUrl}${API.productsEndpoint}`, { params });
