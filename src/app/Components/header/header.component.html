@@ -29,9 +29,9 @@
         <div>
             <ul class="text-white gap-8 hidden md:flex">
                 <li><a routerLink="/">Home</a></li>
-                <li><a routerLink="/">Category</a></li>
-                <li><a routerLink="/about-us">About</a></li>
+                <li><a href="#categories">Category</a></li>
                 <li><a routerLink="/products">Products</a></li>
+                <li><a routerLink="/about-us">About Us</a></li>
                 <li><a routerLink="/contact-us">Contact Us</a></li>
                 <li>
                     <button (click)="toggleCart($event)" class="hover:fill-red-500 cursor-pointer">
@@ -72,7 +72,7 @@
                 <div class="relative">
                     <img
                         class="size-14 rounded-full cursor-pointer w-10 h-10"
-                        [src]="userImage"
+                        [src]="avatarUrl"
                         alt="User Avatar"
                         (click)="toggleDropdown()"
                     />
@@ -88,7 +88,7 @@
                             <div class="flex items-center gap-3">
                                 <img
                                     class="size-6 rounded-full"
-                                    [src]="userImage"
+                                    [src]="avatarUrl"
                                     alt="User Avatar"
                                 />
                                 <span class="whitespace-nowrap font-medium text-gray-700">

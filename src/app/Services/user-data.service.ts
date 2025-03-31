@@ -18,7 +18,7 @@ export interface User {
     country?: string;
     city?: string;
     bio?: string;
-    image?: string;
+    avatarUrl?: string;
 }
 
 @Injectable({
@@ -37,6 +37,16 @@ export class UserDataService {
         return this.http.patch<{ status: string; data: User }>(
             `https://e-commerce-node-js-psi.vercel.app/api/users/`,
             userData
+        );
+    }
+
+    changeUserAvatar(file: File): Observable<{ status: string; message: string; data: null }> {
+        const formData = new FormData();
+        formData.append('file', file, file.name);
+
+        return this.http.put<{ status: string; message: string; data: null }>(
+            `${this.apiUrl}/me/avatar`,
+            formData
         );
     }
 }
