@@ -1,21 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CategoryCardComponent } from '../category-card/category-card.component';
+import { CatogriesService } from '../../Services/catogries.service';
+import { LoaderComponent } from '../loader/loader.component';
+import { delay } from 'rxjs';
+
+interface Categories {
+    name: string;
+    image: string;
+}
 
 @Component({
-  selector: 'app-top-categories',
-  imports:[CommonModule, CategoryCardComponent
-  ],
-  templateUrl: './top-categories.component.html',
-  styleUrls: ['./top-categories.component.css']
+    selector: 'app-top-categories',
+    imports: [CommonModule, CategoryCardComponent, LoaderComponent],
+    templateUrl: './top-categories.component.html',
 })
 export class TopCategoriesComponent {
-  categories = [
-    { name: 'Bags', image: 'Bags.png', link: '/bags' },
-    { name: 'Frames', image: 'Frames.png', link: '/frames' },
-    { name: 'Accessories', image: 'Accessories.png', link: '/accessories' },
-    { name: 'Tablecloth', image: 'Tablecloth.png', link: '/tablecloth' },
-    { name: 'Clothes', image: 'Clothes.png', link: '/clothes' },
-    { name: 'Sock and Glove', image: 'SockandGlove.png', link: '/socks-gloves' }
-  ];
+    loading: boolean = true;
+    categories: Categories[] = [];
+
+    constructor(private categories1: CatogriesService) {}
+
+    ngOnInit() {
+        this.categories1.getCategory().subscribe({
+            next: (res) => {
+                this.categories = res.data.categories;
+                this.loading = false;
+            },
+            error: (err) => {
+                console.log(err);
+                this.loading = false;
+            },
+        });
+    }
 }
