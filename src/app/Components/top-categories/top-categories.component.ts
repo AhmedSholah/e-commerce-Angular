@@ -3,11 +3,10 @@ import { Component } from '@angular/core';
 import { CategoryCardComponent } from '../category-card/category-card.component';
 import { CatogriesService } from '../../Services/catogries.service';
 import { LoaderComponent } from '../loader/loader.component';
-import { delay } from 'rxjs';
 
 interface Categories {
     name: string;
-    image: string;
+    imageUrl: string;
 }
 
 @Component({

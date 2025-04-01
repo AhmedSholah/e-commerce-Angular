@@ -5,5 +5,5 @@ import { Component, Input } from '@angular/core';
     templateUrl: './category-card.component.html',
 })
 export class CategoryCardComponent {
-    @Input() category!: { name: string; image: string };
+    @Input() category!: { name: string; imageUrl: string };
 }
