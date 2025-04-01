@@ -5,10 +5,7 @@ import { OurReviewsComponent } from '../../Components/our-reviews/our-reviews.co
 import { AboutUsComponent } from '../../Components/about-us/about-us.component';
 import { TopCategoriesComponent } from '../../Components/top-categories/top-categories.component';
 import { TrendingComponent } from '../trending/trending.component';
-import { FooterComponent } from '../../Components/footer/footer.component';
-import { CheckoutConfirmationComponent } from '../../Components/checkout-confirmation/checkout-confirmation.component';
 import { CartComponent } from '../../Components/cart/cart.component';
-import { CheckoutComponent } from '../../Components/checkout/checkout.component';
 
 @Component({
     selector: 'app-home',
@@ -19,13 +16,9 @@ import { CheckoutComponent } from '../../Components/checkout/checkout.component'
         TopCategoriesComponent,
         TrendingComponent,
         OurReviewsComponent,
-        FooterComponent,
         CartComponent,
-        CheckoutComponent,
-        CheckoutConfirmationComponent,
     ],
 
     templateUrl: './home.component.html',
-    styles: ``,
 })
 export class HomeComponent {}

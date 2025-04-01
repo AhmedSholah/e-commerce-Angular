@@ -18,10 +18,10 @@ export class TopCategoriesComponent {
     loading: boolean = true;
     categories: Categories[] = [];
 
-    constructor(private categories1: CatogriesService) {}
+    constructor(private catogriesService: CatogriesService) {}
 
     ngOnInit() {
-        this.categories1.getCategory().subscribe({
+        this.catogriesService.getCategory().subscribe({
             next: (res) => {
                 this.categories = res.data.categories;
                 this.loading = false;

@@ -7,7 +7,6 @@ import { CartServiceService } from '../../Services/cart-service.service';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './cart.component.html',
-    styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
     isCartVisible = false;
