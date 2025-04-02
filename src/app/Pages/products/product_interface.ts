@@ -13,7 +13,6 @@ export interface Products {
    price: number,
    description: string,
    rating: number,
-
 }
 
 export interface category {

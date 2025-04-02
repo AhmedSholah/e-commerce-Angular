@@ -13,6 +13,6 @@ import { ProductdetailsSecondSectionComponent } from '../../Components/productde
         ProductdetailsSecondSectionComponent,
     ],
     templateUrl: './product-details.component.html',
-    styleUrls: ['./product-details.component.css'],
+    // styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent {}

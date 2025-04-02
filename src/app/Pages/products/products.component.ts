@@ -9,9 +9,10 @@ import {category, Products} from './product_interface'
 import { CatogriesService } from '../../Services/catogries.service';
 import { FormsModule } from '@angular/forms';
 import { SkelatonProductCardsComponent } from '../../Components/skelaton-product-cards/skelaton-product-cards.component';
+import { CartComponent } from '../../Components/cart/cart.component';
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, HeaderComponent, OurReviewsComponent,FooterComponent, FormsModule, SkelatonProductCardsComponent],
+  imports: [CommonModule, HeaderComponent, OurReviewsComponent,FooterComponent, FormsModule, SkelatonProductCardsComponent,CartComponent],
   templateUrl: './products.component.html',
   styles: ``
 })
