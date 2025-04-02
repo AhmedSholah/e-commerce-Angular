@@ -70,7 +70,7 @@ interface OrderResponse {
   standalone: true,
   imports: [CommonModule, CartComponent, HttpClientModule],
   templateUrl: './my-order.component.html',
-  styleUrl: './my-order.component.css'
+  // styleUrl: './my-order.component.css'
 })
 
 export class MyOrderComponent implements OnInit {
