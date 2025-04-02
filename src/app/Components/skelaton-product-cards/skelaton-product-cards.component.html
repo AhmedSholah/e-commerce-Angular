@@ -1,0 +1,47 @@
+<div class="grid lg:grid-cols-4 md:grid-cols-2 justify-items-center mb-5">
+    <div
+        class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
+        *ngFor="let card of [1,2,3,4 ,5, 6, 7,8]; index as i"
+    >
+        <div class="relative bg-gray-400 h-[13em] rounded-[1rem] animate-pulse">
+            <div class="w-full object-cover rounded-[1rem]"></div>
+        </div>
+        <div class="flex flex-col basis-0 grow justify-between p-4 animate-pulse">
+            <div class="flex flex-col gap-2">
+                <div class="flex  gap-1 justify-between ">
+                    <div class="text-bold bg-gray-400 h-[1.2rem] w-[7rem] rounded-lg">
+                    </div>
+                    <div class="flex">
+                        <span *ngFor="let item of [1, 2, 3, 4, 5]; index as i" class="">
+                            <svg
+                                class="flex justify-end m-auto text-gray-300 ml-1 w-6 h-full"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M8.5 0.5L10.2961 6.71885H16.1085L11.4062 10.5623L13.2023 16.7812L8.5 12.9377L3.79772 16.7812L5.59383 10.5623L0.891548 6.71885H6.70389L8.5 0.5Z"
+                                />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="trending-card-text bg-gray-400 w-[3rem] h-[1rem] rounded-[1rem]"></div>
+                <div
+                    class="trending-card-text max-h-[5rem] overflow-hidden text-ellipsis bg-gray-400 w-full h-[1rem] rounded-[1rem] animate-pulse"
+                >
+                </div>
+                <div
+                class="trending-card-text max-h-[5rem] overflow-hidden text-ellipsis bg-gray-400 w-full h-[1rem] rounded-[1rem] animate-pulse"
+            >
+            </div>
+            </div>
+            <button class=" p-2 mt-4 rounded-[1rem] bg-gray-400 w-full">
+                <div class="flex justify-center gap-2">
+                    <!-- <img src="images/trending/basket.svg" class="bg-gray-400" /> -->
+                    <span class=" text-bold text-gray-700 animate-pulse">Add to Cart</span>
+                </div>
+            </button>
+        </div>
+    </div>    
+</div>

@@ -15,215 +15,103 @@
 
     <!-- Mobile side filter -->
   <div [ngClass]="filter ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'" class="fixed inset-0 -top-[4rem] bg-black bg-opacity-50 md:bg-main-50 z-1  bg-main-100 md:block translate-y-[4rem]  md:translate-y-[0] p-5 md:p-0 rounded-lg w-[80%] transition-all duration-300 ease-in-out">  
-      <div class="mt-3 ml-2  ">
-          <div class="mb-3">
+    <div class="mt-3 ml-2">
 
-              <div class="flex justify-between items-center">
-                  <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Category</h1>
-                  <div (click)="toggleFilter()"><svg class="h-7 w-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="100" y="100" width="100" height="100" rx="50" transform="rotate(-180 100 100)" fill="#D9D9D9" fill-opacity="0.7"/>
-                    <path d="M33.4731 33.4731L66 66" stroke="#868080" stroke-width="5" stroke-linecap="round"/>
-                    <path d="M66 33.4731L33.4731 66" stroke="#7F7F7F" stroke-width="5" stroke-linecap="round"/>
-                    </svg>
-                    </div>
-              </div>
-              <div class="flex flex-col gap-1">
-                  <div class="flex items-center">
-                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Bags" />
-                      <label
-                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                          for="Bags"
-                          >Bags</label
-                      >
-                  </div>
-                  <div class="flex items-center">
-                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Frames" />
-                      <label
-                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                          for="Frames"
-                          >Frames</label
-                      >
-                  </div>
-                  <div class="flex items-center">
-                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Accessories" />
-                      <label
-                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                          for="Accessories"
-                          >Accessories</label
-                      >
-                  </div>
-                  <div class="flex items-center">
-                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Tablecloth" />
-                      <label
-                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                          for="Tablecloth"
-                          >Tablecloth</label
-                      >
-                  </div>
-                  <div class="flex items-center">
-                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Clothes" />
-                      <label
-                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                          for="Clothes"
-                          >Clothes</label
-                      >
-                  </div>
-                  <div class="flex items-center">
-                      <input
-                          class="mr-1 w-4 h-4 accent-main peer"
-                          type="checkbox"
-                          id="Sock & Glove"
-                      />
-                      <label
-                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                          for="Sock & Glove"
-                          >Sock & Glove</label
-                      >
-                  </div>
-                  <div class="flex items-center">
-                      <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="All" />
-                      <label
-                          class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                          for="All"
-                          >All</label
-                      >
-                  </div>
-              </div>
-          </div>
-          <div class="mb-2">
-              <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Availability</h1>
-              <div class="flex items-center">
-                  <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="stock" />
-                  <label
-                      class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                      for="stock"
-                      >In stock (35)</label
-                  >
-              </div>
-              <div class="flex items-center">
-                  <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="outstock" />
-                  <label
-                      class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                      for="outstock"
-                      >Out of stock (5)</label
-                  >
-              </div>
-          </div>
-          <div class="mb-5">
-              <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Price</h1>
-              <p class="text-gray-500 text-[0.9rem]">The highest price is $350.00</p>
-              <div class="flex flex-col align-between">
-                  <div class="flex justify-between items-center mt-2">
-                      <label
-                          class="text-gray-500 text-[0.9rem] peer-checked:text-main"
-                          for="formPrice"
-                          >From $</label
-                      >
-                      <input
-                          class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
-                          type="text"
-                          id="formPrice"
-                      />
-                  </div>
-                  <div class="flex justify-between items-center mt-2">
-                      <label class="text-gray-500 text-[0.9rem] peer-checked:text-main" for="toPrice"
-                          >To $</label
-                      >
-                      <input
-                          class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:outline-none"
-                          type="text"
-                          id="toPrice"
-                      />
-                  </div>
-                  <div class="flex justify-between mt-7 gap-3">
-                      <button class="btn-primary-small">Apply</button>
-                      <button class="btn-outline">Clear All</button>
-                  </div>
-              </div>
-          </div>
-          <div class="mb-2 hidden md:block">
-              <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1 ">Best Selling</h1>
-              <div
-                  class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
-                  *ngFor="let card of cards | slice: 0 : 1; index as i"
-              >
-                  <div class="relative">
-                      <img class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" />
-                      <!-- <img
-                          class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
-                          [src]="
-                              card.loved ? 'images/trending/loved.svg' : 'images/trending/heart.svg'
-                          "
-                          (click)="toggleHeart(i)"
-                      /> -->
-                  </div>
-                  <div class="flex flex-col basis-0 grow justify-between p-4">
-                      <div class="flex flex-col gap-2">
-                          <div class="flex justify-between">
-                              <div class="text-bold text-white text-[1.2rem]">{{ card.name }}</div>
-                              <div class="flex">
-                                  <span *ngFor="let item of [1, 2, 3, 4, 5]; index as i">
-                                      <svg
-                                          class="text-yellow-400 w- h-6"
-                                          [ngClass]="{
-                                              'text-yellow-400': card.rating > i,
-                                              'text-gray-400': card.rating <= i,
-                                          }"
-                                          viewBox="0 0 24 24"
-                                          fill="currentColor"
-                                          xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                          <path
-                                              d="M8.5 0.5L10.2961 6.71885H16.1085L11.4062 10.5623L13.2023 16.7812L8.5 12.9377L3.79772 16.7812L5.59383 10.5623L0.891548 6.71885H6.70389L8.5 0.5Z"
-                                          />
-                                      </svg>
-                                  </span>
-                              </div>
-                          </div>
-                          <div class="trending-card-text">$ {{ card.price }}</div>
-                          <div class="trending-card-text max-h-[5rem] overflow-hidden text-ellipsis">
-                              {{ card.description }}
-                          </div>
-                      </div>
-                      <button class="bg-main-50 p-2 mt-4 rounded-[1rem] w-full">
-                          <div class="flex justify-center gap-2">
-                              <img src="images/trending/basket.svg" />
-                              <span class="text-main text-bold">Add to Cart</span>
-                          </div>
-                      </button>
-                  </div>
-              </div>
-              <div class="flex items-center justify-center mt-7 gap-3">
-                  <button class="btn-primary-small max-w-[2.5rem]">
-                      <svg
-                          width="8"
-                          height="11"
-                          viewBox="0 0 11 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                      >
-                          <path
-                              d="M10.3112 1.21787L10.3194 13.2179C10.3191 13.3394 10.2857 13.4585 10.2227 13.5624C10.1598 13.6663 10.0697 13.7511 9.96211 13.8076C9.85455 13.8641 9.73362 13.8902 9.61234 13.8831C9.49105 13.876 9.374 13.8359 9.27378 13.7672L0.603028 7.77315C0.243526 7.52473 0.243118 6.92606 0.602281 6.67648L9.26486 0.670579C9.36477 0.601061 9.48183 0.560254 9.60331 0.552592C9.72479 0.54493 9.84604 0.570706 9.9539 0.627119C10.0618 0.683533 10.1521 0.768426 10.2151 0.872575C10.2781 0.976724 10.3113 1.09615 10.3112 1.21787Z"
-                              fill="#FDF6F3"
-                          />
-                      </svg>
-                  </button>
-                  <button class="btn-primary-small max-w-[2.5rem]">
-                      <svg
-                          width="12"
-                          height="13"
-                          viewBox="0 0 16 17"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                      >
-                          <path
-                              d="M3.33721 2.21787L3.32903 14.2179C3.32933 14.3394 3.36276 14.4585 3.42572 14.5624C3.48867 14.6663 3.57878 14.7511 3.68633 14.8076C3.79389 14.8641 3.91481 14.8902 4.0361 14.8831C4.15739 14.876 4.27444 14.8359 4.37466 14.7672L13.0454 8.77315C13.4049 8.52473 13.4053 7.92606 13.0462 7.67648L4.38358 1.67058C4.28366 1.60106 4.16661 1.56025 4.04513 1.55259C3.92365 1.54493 3.80239 1.57071 3.69454 1.62712C3.58668 1.68353 3.49634 1.76843 3.43334 1.87258C3.37035 1.97672 3.3371 2.09615 3.33721 2.21787Z"
-                              fill="#FDF6F3"
-                          />
-                      </svg>
-                  </button>
-              </div>
-          </div>
+        
+        <div class="mb-3">
+            <div class="flex justify-between items-center text-main border-b-2 mb-3">
+                <h1 class="text-3xl text-bold text-main d mb-1 pb-1">Category</h1>
+                <div (click)="toggleFilter()"><svg class="h-7 w-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="100" y="100" width="100" height="100" rx="50" transform="rotate(-180 100 100)" fill="#D9D9D9" fill-opacity="0.7"/>
+                                    <path d="M33.4731 33.4731L66 66" stroke="#868080" stroke-width="5" stroke-linecap="round"/>
+                                    <path d="M66 33.4731L33.4731 66" stroke="#7F7F7F" stroke-width="5" stroke-linecap="round"/>
+                                    </svg>
+                </div>
+            </div>
+
+            
+            <div class="flex flex-col gap-1">
+                <div *ngFor="let category of categories; index as i" class="flex items-center">
+                    <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" 
+                    [id]="category.name" [value]="category.name" 
+                    (change) ="FilterOptions($event)"
+                    />
+                    <label
+                        class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                        [for]="category.name"
+                        >{{category.name}}</label
+                    >
+                </div>
+            </div>
+        </div>
+    
+        
+        <div class="mb-2">
+            <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Availability</h1>
+            <div class="flex items-center">
+                <input class="mr-1 w-4 h-4 accent-main peer" type="radio" name="stockStatus" id="stock" value="true" (change)="stockStatus($event)"/>
+                <label
+                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                    for="stock" 
+                    >In stock </label
+                >
+            </div>
+            <div class="flex items-center">
+                <input class="mr-1 w-4 h-4 accent-main peer" type="radio" name="stockStatus" id="outstock" value="false" (change)="stockStatus($event)"/>
+                <label
+                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
+                    for="outstock" 
+                    >Out of stock </label
+                >
+            </div>
+        </div>
+        <div class="mb-5">
+            <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Price</h1>
+            <p class="text-gray-500 text-[0.9rem]">The highest price is ${{ highestPrice}}</p>
+            <div class="flex flex-col align-between">
+                <div class="relative flex justify-between items-center mt-2">
+                    <label
+                        class="text-gray-500 text-[0.9rem] peer-checked:text-main"
+                        for="formPrice"
+                        >From $</label
+                    >
+                    <input
+                        class="ml-3 h-6 text-[0.8rem] w-[45%] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
+                        type="number"
+                        id="formPrice"
+                        [(ngModel)] = 'minPrice'
+                        min="0"
+                        max="350"
+                        required
+                    />
+                </div>
+                
+                <div class="flex justify-between items-center mt-2">
+                    <label class="text-gray-500 text-[0.9rem] peer-checked:text-main" for="toPrice"
+                        >To $</label
+                    >
+                    <input
+                    class="ml-3 h-6 text-[0.8rem] w-[45%] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
+                    type="number"
+                    id="formPrice"
+                    [(ngModel)] = 'maxPrice'
+                />
+            </div>
+            
+            <div *ngIf="errorPriceValidation" class="right-0 top-0 text-red-500 text-sm font-medium bg-red-50 px-3 py-1.5 rounded-md shadow-sm border border-red-200 flex items-center mt-1 animate-bounce-gentle transform transition-all duration-300 ease-in-out mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                {{errMessage}}
+            </div>
+    
+                <div class="flex justify-between mt-6 gap-3">
+                    <button class="btn-primary-small" (click) = "applyChange()">Apply</button>
+                    <button class="btn-outline" (click) = "clearAll()">Clear All</button>
+                </div>
+            </div>
+        </div>
+       
       </div>
   </div>
 
@@ -232,133 +120,109 @@
     <div class="mb-3">
         <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Category</h1>
         <div class="flex flex-col gap-1">
-            <div class="flex items-center">
-                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Bags" />
-                <label
-                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="Bags"
-                    >Bags</label
-                >
-            </div>
-            <div class="flex items-center">
-                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Frames" />
-                <label
-                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="Frames"
-                    >Frames</label
-                >
-            </div>
-            <div class="flex items-center">
-                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Accessories" />
-                <label
-                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="Accessories"
-                    >Accessories</label
-                >
-            </div>
-            <div class="flex items-center">
-                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Tablecloth" />
-                <label
-                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="Tablecloth"
-                    >Tablecloth</label
-                >
-            </div>
-            <div class="flex items-center">
-                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="Clothes" />
-                <label
-                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="Clothes"
-                    >Clothes</label
-                >
-            </div>
-            <div class="flex items-center">
-                <input
-                    class="mr-1 w-4 h-4 accent-main peer"
-                    type="checkbox"
-                    id="Sock & Glove"
+
+            <div *ngFor="let category of categories; index as i" class="flex items-center">
+                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" 
+                [id]="category.name" [value]="category.name" 
+                (change) ="FilterOptions($event)"
                 />
                 <label
                     class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="Sock & Glove"
-                    >Sock & Glove</label
-                >
-            </div>
-            <div class="flex items-center">
-                <input class="mr-1 w-4 h-4 accent-main peer" type="checkbox" id="All" />
-                <label
-                    class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                    for="All"
-                    >All</label
+                    [for]="category.name"
+                    >{{category.name}}</label
                 >
             </div>
         </div>
     </div>
+
+    
     <div class="mb-2">
         <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Availability</h1>
         <div class="flex items-center">
-            <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="stock" />
+            <input class="mr-1 w-4 h-4 accent-main peer" type="radio" name="stockStatus" id="stock" value="true" (change)="stockStatus($event)"/>
             <label
                 class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                for="stock"
-                >In stock (35)</label
+                for="stock" 
+                >In stock </label
             >
         </div>
         <div class="flex items-center">
-            <input class="mr-1 w-4 h-4 accent-main peer" type="radio" id="outstock" />
+            <input class="mr-1 w-4 h-4 accent-main peer" type="radio" name="stockStatus" id="outstock" value="false" (change)="stockStatus($event)"/>
             <label
                 class="text-gray-500 text-[0.9rem] peer-checked:text-main peer-checked:font-bold"
-                for="outstock"
-                >Out of stock (5)</label
+                for="outstock" 
+                >Out of stock </label
             >
         </div>
     </div>
     <div class="mb-5">
         <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1">Price</h1>
-        <p class="text-gray-500 text-[0.9rem]">The highest price is $350.00</p>
+        <p class="text-gray-500 text-[0.9rem]">The highest price is ${{ highestPrice}}</p>
         <div class="flex flex-col align-between">
-            <div class="flex justify-between items-center mt-2">
+            <div class="relative flex justify-between items-center mt-2">
                 <label
                     class="text-gray-500 text-[0.9rem] peer-checked:text-main"
                     for="formPrice"
                     >From $</label
                 >
                 <input
-                    class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
-                    type="text"
+                    class="ml-3 h-6 text-[0.8rem] w-[45%] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
+                    type="number"
                     id="formPrice"
+                    [(ngModel)] = 'minPrice'
+                    min="0"
+                    max="350"
+                    required
                 />
             </div>
+            
             <div class="flex justify-between items-center mt-2">
                 <label class="text-gray-500 text-[0.9rem] peer-checked:text-main" for="toPrice"
                     >To $</label
                 >
                 <input
-                    class="ml-3 h-6 text-[0.8rem] bg-gray-200 rounded-[5px] p-2 foucs:outline-none"
-                    type="text"
-                    id="toPrice"
-                />
-            </div>
-            <div class="flex justify-between mt-7 gap-3">
-                <button class="btn-primary-small">Apply</button>
-                <button class="btn-outline">Clear All</button>
+                class="ml-3 h-6 text-[0.8rem] w-[45%] bg-gray-200 rounded-[5px] p-2 foucs:b-none"
+                type="number"
+                id="formPrice"
+                [(ngModel)] = 'maxPrice'
+            />
+        </div>
+        
+        <div *ngIf="errorPriceValidation" class="right-0 top-0 text-red-500 text-sm font-medium bg-red-50 px-3 py-1.5 rounded-md shadow-sm border border-red-200 flex items-center mt-1 animate-bounce-gentle transform transition-all duration-300 ease-in-out mt-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            {{errMessage}}
+        </div>
+
+            <div class="flex justify-between mt-6 gap-3">
+                <button class="btn-primary-small" (click) = "applyChange()">Apply</button>
+                <button class="btn-outline" (click) = "clearAll()">Clear All</button>
             </div>
         </div>
     </div>
+    <!-- Best Selling Desktop -->
     <div class="mb-2 hidden md:block">
         <h1 class="text-3xl text-bold text-main border-b-2 mb-1 pb-1 ">Best Selling</h1>
         <div
             class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
-            *ngFor="let card of cards | slice: 0 : 1; index as i"
+            *ngFor="let card of  bestSelling | slice: ind1 : ind2; index as i"
         >
             <div class="relative">
-                <img class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" />
+                <img *ngIf='!(card.images.length === 0)' class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" />
+
+                <img *ngIf='card.images.length === 0' class="w-full h-full object-cover rounded-[1rem]" src={{imageUrl}} />
                 <!-- <img
                     class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
                     [src]="
                         card.loved ? 'images/trending/loved.svg' : 'images/trending/heart.svg'
                     "
-                    (click)="toggleHeart(i)"
+                    (cl<button class="bg-main-50 hover:bg-red-700 p-2 mt-4 rounded-[1rem] w-full ">
+                          <div class="flex justify-center gap-2">
+                              <img src="images/trending/basket.svg" />
+                              <span class="text-main text-bold ">Add to Cart</span>
+                          </div>
+                      </button>ick)="toggleHeart(i)"
                 /> -->
             </div>
             <div class="flex flex-col basis-0 grow justify-between p-4">
@@ -389,7 +253,7 @@
                         {{ card.description }}
                     </div>
                 </div>
-                <button class="bg-main-50 p-2 mt-4 rounded-[1rem] w-full">
+                <button class="bg-main-50 hover:bg-gray-100 p-2 mt-4 rounded-[1rem] w-full">
                     <div class="flex justify-center gap-2">
                         <img src="images/trending/basket.svg" />
                         <span class="text-main text-bold">Add to Cart</span>
@@ -398,7 +262,7 @@
             </div>
         </div>
         <div class="flex items-center justify-center mt-7 gap-3">
-            <button class="btn-primary-small max-w-[2.5rem]">
+            <button class="btn-primary-small max-w-[2.5rem]" id="previous" (click)="changeBestSellingCard(-1)">
                 <svg
                     width="8"
                     height="11"
@@ -412,7 +276,7 @@
                     />
                 </svg>
             </button>
-            <button class="btn-primary-small max-w-[2.5rem]">
+            <button class="btn-primary-small max-w-[2.5rem]" id="next" (click)="changeBestSellingCard(1)">
                 <svg
                     width="12"
                     height="13"
@@ -428,7 +292,7 @@
             </button>
         </div>
     </div>
-</div>
+  </div>
 
     <div class="flex flex-col">
         <div class="flex justify-between bg-main-100 p-3 m-3">
@@ -484,8 +348,8 @@
 
             <div class="relative">
                 <button
-                    class="bg-main text-white border border-main h-8 w-full md:text-sm text-[0.8rem] px-4 flex justify-center items-center gap-1 p-2 rounded-[0.4rem] mb-1"
-                    (click)="sortCards(cardsOrder)"
+                    class="bg-main min-w-[6rem] ml-1 text-white border border-main h-8 w-full md:text-sm text-[0.8rem] px-4 flex justify-center items-center gap-1 p-2 rounded-[0.4rem] mb-1"
+                    (click)="showSortList()"
                 >
                     {{ cardsOrder }}
                     <svg
@@ -503,7 +367,7 @@
                 </button>
 
                 <div
-                    class="absolute w-full translate-y-5 flex flex-col items-center bg-main-200 rounded top-1/2 {{
+                    class="absolute w-full min-w-[6rem] translate-y-5 flex flex-col items-center bg-main-200 rounded top-1/2 {{
                         displaySort
                     }} z-1"
                 >
@@ -520,7 +384,7 @@
                         Low to high
                     </div>
                     <div
-                        class="text-main text-sm w-full m-1 text-center hover:bg-main-300"
+                        class="text-main text-sm w-full m-1  text-center hover:bg-main-300"
                         (click)="sortCards('High to low')"
                     >
                         High to low
@@ -541,15 +405,17 @@
             </div>
         </div>
 
+        <!-- Cards -->
         <div class="flex flex-col">
-            <div class="grid lg:grid-cols-4 md:grid-cols-2 justify-items-center mb-5">
+            <div *ngIf="!loading && !emptyState" class="grid lg:grid-cols-4 md:grid-cols-2 justify-items-center mb-5">
                 <div
                     class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
                     *ngFor="let card of cards | slice: 0 : paginationNumber; index as i"
                 >
-                    <div class="relative">
-                        
-                        <img class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" /> 
+                    <div class="relative group">            
+                        <img class="w-full h-full object-cover rounded-[1rem] group-hover:hidden" [src]="card.images[0]" /> 
+                        <img class="w-full h-full object-cover rounded-[1rem] hidden group-hover:block" [src]="card.images[1]" /> 
+
                         <!-- <img
                             class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
                             [src]="
@@ -592,18 +458,56 @@
                                 {{ card.description }}
                             </div>
                         </div>
-                        <button class="bg-main-50 p-2 mt-4 rounded-[1rem] w-full">
+                        <button class="bg-main-50  hover:bg-gray-100  p-2 mt-4 rounded-[1rem] w-full">
                             <div class="flex justify-center gap-2">
                                 <img src="images/trending/basket.svg" />
-                                <span class="text-main text-bold">Add to Cart</span>
+                                <span class="text-main text-bold ">Add to Cart</span>
                             </div>
                         </button>
                     </div>
                 </div>
             </div>
 
+            <div *ngIf="emptyState" class="flex flex-col items-center justify-center p-12 text-center text-gray-600">
+                <svg
+                  class="w-28 h-28 mb-6 text-gray-300"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
+                  <path
+                    d="M8 12h8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+                <!-- Title -->
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">
+                  No Products Found
+                </h2>
+                <!-- Message -->
+                <p class="max-w-md mb-4">
+                  We couldn’t find any products matching your criteria. Try adjusting your filters or check back later.
+                </p>
+                <!-- Action Button -->
+                <button
+                  class="bg-main hover:bg-main-700 text-white font-medium py-2 px-4 rounded"
+                  (click)="clearAll()"
+                >
+                  Clear Filters
+                </button>
+              </div>
+              
+
+            <!-- Skeleton-card -->
+           <app-skelaton-product-cards *ngIf="loading"/>
+
+           
             <div class="flex items-center justify-center mt-7 gap-3">
-                <button class="btn-primary-small max-w-[2.5rem]">
+                <button class="btn-primary-small max-w-[2.5rem]" id="previous" (click)="changePage(-1)">
                     <svg
                         width="8"
                         height="11"
@@ -617,7 +521,7 @@
                         />
                     </svg>
                 </button>
-                <button class="btn-primary-small max-w-[2.5rem]">
+                <button class="btn-primary-small max-w-[2.5rem]" id="next" (click)="changePage(1)">
                     <svg
                         width="12"
                         height="13"
@@ -632,6 +536,99 @@
                     </svg>
                 </button>
             </div>
+
+             <!-- Best Selling mobile -->
+        <div class="mb-2 mt-10 md:hidden  "> 
+            <h1 class="text-2xl text-bold text-main  mb-4 pb-1 text-center">Best Selling</h1>
+            <div
+                class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
+                *ngFor="let card of  bestSelling | slice: ind1 : ind2; index as i"
+            >
+                <div class="relative">
+                    <img *ngIf='!(card.images.length === 0)' class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" />
+    
+                    <img *ngIf='card.images.length === 0' class="w-full h-full object-cover rounded-[1rem]" src={{imageUrl}} />
+                    <!-- <img
+                        class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
+                        [src]="
+                            card.loved ? 'images/trending/loved.svg' : 'images/trending/heart.svg'
+                        "
+                        (cl<button class="bg-main-50 hover:bg-red-700 p-2 mt-4 rounded-[1rem] w-full ">
+                              <div class="flex justify-center gap-2">
+                                  <img src="images/trending/basket.svg" />
+                                  <span class="text-main text-bold ">Add to Cart</span>
+                              </div>
+                          </button>ick)="toggleHeart(i)"
+                    /> -->
+                </div>
+                <div class="flex flex-col basis-0 grow justify-between p-4">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex justify-between">
+                            <div class="text-bold text-white text-[1.2rem]">{{ card.name }}</div>
+                            <div class="flex">
+                                <span *ngFor="let item of [1, 2, 3, 4, 5]; index as i">
+                                    <svg
+                                        class="text-yellow-400 w- h-6"
+                                        [ngClass]="{
+                                            'text-yellow-400': card.rating > i,
+                                            'text-gray-400': card.rating <= i,
+                                        }"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.5 0.5L10.2961 6.71885H16.1085L11.4062 10.5623L13.2023 16.7812L8.5 12.9377L3.79772 16.7812L5.59383 10.5623L0.891548 6.71885H6.70389L8.5 0.5Z"
+                                        />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="trending-card-text">$ {{ card.price }}</div>
+                        <div class="trending-card-text max-h-[5rem] overflow-hidden text-ellipsis">
+                            {{ card.description }}
+                        </div>
+                    </div>
+                    <button class="bg-main-50 hover:bg-gray-100 p-2 mt-4 rounded-[1rem] w-full">
+                        <div class="flex justify-center gap-2">
+                            <img src="images/trending/basket.svg" />
+                            <span class="text-main text-bold">Add to Cart</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="flex items-center justify-center mt-7 gap-3">
+                <button class="btn-primary-small max-w-[2.5rem]" id="previous" (click)="changeBestSellingCard(-1)">
+                    <svg
+                        width="8"
+                        height="11"
+                        viewBox="0 0 11 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M10.3112 1.21787L10.3194 13.2179C10.3191 13.3394 10.2857 13.4585 10.2227 13.5624C10.1598 13.6663 10.0697 13.7511 9.96211 13.8076C9.85455 13.8641 9.73362 13.8902 9.61234 13.8831C9.49105 13.876 9.374 13.8359 9.27378 13.7672L0.603028 7.77315C0.243526 7.52473 0.243118 6.92606 0.602281 6.67648L9.26486 0.670579C9.36477 0.601061 9.48183 0.560254 9.60331 0.552592C9.72479 0.54493 9.84604 0.570706 9.9539 0.627119C10.0618 0.683533 10.1521 0.768426 10.2151 0.872575C10.2781 0.976724 10.3113 1.09615 10.3112 1.21787Z"
+                            fill="#FDF6F3"
+                        />
+                    </svg>
+                </button>
+                <button class="btn-primary-small max-w-[2.5rem]" id="next" (click)="changeBestSellingCard(1)">
+                    <svg
+                        width="12"
+                        height="13"
+                        viewBox="0 0 16 17"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M3.33721 2.21787L3.32903 14.2179C3.32933 14.3394 3.36276 14.4585 3.42572 14.5624C3.48867 14.6663 3.57878 14.7511 3.68633 14.8076C3.79389 14.8641 3.91481 14.8902 4.0361 14.8831C4.15739 14.876 4.27444 14.8359 4.37466 14.7672L13.0454 8.77315C13.4049 8.52473 13.4053 7.92606 13.0462 7.67648L4.38358 1.67058C4.28366 1.60106 4.16661 1.56025 4.04513 1.55259C3.92365 1.54493 3.80239 1.57071 3.69454 1.62712C3.58668 1.68353 3.49634 1.76843 3.43334 1.87258C3.37035 1.97672 3.3371 2.09615 3.33721 2.21787Z"
+                            fill="#FDF6F3"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
         </div>
     </div>
 </section>
