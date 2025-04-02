@@ -85,7 +85,7 @@ html {
 }
 .btn-primary-small {
     @apply bg-main text-white rounded-[6px] font-semibold border border-main 
-    h-8 w-full text-sm px-4;
+    h-8 w-full text-sm px-4 hover:bg-main-700;
 }
 
 .btn-secondary {
@@ -94,7 +94,7 @@ html {
 
 .btn-outline {
     @apply bg-main-50 text-main rounded-[6px] font-semibold border border-main 
-        h-8 w-full text-sm px-4;
+        h-8 w-full text-sm px-4 hover:bg-main-700 hover:text-white;
 }
 
 .btn.btn-label {

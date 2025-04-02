@@ -42,6 +42,13 @@ export class ProductsComponent {
   totalPages: number = this.getTotalPages();
   loading: boolean = true;
   errorPriceValidation: boolean = false;
+  errMessage: string = 'no Errors';
+  emptyState: boolean = false;
+  imageUrl = 'https://saratogasnowmobile.com/wp-content/uploads/woocommerce-placeholder.png';
+  bestSellingCard: number = 0; 
+  ind1 = 0; 
+  ind2 = 1; 
+
   // toggleHeart(index: number){
   //   this.cards[index].loved = !this.cards[index].loved; 
   // }
@@ -51,10 +58,6 @@ export class ProductsComponent {
     this.cardsNumber = cardsNumber;
     this.paginationNumber = cardsNumber;
     this.perPage = cardsNumber;
-    // if(this.page == this.totalPages){
-    //   this.totalPages = this.getTotalPages();
-    //   this.page = this.totalPages;
-    // }
     this.loadProducts();
   }
   showSortList(){
@@ -96,7 +99,6 @@ export class ProductsComponent {
 
   toggleFilter(){
     this.filter = !this.filter;
-    console.log(this.filter);
   }
   
   stockStatus(event: any){
@@ -121,15 +123,44 @@ export class ProductsComponent {
 
   
   applyChange(){
-   
-    if((!this.minPrice && this.minPrice != undefined || !this.maxPrice && this.maxPrice != undefined )){
-      this.errorPriceValidation = true;
-    }
-  
-    console.log(this.errorPriceValidation );
+ 
+   if(!this.minPrice && !this.maxPrice){
     this.loading = true;
     this.page = 1;
     this.loadProducts();
+  }
+   
+  const { valid, message } = this.validatePriceInput();
+  this.errorPriceValidation = valid;
+  this.errMessage = message;
+
+    if (this.minPrice && this.maxPrice && this.errorPriceValidation === false) {
+      console.log(this.minPrice, this.maxPrice);
+      this.errorPriceValidation = false;
+      this.page = 1;
+      this.loadProducts();
+    }
+  
+    if(!valid){
+      this.toggleFilter();
+    }
+   
+  }
+  validatePriceInput()
+  {   
+    
+    if(this.minPrice && !this.maxPrice )
+    return  {valid: true, message: 'Max Price is Required'}; 
+    else if(this.maxPrice && !this.minPrice)
+    return  {valid: true, message: 'Min Price is Required'}; 
+    else if(this.maxPrice && this.maxPrice > this.highestPrice)
+      return  {valid: true, message: `Max Price Should be less then ${this.highestPrice}`}; 
+    else if((this.minPrice && this.maxPrice) && this.maxPrice < this.minPrice)
+      return  {valid: true, message: `Min Price Should be less then Max Price $${this.highestPrice}`};
+    else if((this.minPrice && this.maxPrice) && this.maxPrice < this.minPrice)
+      return  {valid: true, message: `Max Price Should be Greater then Min Price $${this.highestPrice}`};
+
+    return { valid: false , message : ''};
   }
 
   getTotalPages(): number {
@@ -141,6 +172,9 @@ export class ProductsComponent {
     this.instock = true;
     this.minPrice = 0;
     this.maxPrice = 0;
+    this.errorPriceValidation = false;
+    this.emptyState = false;
+
     const checkBoxInputs = document.querySelectorAll("input[type='checkbox']");
     const radioInputs = document.querySelectorAll("input[type='radio']");
 
@@ -192,25 +226,44 @@ export class ProductsComponent {
       console.log(err);
     }});    
   }
-  checkAvilabiltyState(event: any){
+  // checkAvilabiltyState(event: any){
+  // }
 
-  }
   fetchProducts(options: { page: number, limit: number, category?: string[], minPrice?: number, maxPrice?: number , inStock?: boolean, sortBy?:'name' | 'price' | 'createdAt', sortOrder?: 'asc' | 'desc'}) {
     this.product.getProducts(options).subscribe({
       next: (res:any) => {
         this.loading = false;
         const Products = res.data.products;
         this.cards = Products;
+        if(this.cards.length === 0) {
+          this.emptyState = true;
+          console.log('display empty');
+        }
         console.log(this.cards);
         this.bestSelling = res.data.bestSellingProducts;
+        console.log("Here is best Selling",this.bestSelling);
         this.highestPrice = res.data.highestPricedProduct.price;
         this.productCount = res.data.productsCount;
-        // console.log(this.bestSelling);
       },
       error: (error) => {
         console.log(error);
+        window.alert('Reload the Page error While Loading');
       }
     });
+}
+
+
+changeBestSellingCard(number : number){
+ const bestSellingLength = this.bestSelling.length;
+  
+ if(number == 1 && this.ind2 < bestSellingLength){
+  this.ind1++;
+  this.ind2++;
+ }else if (number == -1 && this.ind1 > 0){
+  this.ind1--;
+  this.ind2--;
+ }
+  console.log(this.ind1,this.ind2);
 }
  
 loadProducts(){
@@ -230,13 +283,13 @@ loadProducts(){
 // ClearAll function --> Done 
 // handel sort button --> Done
 // set limit for the pagination --> Done
+// validate price inputs ---> Done
+// make a skelton for the product --> Done
+// handel if there is no product ---> Done 
+// hover image effect --> Done
+// handel best selling card --> best selling --> Done
 
-
-// make a skelton for the product 
-// validate price inputs
-
-// handel best selling card --> best selling
-// handel if there is no product 
+// handel filter on the mobile 
+// Add to Cart Post request
 
 // handel love 
-// handel filter on the mobile 
