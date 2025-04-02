@@ -279,17 +279,3 @@ loadProducts(){
   }
 }
   
-
-// ClearAll function --> Done 
-// handel sort button --> Done
-// set limit for the pagination --> Done
-// validate price inputs ---> Done
-// make a skelton for the product --> Done
-// handel if there is no product ---> Done 
-// hover image effect --> Done
-// handel best selling card --> best selling --> Done
-
-// handel filter on the mobile 
-// Add to Cart Post request
-
-// handel love 
