@@ -95,4 +95,21 @@ export class HeaderComponent implements OnInit {
     get lastName(): string {
         return this.userName.split(' ')[1] || '';
     }
+    navigateToSection(sectionId: string) {
+        if (this.router.url === '/') {
+          
+          this.scrollToSection(sectionId);
+        } else {
+          
+          this.router.navigate(['/']).then(() => {
+            setTimeout(() => this.scrollToSection(sectionId), 100); 
+          });
+        }
+      }
+    scrollToSection(sectionId: string) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
 }

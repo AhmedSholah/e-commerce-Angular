@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { OurReviewsComponent } from '../../Components/our-reviews/our-reviews.component';
 import { HeaderComponent } from '../../Components/header/header.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
+import { CartComponent } from '../../Components/cart/cart.component';
 
 @Component({
   selector: 'app-fav-product',
-  imports: [CommonModule,HeaderComponent, OurReviewsComponent,FooterComponent],
+  imports: [CommonModule,HeaderComponent, OurReviewsComponent,FooterComponent,CartComponent],
   templateUrl: './fav-product.component.html',
   styles: ``
 })

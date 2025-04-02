@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../Components/header/header.component';
 import { OurReviewsComponent } from '../../Components/our-reviews/our-reviews.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
 import { ProductsService } from '../../Services/products.service';
+
 import {category, Products} from './product_interface'
 import { CatogriesService } from '../../Services/catogries.service';
 import { FormsModule } from '@angular/forms';
