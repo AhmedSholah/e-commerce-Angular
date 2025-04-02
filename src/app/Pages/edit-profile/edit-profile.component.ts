@@ -3,12 +3,13 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { UserDataService } from '../../Services/user-data.service';
 import { LoaderComponent } from '../../Components/loader/loader.component';
+import { CartComponent } from '../../Components/cart/cart.component';
 
 @Component({
     selector: 'app-edit-profile',
     standalone: true,
     templateUrl: './edit-profile.component.html',
-    imports: [CommonModule, ReactiveFormsModule, LoaderComponent],
+    imports: [CommonModule, ReactiveFormsModule, LoaderComponent,CartComponent],
 })
 export class EditProfileComponent {
     loading: boolean = false;
@@ -105,3 +106,4 @@ export class EditProfileComponent {
         });
     }
 }
+

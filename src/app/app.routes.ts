@@ -9,6 +9,7 @@ import { FavProductComponent } from './Pages/fav-product/fav-product.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { MainLayoutComponent } from './Components/Layouts/main-layout/main-layout.component';
 import { AboutUsComponent } from './Components/about-us/about-us.component';
+import { MyOrderComponent } from './Components/my-order/my-order.component';
 
 
 export const routes: Routes = [
@@ -46,6 +47,10 @@ export const routes: Routes = [
                 path: 'profile',
                 component: EditProfileComponent,
             },
+            {
+                path:'myOrder',
+                component:MyOrderComponent
+            }
         ],
     },
 ];

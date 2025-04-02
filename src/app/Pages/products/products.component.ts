@@ -5,9 +5,10 @@ import { OurReviewsComponent } from '../../Components/our-reviews/our-reviews.co
 import { FooterComponent } from '../../Components/footer/footer.component';
 import { ProductsService } from '../../Services/products.service';
 import {Products} from './product_interface'
+import { CartComponent } from '../../Components/cart/cart.component';
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, HeaderComponent, OurReviewsComponent,FooterComponent],
+  imports: [CommonModule, HeaderComponent, OurReviewsComponent,FooterComponent,CartComponent],
   templateUrl: './products.component.html',
   styles: ``
 })
