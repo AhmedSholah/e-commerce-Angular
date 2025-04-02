@@ -13,6 +13,7 @@ import { CartComponent } from '../../Components/cart/cart.component';
 })
 export class EditProfileComponent {
     loading: boolean = false;
+    loadingAvatar: boolean = true;
     form: FormGroup;
     imagePreview: string | ArrayBuffer | null = null;
     defaultImage: string = 'person.svg';
@@ -50,16 +51,19 @@ export class EditProfileComponent {
 
     loadUserData() {
         this.loading = true;
+
         this.userService.getUser().subscribe({
             next: (res) => {
                 this.user = res.data.currentUser;
                 this.form.patchValue(this.user);
-                this.imagePreview = this.user.image ? this.user.image : this.defaultImage;
+                this.imagePreview = this.user.avatarUrl ? this.user.avatarUrl : this.defaultImage;
                 this.loading = false;
+                this.loadingAvatar = false;
             },
             error: (error) => {
                 console.error('Error loading user data:', error);
                 this.loading = false;
+                this.loadingAvatar = false;
             },
         });
     }
@@ -67,13 +71,20 @@ export class EditProfileComponent {
     onFileSelected(event: Event) {
         const file = (event.target as HTMLInputElement).files?.[0];
         if (!file) return;
+        this.loadingAvatar = true;
 
-        this.selectedFile = file;
-        const reader = new FileReader();
-        reader.onload = () => {
-            this.imagePreview = reader.result;
-        };
-        reader.readAsDataURL(file);
+        this.userService.changeUserAvatar(file).subscribe({
+            next: (res) => {
+                this.imagePreview = URL.createObjectURL(file);
+                this.selectedFile = file;
+                console.log('Image Upload Successful:', res);
+                this.loadingAvatar = false;
+            },
+            error: (error) => {
+                console.error('Image Upload Error:', error);
+                this.loadingAvatar = false;
+            },
+        });
     }
 
     onSubmit() {

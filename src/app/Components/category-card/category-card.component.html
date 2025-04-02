@@ -1,12 +1,26 @@
-<div class="relative mb-20">
-    <img src="VectorTop.png" class="absolute top-0" alt="">
-    <p class="absolute top-2 left-8 text-main text-2xl font-serif">{{ category.name }}</p>
-    <img [src]="category.image" alt="">
-    <img src="VectorBottom.png" class="absolute bottom-0" alt="">
-    <a [href]="category.link">
-        <p class="absolute bottom-5 left-58  text-main text-[22px] font-serif flex justify-center items-center">View All
-            <svg class="w-4.5 h-4.5 mx-2.5 text-main fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M6 4l10 8-10 8z" fill="currentColor" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" stroke-width="2"/>
+<div class="relative mb-20 rounded-3xl overflow-hidden hover:-translate-y-3 transition">
+    <a [href]="'/products/' + category.name.toLowerCase()">
+        <img src="VectorTop.png" class="absolute top-0" alt="" />
+        <p class="absolute top-2 left-8 text-main text-2xl font-serif">{{ category.name }}</p>
+        <img [src]="category.imageUrl" class="w-[388px] h-[388px]" alt="{{ category.name }}" />
+        <img src="VectorBottom.png" class="absolute bottom-0" alt="" />
+        <p
+            class="absolute bottom-5 left-58 text-main text-[22px] font-serif flex justify-center items-center"
+        >
+            View All
+            <svg
+                class="w-4.5 h-4.5 mx-2.5 text-main fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    d="M6 4l10 8-10 8z"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="2"
+                />
             </svg>
         </p>
     </a>

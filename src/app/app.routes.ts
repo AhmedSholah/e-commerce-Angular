@@ -11,6 +11,9 @@ import { MainLayoutComponent } from './Components/Layouts/main-layout/main-layou
 import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { MyOrderComponent } from './Components/my-order/my-order.component';
 
+import { CheckoutComponent } from './Components/checkout/checkout.component';
+import { CheckoutConfirmationComponent } from './Components/checkout-confirmation/checkout-confirmation.component';
+
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -48,12 +51,19 @@ export const routes: Routes = [
                 component: EditProfileComponent,
             },
             {
+
                 path:'myOrder',
                 component:MyOrderComponent
             }
+
+                path: 'checkout',
+                component: CheckoutComponent,
+            },
+            {
+                path: 'checkout-confirmation',
+                component: CheckoutConfirmationComponent,
+            },
+
         ],
     },
 ];
-
-
-
