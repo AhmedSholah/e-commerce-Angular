@@ -10,6 +10,8 @@ import { CatogriesService } from '../../Services/catogries.service';
 import { FormsModule } from '@angular/forms';
 import { SkelatonProductCardsComponent } from '../../Components/skelaton-product-cards/skelaton-product-cards.component';
 import { CartComponent } from '../../Components/cart/cart.component';
+import { CartServiceService } from '../../Services/cart-service.service';
+import { FavoriteService } from '../../Services/favorite.service';
 @Component({
   selector: 'app-products',
   imports: [CommonModule, HeaderComponent, OurReviewsComponent,FooterComponent, FormsModule, SkelatonProductCardsComponent,CartComponent],
@@ -18,7 +20,9 @@ import { CartComponent } from '../../Components/cart/cart.component';
 })
 export class ProductsComponent {
 
-  constructor(private product: ProductsService, private categoryService: CatogriesService){
+  constructor(private product: ProductsService, private categoryService: CatogriesService, private cartServiceService: CartServiceService
+    ,private favoriteService: FavoriteService
+  ){
   }
 
   cardsNumber: number = 4;
@@ -50,10 +54,11 @@ export class ProductsComponent {
   bestSellingCard: number = 0; 
   ind1 = 0; 
   ind2 = 1; 
+  addedItems: string[] = [];
 
-  // toggleHeart(index: number){
-  //   this.cards[index].loved = !this.cards[index].loved; 
-  // }
+  toggleHeart(index: number){
+    // this.cards[index].loved = !this.cards[index].loved; 
+  }
   
   cardPagination(cardsNumber : number){
     this.displayP = this.displayP === 'hidden' ? 'block' : 'hidden';
@@ -124,8 +129,7 @@ export class ProductsComponent {
   }
 
   
-  applyChange(){
- 
+  applyChange(mobile: boolean){
    if(!this.minPrice && !this.maxPrice){
     this.loading = true;
     this.page = 1;
@@ -143,7 +147,7 @@ export class ProductsComponent {
       this.loadProducts();
     }
   
-    if(!valid){
+    if(!valid && !mobile){
       this.toggleFilter();
     }
    
@@ -267,17 +271,100 @@ changeBestSellingCard(number : number){
  }
   console.log(this.ind1,this.ind2);
 }
+
+
+async addToCart(productId: string){
+  
+  console.log(productId);
+  await this.cartServiceService.addToCart(productId , 1).subscribe({
+    next: (res) =>{
+      console.log(res);
+    },
+    error: (err) =>{
+      console.log(err);
+    }
+  });
+  this.addedItems.push(productId);
+  console.log(this.addedItems);
+
+  let intervalId = setInterval(()=>{
+    this.addedItems.pop();
+    console.log(this.addedItems);
+    clearInterval(intervalId);
+  },2000);
+
+}
  
 loadProducts(){
   this.fetchProducts({page: this.page,  limit: this.perPage, category: this.filteredOptions, inStock: this.instock, minPrice: this.minPrice, maxPrice: this.maxPrice , sortBy: this.sortBy ,sortOrder: this.sortOrder});
   this.totalPages = this.getTotalPages();
 }
 
+favoriteCards: string[] = [];
+
+fetchFavorite(){
+  this.favoriteService.getFavorite().subscribe({
+    next: (res: any) => {
+      this.favoriteCards = [];
+      res.data.items.forEach((item: any) => {
+        if (item.product) {  
+          this.favoriteCards.push(item.product._id);
+        }
+      });
+      console.log("Favorite Cards IDs:", this.favoriteCards);
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
+}
+
+addFavorite(productId: string){
+  const flag = this.favoriteCards.includes(productId);
+  if(!flag){
+    this.favoriteService.addFavorite(productId).subscribe({
+      next: (res) => {
+        this.favoriteCards.push(productId);
+        console.log("favorite Card Added", this.favoriteCards);
+      },
+      error : (err) => {
+        console.log(err);
+      }
+    });
+  }
+  else{
+    this.favoriteCards = this.favoriteCards.filter((id) => id !== productId);
+    this.removeFavorite(productId);
+    console.log("favorite Card Deleted", this.favoriteCards);
+  }
+}
+
+removeFavorite(productId : string){
+  this.favoriteService.deleteFavorite(productId).subscribe({
+    next: (res) => {
+      console.log("card Deletes", res);
+    },
+    error : (err) => {
+      console.log(err);
+    }
+  });
+}
+// if button clicked get id 
+
+
+
+
   ngOnInit(){
     // this.fetchOneProduct("67d4446da328b72e7b649725");
     this.loadProducts();
     this.fetchCategories();
-    
+    this.fetchFavorite();
+    // this.addFavorite("67ec6a6beb0aa47279b96982");
   }
 }
   
+
+// add love
+// make a toggled button 
+// if clicked send a request to the server 
+// if it's loved already remove it from cart

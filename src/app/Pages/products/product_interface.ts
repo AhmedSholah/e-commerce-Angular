@@ -13,6 +13,7 @@ export interface Products {
    price: number,
    description: string,
    rating: number,
+   _id: string
 }
 
 export interface category {

@@ -107,7 +107,7 @@
             </div>
     
                 <div class="flex justify-between mt-6 gap-3">
-                    <button class="btn-primary-small" (click) = "applyChange()">Apply</button>
+                    <button class="btn-primary-small" (click) = "applyChange(false)">Apply</button>
                     <button class="btn-outline" (click) = "clearAll()">Clear All</button>
                 </div>
             </div>
@@ -197,7 +197,7 @@
         </div>
 
             <div class="flex justify-between mt-6 gap-3">
-                <button class="btn-primary-small" (click) = "applyChange()">Apply</button>
+                <button class="btn-primary-small" (click) = "applyChange(true)">Apply</button>
                 <button class="btn-outline" (click) = "clearAll()">Clear All</button>
             </div>
         </div>
@@ -210,9 +210,9 @@
             *ngFor="let card of  bestSelling | slice: ind1 : ind2; index as i"
         >
             <div class="relative">
-                <img *ngIf='!(card.images.length === 0)' class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" />
+                <img *ngIf='!(card.images.length === 0)' class="w-full h-full max-h-[20rem] object-cover rounded-[1rem]" [src]="card.images[0]" />
 
-                <img *ngIf='card.images.length === 0' class="w-full h-full object-cover rounded-[1rem]" src={{imageUrl}} />
+                <img *ngIf='card.images.length === 0' class="w-full h-full max-h-[20rem] object-cover rounded-[1rem]" src={{imageUrl}} />
                 <!-- <img
                     class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
                     [src]="
@@ -408,27 +408,27 @@
 
         <!-- Cards -->
         <div class="flex flex-col">
-            <div *ngIf="!loading && !emptyState" class="grid lg:grid-cols-4 md:grid-cols-2 justify-items-center mb-5">
+            <div *ngIf="!loading && !emptyState" class="grid lg:grid-cols-4 md:grid-cols-2 justify-items-center mb-5 ">
                 <div
-                    class="bg-main rounded-[1rem] m-2 max-w-[20rem]"
+                    class="flex flex-col bg-main rounded-[1rem] m-2 max-w-[20rem] "
                     *ngFor="let card of cards | slice: 0 : paginationNumber; index as i"
                 >
-                    <div class="relative group">            
-                        <img class="w-full h-full object-cover rounded-[1rem] group-hover:hidden" [src]="card.images[0]" /> 
-                        <img class="w-full h-full object-cover rounded-[1rem] hidden group-hover:block" [src]="card.images[1]" /> 
+                    <div class="relative group ">            
+                        <img class="w-full h-full object-cover max-h-[18rem] rounded-[1rem]  group-hover:hidden" [src]="card.images[0]" /> 
+                        <img class="w-full h-full object-cover max-h-[18rem] rounded-[1rem] hidden group-hover:block" [src]="card.images[1]" /> 
 
-                        <!-- <img
+                        <img
                             class="absolute right-3 top-2 transtion-transform duration-300 translate-y-1 hover:translate-y-0"
                             [src]="
-                                card.loved
+                                    this.favoriteCards.includes(card._id)
                                     ? 'images/trending/loved.svg'
                                     : 'images/trending/heart.svg'
                             "
-                            (click)="toggleHeart(i)"
-                        /> -->
+                            (click)="addFavorite(card._id)"
+                        />
                     </div>
-                    <div class="flex flex-col basis-0 grow justify-between p-4">
-                        <div class="flex flex-col gap-2">
+                    <div class="flex flex-col grow basis-0 justify-between items-between p-4 ">
+                        <div class="flex flex-col gap-2 flex-1">
                             <div class="flex justify-between">
                                 <div class="text-bold text-white text-[1.2rem]">
                                     {{ card.name }}
@@ -459,10 +459,10 @@
                                 {{ card.description }}
                             </div>
                         </div>
-                        <button class="bg-main-50  hover:bg-gray-100  p-2 mt-4 rounded-[1rem] w-full">
+                        <button class="bg-main-50 hover:bg-gray-100 p-2 mt-4 rounded-[1rem] w-full" (click)="addToCart(card._id)">
                             <div class="flex justify-center gap-2">
                                 <img src="images/trending/basket.svg" />
-                                <span class="text-main text-bold ">Add to Cart</span>
+                                <span class="text-main text-bold treansition-all duration-300 ease-in-out" [ngClass]="{'scale-105': addedItems.includes(card._id)}">{{addedItems.includes(card._id) ? 'Added!' : 'Add to Cart'}}</span>
                             </div>
                         </button>
                     </div>
@@ -546,7 +546,7 @@
                 *ngFor="let card of  bestSelling | slice: ind1 : ind2; index as i"
             >
                 <div class="relative">
-                    <img *ngIf='!(card.images.length === 0)' class="w-full h-full object-cover rounded-[1rem]" [src]="card.images[0]" />
+                    <img *ngIf='!(card.images.length === 0)' class="w-full h-full object-cover rounded-[1rem] max-h-[20rem]" [src]="card.images[0]" />
     
                     <img *ngIf='card.images.length === 0' class="w-full h-full object-cover rounded-[1rem]" src={{imageUrl}} />
                     <!-- <img
@@ -562,7 +562,7 @@
                           </button>ick)="toggleHeart(i)"
                     /> -->
                 </div>
-                <div class="flex flex-col basis-0 grow justify-between p-4">
+                <div class="flex flex-col basis-0 grow justify-between  p-4">
                     <div class="flex flex-col gap-2">
                         <div class="flex justify-between">
                             <div class="text-bold text-white text-[1.2rem]">{{ card.name }}</div>
