@@ -9,10 +9,18 @@
     <div
         class="flex flex-col items-center sm:items-start justify-center gap-5 sm:gap-10 order-1 sm:order-1 lg:mt-[-200px]"
     >
-        <img
-            [src]="imagePreview || 'person.svg'"
-            class="w-40 h-40 sm:w-50 sm:h-50 rounded-full border border-main object-cover mx-auto"
-        />
+        <div class="w-40 h-40 sm:w-50 sm:h-50 flex justify-center items-center">
+            @if (loadingAvatar) {
+                <div class="w-20 h-20">
+                    <app-loader></app-loader>
+                </div>
+            } @else {
+                <img
+                    [src]="imagePreview || 'person.svg'"
+                    class="w-40 h-40 sm:w-50 sm:h-50 rounded-full border border-main object-cover mx-auto"
+                />
+            }
+        </div>
         <input
             #fileInput
             type="file"
@@ -22,9 +30,15 @@
         />
         <button
             (click)="fileInput.click()"
-            class="bg-main text-main-50 rounded-[10px] text-[20px] px-3 py-1 lg:px-5 lg:py-2 lg:rounded-[15px] mx-auto"
+            class="bg-main text-main-50 rounded-[10px] text-[20px] py-2 w-40 lg:rounded-[15px] mx-auto"
         >
-            Change Photo
+            @if (loadingAvatar) {
+                <div class="h-[40px]">
+                    <app-loader></app-loader>
+                </div>
+            } @else {
+                <span>Change Photo</span>
+            }
         </button>
     </div>
 
@@ -249,3 +263,4 @@
         </button>
     </div>
 </div>
+<app-cart></app-cart>

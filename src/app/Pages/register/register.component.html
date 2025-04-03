@@ -14,25 +14,48 @@
                 class="flex flex-col gap-5 md:max-w-[25rem]"
                 (ngSubmit)="onSubmit()"
             >
-                <div>
-                    <div class="relative">
-                        <input
-                            formControlName="name"
-                            type="text"
-                            id="name"
-                            placeholder=" "
-                            class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
-                        />
-                        <label for="name" class="btn btn-label"> Name </label>
+                <div class="flex flex-col gap-5 md:flex-row md:gap-2">
+                    <div>
+                        <div class="relative">
+                            <input
+                                formControlName="firstName"
+                                type="text"
+                                id="firstName"
+                                placeholder=" "
+                                class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
+                            />
+                            <label for="firstName" class="btn btn-label"> FirstName </label>
+                        </div>
+                        <div
+                            *ngIf="firstName?.invalid && firstName?.touched"
+                            class="mt-2 ml-1 text-bold text-red-700"
+                        >
+                            <div *ngIf="firstName?.errors?.['required']">FirstName is required</div>
+                            <div *ngIf="firstName?.errors?.['minlength']">
+                                Minimum Length is 3 Characters
+                            </div>
+                        </div>
                     </div>
-                    <div
-                        *ngIf="name?.invalid && name?.touched"
-                        class="mt-2 ml-1 text-bold text-red-700"
-                    >
-                        <div *ngIf="name?.errors?.['required']">Name is required</div>
 
-                        <div *ngIf="name?.errors?.['minlength']">
-                            Minimum Length is 3 Characters
+                    <div>
+                        <div class="relative">
+                            <input
+                                formControlName="lastName"
+                                type="text"
+                                id="lastName"
+                                placeholder=" "
+                                class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
+                            />
+                            <label for="lastName" class="btn btn-label"> LastName </label>
+                        </div>
+                        <div
+                            *ngIf="lastName?.invalid && lastName?.touched"
+                            class="mt-2 ml-1 text-bold text-red-700"
+                        >
+                            <div *ngIf="lastName?.errors?.['required']">LastName is required</div>
+                            <div *ngIf="lastName?.errors?.['minlength']">
+                                Minimum Length is 3 Characters
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,7 +166,7 @@
                             formControlName="gender"
                             class="accent-main w-[0.9rem]"
                         />
-                        <label for="gender" class="text-bold text-main">Male</label>
+                        <label for="male" class="text-bold text-main">Male</label>
                         <input
                             type="radio"
                             id="female"
@@ -152,7 +175,7 @@
                             formControlName="gender"
                             class="accent-main w-[0.9rem]"
                         />
-                        <label for="gender" class="text-bold text-main">Female</label>
+                        <label for="female" class="text-bold text-main">Female</label>
                     </div>
 
                     <div
@@ -171,7 +194,10 @@
                     />
                     <label for="remember-me" class="text-main text-lg">Remember me</label>
                 </div>
-                <button class="btn-primary">SignUp</button>
+                <button class="flex btn-primary">
+                    <div *ngIf="loading" class="m-auto"><app-loader></app-loader></div>
+                    <div *ngIf="!loading" class="m-auto">SignUp</div>
+                </button>
                 <div class="relative">
                     <div class="w-full h-[1px] bg-gray-300"></div>
                     <span

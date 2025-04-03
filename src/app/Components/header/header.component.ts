@@ -15,7 +15,7 @@ import { UserDataService } from '../../Services/user-data.service';
 export class HeaderComponent implements OnInit {
     isLoggedIn = false;
     userName: string = '';
-    userImage: string = 'defaultImage.jpg';
+    avatarUrl: string = 'defaultImage.jpg';
     dropdownOpen = false;
 
     constructor(
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
                 if (user) {
                     this.isLoggedIn = true;
                     this.userName = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-                    this.userImage = user.image || 'defaultImage.jpg';
+                    this.avatarUrl = user.avatarUrl || 'defaultImage.jpg';
                 }
             },
             error: (err) => {
@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit {
                 const user = response.data.currentUser;
                 if (user) {
                     this.userName = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-                    this.userImage = user.image || 'defaultImage.jpg';
+                    this.avatarUrl = user.avatarUrl || 'defaultImage.jpg';
                 }
             },
             error: (err) => {
@@ -95,4 +95,21 @@ export class HeaderComponent implements OnInit {
     get lastName(): string {
         return this.userName.split(' ')[1] || '';
     }
+    navigateToSection(sectionId: string) {
+        if (this.router.url === '/') {
+          
+          this.scrollToSection(sectionId);
+        } else {
+          
+          this.router.navigate(['/']).then(() => {
+            setTimeout(() => this.scrollToSection(sectionId), 100); 
+          });
+        }
+      }
+    scrollToSection(sectionId: string) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
 }

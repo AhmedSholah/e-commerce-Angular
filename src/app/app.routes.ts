@@ -9,10 +9,15 @@ import { FavProductComponent } from './Pages/fav-product/fav-product.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { MainLayoutComponent } from './Components/Layouts/main-layout/main-layout.component';
 import { AboutUsComponent } from './Components/about-us/about-us.component';
+
 import { CartComponent } from './Components/cart/cart.component';
+
+import { MyOrderComponent } from './Components/my-order/my-order.component';
+
 import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { CheckoutConfirmationComponent } from './Components/checkout-confirmation/checkout-confirmation.component';
 
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -40,6 +45,7 @@ export const routes: Routes = [
             {
                 path: 'favorite-products',
                 component: FavProductComponent,
+                canActivate: [authGuard],
             },
             {
                 path: 'product/:id',
@@ -48,6 +54,26 @@ export const routes: Routes = [
             {
                 path: 'profile',
                 component: EditProfileComponent,
+                canActivate: [authGuard],
+            },
+            {
+                path: 'myOrder',
+                component: MyOrderComponent,
+                canActivate: [authGuard],
+            },
+            {
+                path: 'checkout',
+                component: CheckoutComponent,
+                canActivate: [authGuard],
+            },
+            {
+                path: 'checkout-confirmation',
+                component: CheckoutConfirmationComponent,
+                canActivate: [authGuard],
+            },
+            {
+                path: '**',
+                component: HomeComponent,
             },
             { path: 'cart', component: CartComponent },
             { path: 'checkout', component: CheckoutComponent },
@@ -55,6 +81,3 @@ export const routes: Routes = [
         ],
     },
 ];
-
-
-
