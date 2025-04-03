@@ -46,6 +46,9 @@ export class CartServiceService {
     this.errorMessageSubject.next(message);
   }
 
+  addToCart(productId: string, quantity: number): Observable<any>{
+    return this.http.post(`${this.baseUrl}${API.cartEndPoint}`,{productId: productId, quantity: quantity}); 
+}
   loadCart() {
     this.isLoadingSubject.next(true);
     this.http.get(`${this.baseUrl}${API.cartEndPoint}`).pipe(
