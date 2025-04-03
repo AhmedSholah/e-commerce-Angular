@@ -58,7 +58,7 @@ export class CartServiceService {
 
   getCart() {
     return this.cartItemsSubject.value;
-
+  }
   private setErrorMessage(message: string) {
     this.errorMessageSubject.next(message);
   }
