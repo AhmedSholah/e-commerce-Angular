@@ -9,9 +9,12 @@
                 <span class="text-3xl text-main-500 font-bold">Craftopia</span>
             </div>
             <h1 class="font-bold text-main-800 text-5xl my-5 text-center md:text-left">SignUp</h1>
-            <form [formGroup]="form" class="flex flex-col gap-5 md:max-w-[25rem]" (ngSubmit)="onSubmit()">
-
-                <div class="flex flex-col gap-5 md:flex-row md:gap-2 ">
+            <form
+                [formGroup]="form"
+                class="flex flex-col gap-5 md:max-w-[25rem]"
+                (ngSubmit)="onSubmit()"
+            >
+                <div class="flex flex-col gap-5 md:flex-row md:gap-2">
                     <div>
                         <div class="relative">
                             <input
@@ -21,52 +24,40 @@
                                 placeholder=" "
                                 class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
                             />
-                            <label for="firstName" class="btn btn-label"> firstName </label>
+                            <label for="firstName" class="btn btn-label"> FirstName </label>
                         </div>
                         <div
                             *ngIf="firstName?.invalid && firstName?.touched"
                             class="mt-2 ml-1 text-bold text-red-700"
                         >
-                            <div
-                            *ngIf="firstName?.errors?.['required'] "
-                        >
-                        firstName is required
+                            <div *ngIf="firstName?.errors?.['required']">FirstName is required</div>
+                            <div *ngIf="firstName?.errors?.['minlength']">
+                                Minimum Length is 3 Characters
+                            </div>
                         </div>
-                            <div
-                            *ngIf="firstName?.errors?.['minlength'] "
-                        >
-                            Minimum Length is 3 Characters
+                    </div>
+
+                    <div>
+                        <div class="relative">
+                            <input
+                                formControlName="lastName"
+                                type="text"
+                                id="lastName"
+                                placeholder=" "
+                                class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
+                            />
+                            <label for="lastName" class="btn btn-label"> LastName </label>
                         </div>
-                    </div>      
-                                 </div>
-                    
-                                 <div>
-                    <div class="relative">
-                        <input
-                            formControlName="lastName"
-                            type="text"
-                            id="lastName"
-                            placeholder=" "
-                            class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
-                        />
-                        <label for="lastName" class="btn btn-label"> lastName </label>
-                    </div>
-                    <div
-                        *ngIf="lastName?.invalid && lastName?.touched"
-                        class="mt-2 ml-1 text-bold text-red-700"
-                    >
                         <div
-                        *ngIf="lastName?.errors?.['required'] "
-                    >
-                    lastName is required
+                            *ngIf="lastName?.invalid && lastName?.touched"
+                            class="mt-2 ml-1 text-bold text-red-700"
+                        >
+                            <div *ngIf="lastName?.errors?.['required']">LastName is required</div>
+                            <div *ngIf="lastName?.errors?.['minlength']">
+                                Minimum Length is 3 Characters
+                            </div>
+                        </div>
                     </div>
-                        <div
-                        *ngIf="lastName?.errors?.['minlength'] "
-                    >
-                        Minimum Length is 3 Characters
-                    </div>
-                                </div>      
-                             </div>
                 </div>
 
                 <div>
@@ -87,11 +78,13 @@
                         <div *ngIf="email?.errors?.['required']">Email is Required</div>
                         <div *ngIf="email?.errors?.['email']">Enter a valid email address</div>
                     </div>
-                    <div *ngIf= "userExists && !password?.invalid" class="mt-2 text-bold text-red-700">
-                        Email Already Exists                    
+                    <div
+                        *ngIf="userExists && !password?.invalid"
+                        class="mt-2 text-bold text-red-700"
+                    >
+                        Email Already Exists
                     </div>
                 </div>
-
 
                 <div>
                     <div class="relative">
@@ -120,11 +113,14 @@
                         </div>
                     </div>
 
-                    <div *ngIf="!passwordCheck && submitClicked && !password?.invalid" class="mt-2 ml-1 text-bold text-red-700">
-                        Password must include at least one uppercase letter, lowercase letter, number, and special character, with no spaces.                       
+                    <div
+                        *ngIf="!passwordCheck && submitClicked && !password?.invalid"
+                        class="mt-2 ml-1 text-bold text-red-700"
+                    >
+                        Password must include at least one uppercase letter, lowercase letter,
+                        number, and special character, with no spaces.
                     </div>
-
-                  </div>
+                </div>
                 <div>
                     <div class="relative">
                         <input
@@ -134,7 +130,9 @@
                             placeholder=" "
                             class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
                         />
-                        <label for="confirmPassword" class="btn btn-label"> Confirm Password </label>
+                        <label for="confirmPassword" class="btn btn-label">
+                            Confirm Password
+                        </label>
                         <div
                             class="icon-Container absolute right-3 top-0 transform: transform translate-y-1/2 cursor-pointer"
                         >
@@ -151,24 +149,41 @@
                         </div>
                     </div>
 
-                    <div *ngIf="!samePassword && passwordCheck && !password?.invalid" class="mt-2 ml-1 text-bold text-red-700">
-                        Passwords do not match.                      
+                    <div
+                        *ngIf="!samePassword && passwordCheck && !password?.invalid"
+                        class="mt-2 ml-1 text-bold text-red-700"
+                    >
+                        Passwords do not match.
                     </div>
-
-                    
                 </div>
                 <div class="flex flex-col">
                     <div class="flex gap-2">
-                        <label for="gender" class="text-bold text-main">Male</label>
-                        <input type="radio" id="male" name="gender" value="male" formControlName="gender" class="accent-main w-[0.9rem]"/>
-                        <label for="gender" class="text-bold text-main">Female</label>
-                        <input type="radio" id="female" name="gender" value="female" formControlName="gender" class="accent-main w-[0.9rem]"/>
+                        <input
+                            type="radio"
+                            id="male"
+                            name="gender"
+                            value="male"
+                            formControlName="gender"
+                            class="accent-main w-[0.9rem]"
+                        />
+                        <label for="male" class="text-bold text-main">Male</label>
+                        <input
+                            type="radio"
+                            id="female"
+                            name="gender"
+                            value="female"
+                            formControlName="gender"
+                            class="accent-main w-[0.9rem]"
+                        />
+                        <label for="female" class="text-bold text-main">Female</label>
                     </div>
 
-                    <div *ngIf="gender?.errors?.['required'] && submitClicked" class="mt-0  text-bold text-red-700">
-                     <div class="m-0" >Select Your gender</div>
-                   </div>
-
+                    <div
+                        *ngIf="gender?.errors?.['required'] && submitClicked"
+                        class="mt-0 text-bold text-red-700"
+                    >
+                        <div class="m-0">Select Your gender</div>
+                    </div>
                 </div>
                 <div class="items-center flex gap-1.5">
                     <input
