@@ -10,9 +10,9 @@ import { HomeComponent } from './Pages/home/home.component';
 import { MainLayoutComponent } from './Components/Layouts/main-layout/main-layout.component';
 import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { MyOrderComponent } from './Components/my-order/my-order.component';
-
 import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { CheckoutConfirmationComponent } from './Components/checkout-confirmation/checkout-confirmation.component';
+
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
