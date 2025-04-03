@@ -355,16 +355,9 @@ removeFavorite(productId : string){
 
 
   ngOnInit(){
-    // this.fetchOneProduct("67d4446da328b72e7b649725");
     this.loadProducts();
     this.fetchCategories();
     this.fetchFavorite();
-    // this.addFavorite("67ec6a6beb0aa47279b96982");
   }
 }
   
-
-// add love
-// make a toggled button 
-// if clicked send a request to the server 
-// if it's loved already remove it from cart
