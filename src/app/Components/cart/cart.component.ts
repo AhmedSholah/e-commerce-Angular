@@ -82,8 +82,4 @@ export class CartComponent implements OnInit {
             .toFixed(2)}`;
     }
 
-    proceedToCheckout() {
-        this.cartService.setCart(this.cartItems); 
-        this.router.navigate(['checkout']); 
-    }
 }
