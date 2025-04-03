@@ -13,10 +13,19 @@ export interface CartItem {
   quantity: number;
 }
 
+export interface CartItem {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  oldPrice: number;
+  quantity: number;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class CartServiceService {
+
   baseUrl = API.baseUrl;
 
   private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
@@ -41,6 +50,14 @@ export class CartServiceService {
       this.loadCart();
     }
   }
+
+
+  setCart(items: any[]) {
+    this.cartItemsSubject.next(items);
+  }
+
+  getCart() {
+    return this.cartItemsSubject.value;
 
   private setErrorMessage(message: string) {
     this.errorMessageSubject.next(message);
@@ -119,5 +136,13 @@ export class CartServiceService {
         return [];
       })
     );
+
   }
 }
+
+
+
+
+
+
+  

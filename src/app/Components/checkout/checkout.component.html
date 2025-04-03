@@ -125,7 +125,7 @@
                     </div>
                     <div class="flex gap-2 p-2 mt-[-11px]">
                         <span class="text-white">${{ item.price * item.quantity }}</span>
-                        <span class="text-[#A8A8A8] line-through">${{ item.originalPrice * item.quantity }}</span>
+                        <span class="text-[#A8A8A8] line-through">${{ item.oldPrice }}</span>
                     </div>
 
                     <div class="flex items-center justify-center p-2 mb-1">
@@ -148,8 +148,8 @@
             </div>
           </div>
           <ng-template #emptyCart>
-            <div class="flex justify-center items-center flex-col h-90 relative">
-              <img class="relative right-5" src="cart empty.svg" alt="">
+            <div class="flex justify-center items-center flex-col h-90">
+              <img  src="cart empty.svg" alt="">
               <p class="text-center text-main text-xl  mt-5 font-bold">Your cart is empty </p>
             </div>
           </ng-template>

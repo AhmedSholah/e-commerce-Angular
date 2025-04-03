@@ -26,7 +26,9 @@ export class CartComponent implements OnInit {
   isLoading = false;
   errorMessage = '';
 
-  constructor(private cartService: CartServiceService,private router: Router) {}
+
+constructor(private cartService: CartServiceService,private router: Router) {}
+
 
   ngOnInit() {
     this.cartService.cartVisible$.subscribe(visible => {
@@ -61,6 +63,7 @@ export class CartComponent implements OnInit {
     if (item.quantity > 1) {
       this.cartService.updateQuantity(item.id, -1);
     }
+
   }
   
 
@@ -80,4 +83,5 @@ export class CartComponent implements OnInit {
     this.cartService.toggleCart();
     this.router.navigate(['/products']); 
   }
+
 }
