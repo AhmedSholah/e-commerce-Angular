@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-button',
-  imports: [],
-  templateUrl: './button.component.html',
-  styles: ``
+    selector: 'app-button',
+    imports: [],
+    templateUrl: './button.component.html',
 })
-export class ButtonComponent {
-
-}
+export class ButtonComponent {}

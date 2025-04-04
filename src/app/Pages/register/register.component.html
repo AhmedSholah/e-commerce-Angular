@@ -1,1 +1,223 @@
-<p>register works!</p>
+<section class="container mx-auto flex justify-center items-center h-screen">
+    <figure class="w-1/2 max-w-[30rem] hidden md:block">
+        <img class="w-full" src="register.svg" alt="" />
+    </figure>
+    <div class="md:px-6 flex flex-col items-center">
+        <div class="w-100 px-16 md:px-0">
+            <div class="flex items-center justify-center md:justify-start">
+                <img src="logo.svg" alt="logo" />
+                <span class="text-3xl text-main-500 font-bold">Craftopia</span>
+            </div>
+            <h1 class="font-bold text-main-800 text-5xl my-5 text-center md:text-left">SignUp</h1>
+            <form
+                [formGroup]="form"
+                class="flex flex-col gap-5 md:max-w-[25rem]"
+                (ngSubmit)="onSubmit()"
+            >
+                <div class="flex flex-col gap-5 md:flex-row md:gap-2">
+                    <div>
+                        <div class="relative">
+                            <input
+                                formControlName="firstName"
+                                type="text"
+                                id="firstName"
+                                placeholder=" "
+                                class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
+                            />
+                            <label for="firstName" class="btn btn-label"> FirstName </label>
+                        </div>
+                        <div
+                            *ngIf="firstName?.invalid && firstName?.touched"
+                            class="mt-2 ml-1 text-bold text-red-700"
+                        >
+                            <div *ngIf="firstName?.errors?.['required']">FirstName is required</div>
+                            <div *ngIf="firstName?.errors?.['minlength']">
+                                Minimum Length is 3 Characters
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="relative">
+                            <input
+                                formControlName="lastName"
+                                type="text"
+                                id="lastName"
+                                placeholder=" "
+                                class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
+                            />
+                            <label for="lastName" class="btn btn-label"> LastName </label>
+                        </div>
+                        <div
+                            *ngIf="lastName?.invalid && lastName?.touched"
+                            class="mt-2 ml-1 text-bold text-red-700"
+                        >
+                            <div *ngIf="lastName?.errors?.['required']">LastName is required</div>
+                            <div *ngIf="lastName?.errors?.['minlength']">
+                                Minimum Length is 3 Characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="relative">
+                        <input
+                            formControlName="email"
+                            type="text"
+                            id="email"
+                            placeholder=" "
+                            class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
+                        />
+                        <label for="email" class="btn btn-label"> Email </label>
+                    </div>
+                    <div
+                        *ngIf="email?.invalid && email?.touched"
+                        class="mt-2 ml-1 text-bold text-red-700"
+                    >
+                        <div *ngIf="email?.errors?.['required']">Email is Required</div>
+                        <div *ngIf="email?.errors?.['email']">Enter a valid email address</div>
+                    </div>
+                    <div
+                        *ngIf="userExists && !password?.invalid"
+                        class="mt-2 text-bold text-red-700"
+                    >
+                        Email Already Exists
+                    </div>
+                </div>
+
+                <div>
+                    <div class="relative">
+                        <input
+                            formControlName="password"
+                            [type]="passType"
+                            id="password"
+                            placeholder=" "
+                            class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
+                        />
+                        <label for="password" class="btn btn-label"> Password </label>
+                        <div
+                            class="icon-Container absolute right-3 top-0 transform: transform translate-y-1/2 cursor-pointer"
+                        >
+                            <img [src]="eye" (click)="changIcon()" />
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="password?.invalid && password?.touched"
+                        class="mt-2 ml-1 text-bold text-red-700"
+                    >
+                        <div *ngIf="password?.errors?.['required']">Password Required</div>
+                        <div *ngIf="password?.errors?.['minlength']">
+                            Password should be at least 9 characters
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="!passwordCheck && submitClicked && !password?.invalid"
+                        class="mt-2 ml-1 text-bold text-red-700"
+                    >
+                        Password must include at least one uppercase letter, lowercase letter,
+                        number, and special character, with no spaces.
+                    </div>
+                </div>
+                <div>
+                    <div class="relative">
+                        <input
+                            formControlName="confirmPassword"
+                            [type]="passType"
+                            id="confirmPassword"
+                            placeholder=" "
+                            class="peer border-3 rounded-lg border-main p-2 pl-2 w-full focus:outline-none"
+                        />
+                        <label for="confirmPassword" class="btn btn-label">
+                            Confirm Password
+                        </label>
+                        <div
+                            class="icon-Container absolute right-3 top-0 transform: transform translate-y-1/2 cursor-pointer"
+                        >
+                            <img [src]="eye" (click)="changIcon()" />
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="confirmPassword?.invalid && password?.touched"
+                        class="mt-2 ml-1 text-bold text-red-700"
+                    >
+                        <div *ngIf="confirmPassword?.errors?.['required']">Password Required</div>
+                        <div *ngIf="confirmPassword?.errors?.['minlength']">
+                            Password should be at least 9 characters
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="!samePassword && passwordCheck && !password?.invalid"
+                        class="mt-2 ml-1 text-bold text-red-700"
+                    >
+                        Passwords do not match.
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex gap-2">
+                        <input
+                            type="radio"
+                            id="male"
+                            name="gender"
+                            value="male"
+                            formControlName="gender"
+                            class="accent-main w-[0.9rem]"
+                        />
+                        <label for="male" class="text-bold text-main">Male</label>
+                        <input
+                            type="radio"
+                            id="female"
+                            name="gender"
+                            value="female"
+                            formControlName="gender"
+                            class="accent-main w-[0.9rem]"
+                        />
+                        <label for="female" class="text-bold text-main">Female</label>
+                    </div>
+
+                    <div
+                        *ngIf="gender?.errors?.['required'] && submitClicked"
+                        class="mt-0 text-bold text-red-700"
+                    >
+                        <div class="m-0">Select Your gender</div>
+                    </div>
+                </div>
+                <div class="items-center flex gap-1.5">
+                    <input
+                        type="checkbox"
+                        name="remember-me"
+                        id="remember-me"
+                        class="size-4 accent-main rounded-3xl"
+                    />
+                    <label for="remember-me" class="text-main text-lg">Remember me</label>
+                </div>
+                <button class="flex btn-primary">
+                    <div *ngIf="loading" class="m-auto"><app-loader></app-loader></div>
+                    <div *ngIf="!loading" class="m-auto">SignUp</div>
+                </button>
+                <div class="relative">
+                    <div class="w-full h-[1px] bg-gray-300"></div>
+                    <span
+                        class="absolute bg-main-50 px-3 text-gray-300 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                        >OR</span
+                    >
+                </div>
+                <button class="btn-secondary" (click)="googleAuth()">
+                    <img src="google-icon.svg" alt="google-login" />
+                    Login With Google
+                </button>
+            </form>
+            <div class="mt-5 flex gap-1 justify-center">
+                <span class="text-gray-500 text-sm">Don’t have account?</span>
+                <a
+                    routerLink="/login"
+                    class="text-main font-semibold cursor-pointer underline hover:text-main-500 transition active:text-main-800"
+                    >Login</a
+                >
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,266 @@
+<div
+    style="
+        background-image: url('/edit-profile-bg.svg');
+        background-size: cover;
+        background-position: top;
+    "
+    class="h-auto min-h-screen flex flex-col sm:flex-row p-10 sm:p-20 justify-center items-center gap-10 sm:gap-40"
+>
+    <div
+        class="flex flex-col items-center sm:items-start justify-center gap-5 sm:gap-10 order-1 sm:order-1 lg:mt-[-200px]"
+    >
+        <div class="w-40 h-40 sm:w-50 sm:h-50 flex justify-center items-center">
+            @if (loadingAvatar) {
+                <div class="w-20 h-20">
+                    <app-loader></app-loader>
+                </div>
+            } @else {
+                <img
+                    [src]="imagePreview || 'person.svg'"
+                    class="w-40 h-40 sm:w-50 sm:h-50 rounded-full border border-main object-cover mx-auto"
+                />
+            }
+        </div>
+        <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            class="hidden"
+            (change)="onFileSelected($event)"
+        />
+        <button
+            (click)="fileInput.click()"
+            class="bg-main text-main-50 rounded-[10px] text-[20px] py-2 w-40 lg:rounded-[15px] mx-auto"
+        >
+            @if (loadingAvatar) {
+                <div class="h-[40px]">
+                    <app-loader></app-loader>
+                </div>
+            } @else {
+                <span>Change Photo</span>
+            }
+        </button>
+    </div>
+
+    <div class="order-2 sm:order-2">
+        <form
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            class="bg-main-50 p-6 rounded-lg shadow-lg w-90 sm:w-90 md:w-90 lg:w-150 border border-[#DFDFDF]"
+        >
+            <h2
+                class="text-[24px] sm:text-[32px] font-semibold mb-4 text-main text-center sm:text-left"
+            >
+                Personal Information
+            </h2>
+
+            <div class="flex flex-col gap-5">
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                    <div class="flex flex-col flex-1">
+                        <label class="text-[#9E9E9E] text-[18px]">First Name</label>
+                        <input
+                            type="text"
+                            formControlName="firstName"
+                            class="text-main text-[16px] border border-[#DFDFDF] rounded-lg p-2 w-full focus:border-main focus:outline-none"
+                        />
+                        <p
+                            *ngIf="f['firstName'].errors?.['required'] && f['firstName'].touched"
+                            class="text-red-500 text-sm"
+                        >
+                            First name is required.
+                        </p>
+                        <p
+                            *ngIf="f['firstName'].errors?.['minlength'] && f['firstName'].touched"
+                            class="text-red-500 text-sm"
+                        >
+                            First name must be at least 3 characters long.
+                        </p>
+                        <p
+                            *ngIf="f['firstName'].errors?.['maxlength'] && f['firstName'].touched"
+                            class="text-red-500 text-sm"
+                        >
+                            First name cannot exceed 16 characters.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col flex-1">
+                        <label class="text-[#9E9E9E] text-[18px]">Last Name</label>
+                        <input
+                            type="text"
+                            formControlName="lastName"
+                            class="text-main text-[16px] border border-[#DFDFDF] rounded-lg p-2 w-full focus:border-main focus:outline-none"
+                        />
+                        <p
+                            *ngIf="f['lastName'].errors?.['required'] && f['lastName'].touched"
+                            class="text-red-500 text-sm"
+                        >
+                            Last name is required.
+                        </p>
+                        <p
+                            *ngIf="f['lastName'].errors?.['minlength'] && f['lastName'].touched"
+                            class="text-red-500 text-sm"
+                        >
+                            Last name must be at least 3 characters long.
+                        </p>
+                        <p
+                            *ngIf="f['lastName'].errors?.['maxlength'] && f['lastName'].touched"
+                            class="text-red-500 text-sm"
+                        >
+                            Last name cannot exceed 16 characters.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="text-[#9E9E9E] text-[18px]">Email</label>
+                    <input
+                        type="email"
+                        formControlName="email"
+                        class="text-main text-[16px] border border-[#DFDFDF] rounded-lg p-2 focus:border-main focus:outline-none"
+                    />
+                    <p
+                        *ngIf="f['email'].errors?.['required'] && f['email'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        Email is required.
+                    </p>
+                    <p
+                        *ngIf="f['email'].errors?.['email'] && f['email'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        Enter a valid email.
+                    </p>
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="text-[#9E9E9E] text-[18px]">Phone Number</label>
+                    <input
+                        type="tel"
+                        formControlName="phoneNumber"
+                        placeholder="Enter your phone number"
+                        class="text-main text-[16px] border border-[#D1D1D1] rounded-lg p-2 focus:border-main focus:outline-none"
+                    />
+                    <p
+                        *ngIf="f['phoneNumber'].errors?.['required'] && f['phoneNumber'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        Phone number is required.
+                    </p>
+                    <p
+                        *ngIf="f['phoneNumber'].errors?.['pattern'] && f['phoneNumber'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        Enter a valid phone number (must be exactly 11 digits).
+                    </p>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-[#9E9E9E] text-[18px]">Country</label>
+                    <input
+                        type="text"
+                        formControlName="country"
+                        placeholder="Enter your country"
+                        class="text-main text-[16px] border border-[#D1D1D1] rounded-lg p-2 focus:border-main focus:outline-none"
+                    />
+                    <p
+                        *ngIf="f['country'].errors?.['required'] && f['country'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        County is required.
+                    </p>
+
+                    <p
+                        *ngIf="f['country'].errors?.['pattern'] && f['country'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        Only "Egypt" is allowed.
+                    </p>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-[#9E9E9E] text-[18px]">City</label>
+                    <select
+                        formControlName="city"
+                        class="text-main text-[16px] border border-[#D1D1D1] rounded-lg p-2 focus:border-main focus:outline-none"
+                    >
+                        <option value="" disabled selected>Select your city</option>
+                        <option value="Cairo">Cairo</option>
+                        <option value="Alexandria">Alexandria</option>
+                        <option value="Giza">Giza</option>
+                        <option value="Port Said">Port Said</option>
+                        <option value="Suez">Suez</option>
+                        <option value="Luxor">Luxor</option>
+                        <option value="Aswan">Aswan</option>
+                        <option value="Mansoura">Mansoura</option>
+                        <option value="Tanta">Tanta</option>
+                        <option value="Zagazig">Zagazig</option>
+                        <option value="Ismailia">Ismailia</option>
+                        <option value="Fayoum">Fayoum</option>
+                        <option value="Beni Suef">Beni Suef</option>
+                        <option value="Minya">Minya</option>
+                        <option value="Sohag">Sohag</option>
+                        <option value="Qena">Qena</option>
+                        <option value="Asyut">Asyut</option>
+                        <option value="Damietta">Damietta</option>
+                        <option value="Shibin El Kom">Shibin El Kom</option>
+                        <option value="Banha">Banha</option>
+                        <option value="Kafr El Sheikh">Kafr El Sheikh</option>
+                        <option value="Hurghada">Hurghada</option>
+                        <option value="Marsa Matruh">Marsa Matruh</option>
+                        <option value="Damanhour">Damanhour</option>
+                    </select>
+                    <p
+                        *ngIf="f['city'].errors?.['required'] && f['city'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        City is required.
+                    </p>
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="text-[#9E9E9E] text-[18px]">Bio</label>
+                    <textarea
+                        formControlName="bio"
+                        placeholder="Enter your Bio"
+                        class="text-main text-[16px] border border-[#D1D1D1] rounded-lg p-2 focus:border-main focus:outline-none"
+                    ></textarea>
+                    <p
+                        *ngIf="f['bio'].errors?.['minlength'] && f['bio'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        Bio must be at least 3 characters long.
+                    </p>
+                    <p
+                        *ngIf="f['bio'].errors?.['maxlength'] && f['bio'].touched"
+                        class="text-red-500 text-sm"
+                    >
+                        Bio must not exceed 200 characters.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center gap-3 mt-5">
+                <button
+                    (click)="onSubmit()"
+                    [disabled]="form.invalid || loading"
+                    class="flex justify-center items-center h-12 w-32 border border-main text-main-50 bg-main rounded-[15px] text-[18px] sm:text-[20px] transition-opacity duration-300 cursor-pointer"
+                    [ngClass]="{ 'opacity-50 cursor-not-allowed': form.invalid }"
+                >
+                    @if (loading) {
+                        <app-loader></app-loader>
+                    } @else {
+                        <span>Save</span>
+                    }
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div *ngIf="showPopup" class="fixed inset-0 flex justify-center items-center bg-black/60">
+    <div class="bg-main-50 p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-main font-bold text-xl">Profile Updated!</h2>
+        <p class="text-gray-700">Your profile has been successfully updated.</p>
+        <button (click)="showPopup = false" class="mt-4 bg-main text-white px-4 py-2 rounded-md">
+            OK
+        </button>
+    </div>
+</div>
+<app-cart></app-cart>
