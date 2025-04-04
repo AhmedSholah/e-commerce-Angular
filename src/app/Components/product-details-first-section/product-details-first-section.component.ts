@@ -6,3 +6,9 @@ import { Component } from '@angular/core';
     templateUrl: './product-details-first-section.component.html',
 })
 export class ProductDetailsFirstSectionComponent {}
+
+
+
+/// link products to product-details
+/// make add to cart button works for all cards in website
+// link to categorie to filter in product page 
