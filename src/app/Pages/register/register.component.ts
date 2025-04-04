@@ -7,7 +7,7 @@ import { LoaderComponent } from '../../Components/loader/loader.component';
 
 @Component({
     selector: 'app-register',
-    imports: [RouterLink, CommonModule, ReactiveFormsModule,LoaderComponent],
+    imports: [RouterLink, CommonModule, ReactiveFormsModule, LoaderComponent],
     templateUrl: './register.component.html',
 })
 export class RegisterComponent {
@@ -39,7 +39,7 @@ export class RegisterComponent {
     get firstName() {
         return this.form.get('firstName');
     }
-      get lastName() {
+    get lastName() {
         return this.form.get('lastName');
     }
     get email() {
@@ -83,18 +83,20 @@ export class RegisterComponent {
         if (this.passwordCheck && this.samePassword) {
             if (this.form.valid) {
                 this.loading = true;
-                this.auth.register({ firstName, lastName, email, gender, password, role }).subscribe({
-                    next: (response) => {
-                        this.Router.navigate(['/login']);
-                    },
-                    error: (error) => {
-                        if (error.error.message === 'User Already Exists') {
-                            this.userExists = true;
-                            this.loading = false;
-                        }
-                        console.log(error.error.message);
-                    },
-                });
+                this.auth
+                    .register({ firstName, lastName, email, gender, password, role })
+                    .subscribe({
+                        next: (response) => {
+                            this.Router.navigate(['/login']);
+                        },
+                        error: (error) => {
+                            if (error.error.message === 'User Already Exists') {
+                                this.userExists = true;
+                                this.loading = false;
+                            }
+                            console.log(error.error.message);
+                        },
+                    });
             }
         }
     }
@@ -102,5 +104,16 @@ export class RegisterComponent {
     changIcon() {
         this.passType = this.passType == 'password' ? 'text' : 'password';
         this.eye = this.eye == 'icons/eye.svg' ? 'icons/hideEye.svg' : 'icons/eye.svg';
+    }
+
+    googleAuth() {
+        this.auth.google().subscribe({
+            next: (response) => {
+                window.location.href = response;
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        });
     }
 }

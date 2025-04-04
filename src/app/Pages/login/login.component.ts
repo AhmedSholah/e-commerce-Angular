@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
@@ -23,8 +23,17 @@ export class LoginComponent {
 
     constructor(
         private auth: AuthService,
-        private Router: Router
+        private Router: Router,
+        private route: ActivatedRoute
     ) {}
+
+    ngOnInit(): void {
+        const token = this.route.snapshot.queryParamMap.get('token');
+        if (token) {
+            localStorage.setItem('authToken', `${token}`);
+            this.Router.navigate(['/']);
+        }
+    }
 
     get email() {
         return this.form.get('email');
@@ -57,6 +66,17 @@ export class LoginComponent {
                 },
             });
         }
+    }
+
+    googleAuth() {
+        this.auth.google().subscribe({
+            next: (response) => {
+                window.location.href = response;
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        });
     }
 }
 
