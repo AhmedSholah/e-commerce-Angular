@@ -55,6 +55,7 @@ export class ProductsComponent {
   ind1 = 0; 
   ind2 = 1; 
   addedItems: string[] = [];
+  favoriteCards: string[] = [];
 
   toggleHeart(index: number){
     // this.cards[index].loved = !this.cards[index].loved; 
@@ -300,8 +301,6 @@ loadProducts(){
   this.totalPages = this.getTotalPages();
 }
 
-favoriteCards: string[] = [];
-
 fetchFavorite(){
   this.favoriteService.getFavorite().subscribe({
     next: (res: any) => {
@@ -349,10 +348,6 @@ removeFavorite(productId : string){
     }
   });
 }
-// if button clicked get id 
-
-
-
 
   ngOnInit(){
     this.loadProducts();

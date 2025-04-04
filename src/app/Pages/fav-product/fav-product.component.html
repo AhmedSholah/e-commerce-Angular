@@ -8,17 +8,18 @@
     </div>
 </div>
 
-<section class="grid md:grid-cols-[auto_1fr] grid-cols-[1fr] justify-items-center">
-  <!-- Desktop -->
+<section class="grid md:grid-cols-[1fr] grid-cols-[1fr] justify-items-center ">
+
+    <h1 class="text-2xl font-bold text-main text-center my-8 pb-2 border-b-4 border-main inline-block mx-auto"> Favorite Products </h1>
+     <!-- Desktop -->
 
     <div class="flex flex-col">
-    
         <!-- Cards -->
         <div class="flex flex-col">
-            <div *ngIf="!loading && !emptyState" class="grid lg:grid-cols-4 md:grid-cols-2 justify-items-center mb-5 ">
+            <div *ngIf="!loading && !emptyState" [ngClass]="cards.length >= 3? 'lg:grid-cols-3' : 'lg:grid-cols-auto-fit'" class="container grid md:grid-cols-2 justify-items-center mb-5 mx-auto">
                 <div
                     class="flex flex-col bg-main rounded-[1rem] m-2 max-w-[20rem] "
-                    *ngFor="let card of cards | slice: 0 : paginationNumber; index as i"
+                    *ngFor="let card of cards  index as i"
                 >
                     <div class="relative group ">            
                         <img class="w-full h-full object-cover max-h-[18rem] rounded-[1rem]  group-hover:hidden" [src]="card.images[0]" /> 
@@ -31,7 +32,7 @@
                                     ? 'images/trending/loved.svg'
                                     : 'images/trending/heart.svg'
                             "
-                            (click)="addFavorite(card._id)"
+                            (click)="removeFavorite(card._id)"
                         />
                     </div>
                     <div class="flex flex-col grow basis-0 justify-between items-between p-4 ">
@@ -66,7 +67,7 @@
                                 {{ card.description }}
                             </div>
                         </div>
-                        <button class="bg-main-50 hover:bg-gray-100 p-2 mt-4 rounded-[1rem] w-full" (click)="addToCart(card._id)">
+                        <button class="bg-main-50 hover:bg-gray-100 p-2 mt-4 rounded-[1rem] w-full" (click)="removeFavorite(card._id)">
                             <div class="flex justify-center gap-2">
                                 <img src="images/trending/basket.svg" />
                                 <span class="text-main text-bold treansition-all duration-300 ease-in-out" [ngClass]="{'scale-105': addedItems.includes(card._id)}">{{addedItems.includes(card._id) ? 'Added!' : 'Add to Cart'}}</span>
@@ -94,18 +95,16 @@
                 </svg>
                 <!-- Title -->
                 <h2 class="text-2xl font-semibold text-gray-800 mb-2">
-                  No Products Found
+                  No Favorite Found
                 </h2>
                 <!-- Message -->
                 <p class="max-w-md mb-4">
                   We couldn’t find any Favorite matching your criteria. Add Some.
                 </p>
                 <!-- Action Button -->
-                <button
-                  class="bg-main hover:bg-main-700 text-white font-medium py-2 px-4 rounded"
-                  
-                >
-                  Clear Filters
+                <button (click)="navigateToProducts()"
+                    class="bg-main hover:bg-main-700 text-white font-medium py-2 px-4 rounded">
+                    Add Products
                 </button>
               </div>
               
@@ -113,7 +112,7 @@
             <!-- Skeleton-card -->
            <app-skelaton-product-cards *ngIf="loading"/>
 
-           
+<!--            
             <div class="flex items-center justify-center mt-7 gap-3">
                 <button class="btn-primary-small max-w-[2.5rem]" id="previous" (click)="changePage(-1)">
                     <svg
@@ -143,7 +142,7 @@
                         />
                     </svg>
                 </button>
-            </div>
+            </div> -->
 
      
         </div>
@@ -152,3 +151,4 @@
 
 <app-our-reviews></app-our-reviews>
 <app-cart></app-cart>
+
