@@ -8,5 +8,6 @@ export const API = {
     auth: {
         register: '/api/auth/register',
         login: '/api/auth/login',
+        google: '/api/auth/google',
     },
 };
