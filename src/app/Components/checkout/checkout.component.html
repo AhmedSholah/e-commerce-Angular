@@ -20,36 +20,6 @@
     <div class="ml-5 w-94 sm:w-72 md:w-90 lg:w-120 xl:w-150 lg:h-48 xl:h-50  border rounded-2xl border-gray-200">
       <h2 class="text-3xl font-bold mt-3 sm:mt-3 md:mt-5 lg:mt-7 xl:mt-8 ml-10 text-main">Payment Type</h2>
       <div class="ml-9 sm:ml-10 md:ml-12 lg:ml-13 mt-4 xl:ml-14">
-        <label class="flex items-center gap-2">
-          <input type="radio" name="payment" class="border-2 border-gray-400 rounded-full appearance-none 
-          relative before:content-[''] before:bg-main-50 before:rounded-full before:absolute 
-          before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 scale-100 
-          checked:before:scale-75 checked:before:bg-main checked:border-2 checked:border-main
-          
-          w-5 h-5 sm:w-5 sm:h-5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-7 xl:h-7 
-          before:w-3 before:h-3 sm:before:w-3 sm:before:h-3 md:before:w-3 md:before:h-3 
-          lg:before:w-4 lg:before:h-4 xl:before:w-5 xl:before:h-5"  
-          checked (change)="selectPayment('paypal')">
-        <div class="flex items-center space-x-1">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10"
-            viewBox="0 0 512 512">
-            <g>
-              <path d="M428.876 132.28a175.921 175.921 0 0 0 1.32-21.497C430.196 49.6 380.597 0 319.413 0H134.271c-11.646 0-21.589 8.41-23.521 19.894L42.53 425.369c-2.448 14.55 8.768 27.809 23.521 27.809h67.711c11.646 0 21.776-8.404 23.707-19.889l.317-1.885h.001l-9.436 56.086c-2.156 12.823 7.729 24.51 20.732 24.51h59.237c10.265 0 19.029-7.413 20.731-17.535l16.829-100.02c2.901-17.242 17.828-29.867 35.311-29.867h15.562c84.53 0 153.054-68.525 153.054-153.054 0-32.709-16.168-61.622-40.931-79.244z"
-                fill="#002987"></path>
-              <path d="M428.876 132.28c-10.594 86.179-84.044 152.91-173.086 152.91h-51.665c-11.661 0-21.732 7.767-24.891 18.749l-30.882 183.549C146.195 500.312 156.08 512 169.083 512h59.237c10.265 0 19.029-7.413 20.731-17.535l16.829-100.02c2.901-17.242 17.828-29.867 35.311-29.867h15.562c84.53 0 153.054-68.525 153.054-153.054 0-32.709-16.168-61.622-40.931-79.244z"
-                fill="#0085CC"></path>
-              <path d="M204.125 285.19h51.665c89.043 0 162.493-66.731 173.086-152.909-15.888-11.306-35.304-17.978-56.29-17.978h-134.85c-15.353 0-28.462 11.087-31.01 26.227l-27.493 163.408c3.159-10.982 13.231-18.748 24.892-18.748z"
-                fill="#00186A"></path>
-            </g>
-          </svg>
-        
-          <span class="font-semibold text-blue-900 italic text-lg sm:text-xl md:text-2xl lg:text-3xl">Pay</span>
-          <span class="font-semibold text-[#0085CC] italic relative -left-1 sm:-left-1.5 md:-left-2 text-lg sm:text-xl md:text-2xl lg:text-3xl">Pal</span>
-        </div>
-        
-
-      </label>
       <label class="flex items-center gap-2">
         
          <input type="radio" name="payment" class="border-2 border-gray-400 rounded-full appearance-none 
@@ -71,30 +41,56 @@
       </label>
     </div>
 </div>
- <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+ <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
     <div class="ml-5 w-94 h-148 sm:w-72 md:w-90 lg:w-120 xl:w-150 sm:h-147 md:h-150 lg:h-130 xl:h-130  border rounded-2xl border-gray-200 mt-5 mb-10 p-6">
-      <h2 class="text-3xl font-bold text-main mt-8 ml-5 mb-8">Card Details</h2>  
+      <h2 class="text-3xl font-bold text-main mt-8 ml-5 mb-8">Shipping Address</h2>  
       <div class="flex flex-col">
-        <input formControlName="cardholderName" class=" lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl" placeholder="Cardholder Name">
-        <div class="text-red-500 text-sm h-6" [ngClass]="{'invisible': cardholderName?.valid || !cardholderName?.touched}">Cardholder Name is required</div>
+        <select formControlName="city" class=" lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl">
+          <option value="" disabled selected >Select your city</option>
+          <option value="Cairo">Cairo</option>
+          <option value="Alexandria">Alexandria</option>
+          <option value="Giza">Giza</option>
+          <option value="Port Said">Port Said</option>
+          <option value="Suez">Suez</option>
+          <option value="Luxor">Luxor</option>
+          <option value="Aswan">Aswan</option>
+          <option value="Mansoura">Mansoura</option>
+          <option value="Tanta">Tanta</option>
+          <option value="Zagazig">Zagazig</option>
+          <option value="Ismailia">Ismailia</option>
+          <option value="Fayoum">Fayoum</option>
+          <option value="Beni Suef">Beni Suef</option>
+          <option value="Minya">Minya</option>
+          <option value="Sohag">Sohag</option>
+          <option value="Qena">Qena</option>
+          <option value="Asyut">Asyut</option>
+          <option value="Damietta">Damietta</option>
+          <option value="Shibin El Kom">Shibin El Kom</option>
+          <option value="Banha">Banha</option>
+          <option value="Kafr El Sheikh">Kafr El Sheikh</option>
+          <option value="Hurghada">Hurghada</option>
+          <option value="Marsa Matruh">Marsa Matruh</option>
+          <option value="Damanhour">Damanhour</option>
+        </select>
+        <div class="text-red-500 text-sm h-6" [ngClass]="{'invisible': city?.valid || !city?.touched}">City is required</div>
       
-        <input formControlName="cardNumber" class="lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl" placeholder="Card Number">
-        <div class="text-red-500 text-sm h-6 text-left" [ngClass]="{'invisible': cardNumber?.valid || !cardNumber?.touched}">Card Number must be 16 digits</div>
+        <input formControlName="streetaddress" class="lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl" placeholder="Street Address">
+        <div class="text-red-500 text-sm h-6 text-left" [ngClass]="{'invisible': streetaddress?.valid || !streetaddress?.touched}">Street address must contain letters only</div>
       
         <div class="flex gap-2 flex-wrap sm:flex-wrap ">
           <div class="flex flex-col">
-            <input formControlName="expirationDate" class="w-[325px] sm:w-[240px] md:w-[310px] lg:w-[210px] xl:w-[270px] p-2 border border-main rounded-xl" placeholder="MM/YY">
-            <div class="text-red-500 text-sm h-6" [ngClass]="{'invisible': expirationDate?.valid || !expirationDate?.touched}">Expiration Date format MM/YY</div>
+            <input formControlName="streetnumber" class="w-[325px] sm:w-[240px] md:w-[310px] lg:w-[210px] xl:w-[270px] p-2 border border-main rounded-xl" placeholder="Street No.">
+            <div class="text-red-500 text-sm h-6" [ngClass]="{'invisible': streetnumber?.valid || !streetnumber?.touched}">Street Number must be 1-5 digits</div>
           </div>
           <div class="flex flex-col">
-            <input formControlName="cvv" class="w-[325px] sm:w-[240px] md:w-[310px] lg:w-[210px] xl:w-[270px] p-2 border border-main rounded-xl" placeholder="CVV">
-            <div class="text-red-500 text-sm h-5" [ngClass]="{'invisible': cvv?.valid || !cvv?.touched}">CVV must be 3-4 digits</div>
+            <input formControlName="apartment" class="w-[325px] sm:w-[240px] md:w-[310px] lg:w-[210px] xl:w-[270px] p-2 border border-main rounded-xl" placeholder="Apartment No.">
+            <div class="text-red-500 text-sm h-5" [ngClass]="{'invisible': apartment?.valid || !apartment?.touched}">Apartment must be 1-4 digits</div>
           </div>
         </div>
       
-        <input formControlName="address" class="lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl" placeholder="Address">
-        <div class="text-red-500 text-sm h-6 text-left" [ngClass]="{'invisible': address?.valid || !address?.touched}">
-          Address Required
+        <input formControlName="phone" class="lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl" placeholder="Phone Number">
+        <div class="text-red-500 text-sm h-6 text-left" [ngClass]="{'invisible': phone?.valid || !phone?.touched}">
+          Phone Number must be 11 digits 
         </div>
 
       
@@ -117,7 +113,7 @@
         <div class="h-130 overflow-y-auto rounded-2xl flex flex-col p-2 gap-2">
           <div *ngIf="cartItems.length > 0; else emptyCart">
             <div *ngFor="let item of cartItems; let i = index" class="flex gap-2 mb-2">
-                <img class="rounded-[10px]" [src]="item.image" alt="" />
+                <img class="rounded-[10px] w-[114px] h-[140px] border border-main object-cover" [src]="item.image" alt="" />
                 <div class="bg-main rounded-[10px] w-full flex-col gap-1">
                     <div class="flex justify-between p-2">
                         <p class="font-bold text-white">{{ item.name }}</p>
@@ -151,6 +147,10 @@
             <div class="flex justify-center items-center flex-col h-90">
               <img  src="cart empty.svg" alt="">
               <p class="text-center text-main text-xl  mt-5 font-bold">Your cart is empty </p>
+              <p class="text-gray-500 text-sm mb-4">Start shopping to fill it up.</p>
+            <button class="bg-main text-white px-4 py-2 rounded-lg cursor-pointer" (click)="goToProducts()">
+                Shop Now
+            </button>
             </div>
           </ng-template>
         </div> 
