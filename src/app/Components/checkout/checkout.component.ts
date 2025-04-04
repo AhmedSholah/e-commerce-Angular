@@ -13,7 +13,7 @@ import { CartServiceService } from '../../Services/cart-service.service';
   templateUrl: './checkout.component.html'
 })
 export class CheckoutComponent {
-  paymentMethod: string = 'paypal';
+  paymentMethod: string = 'visa';
   shippingForm: FormGroup;
   loading: boolean = false;
   cartItems: any[] = [];
@@ -104,12 +104,12 @@ export class CheckoutComponent {
     };
     console.log('Cart Items:', this.cartItems);
     console.log('Payment Data:', paymentData);
-
+    const stripeUrl="https://checkout.stripe.com/c/pay/cs_test_b1eymhM2EVsI9USJ8kioj1ohMxIpUFJIA22I4Y6LfoJWZgudaM0YzowyJK#fidkdWxOYHwnPyd1blpxYHZxWjA0VHNuY0dDdlViU0owa1VEQGJWSEZ%2FT39iQjx1VUJdSjJtSlA9dF1QM2BtSEhBVXddbUpTQTVzb2pgM2AzNFByXHxPVkQwdDdCZEM9Rko8VEB2N0B8MXNpNTU9dnZSME1qZCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl";
 
     this.checkoutService.processPayment(paymentData).subscribe({
       next: (response) => {
         console.log('Payment Successful:', response);
-        this.router.navigate(['/checkout-confirmation']); 
+        window.location.href = stripeUrl;
         this.loading = false;
         this.resetForm();
       },
