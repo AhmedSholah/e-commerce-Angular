@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
     userName: string = '';
     avatarUrl: string = 'defaultImage.jpg';
     dropdownOpen = false;
+    errorMessage = '';
+    showErrorOverlay = false;
 
     constructor(
         private cartService: CartServiceService,
@@ -50,6 +52,21 @@ export class HeaderComponent implements OnInit {
 
     toggleCart(event: Event) {
         event.preventDefault();
+
+        const isUserLoggedIn = localStorage.getItem('authToken');
+
+        if (!isUserLoggedIn || !this.isLoggedIn) {
+            this.errorMessage = 'Please login and try again';
+            this.showErrorOverlay = true;
+
+            setTimeout(() => {
+                this.showErrorOverlay = false;
+                this.errorMessage = '';
+            }, 3000);
+
+            return;
+        }
+
         this.cartService.toggleCart();
     }
 
@@ -97,19 +114,17 @@ export class HeaderComponent implements OnInit {
     }
     navigateToSection(sectionId: string) {
         if (this.router.url === '/') {
-          
-          this.scrollToSection(sectionId);
+            this.scrollToSection(sectionId);
         } else {
-          
-          this.router.navigate(['/']).then(() => {
-            setTimeout(() => this.scrollToSection(sectionId), 100); 
-          });
+            this.router.navigate(['/']).then(() => {
+                setTimeout(() => this.scrollToSection(sectionId), 100);
+            });
         }
-      }
+    }
     scrollToSection(sectionId: string) {
         const section = document.getElementById(sectionId);
         if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
+            section.scrollIntoView({ behavior: 'smooth' });
         }
-      }
+    }
 }
