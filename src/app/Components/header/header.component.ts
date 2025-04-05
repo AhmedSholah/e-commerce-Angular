@@ -53,20 +53,6 @@ export class HeaderComponent implements OnInit {
     toggleCart(event: Event) {
         event.preventDefault();
 
-        const isUserLoggedIn = localStorage.getItem('authToken');
-
-        if (!isUserLoggedIn || !this.isLoggedIn) {
-            this.errorMessage = 'Please login and try again';
-            this.showErrorOverlay = true;
-
-            setTimeout(() => {
-                this.showErrorOverlay = false;
-                this.errorMessage = '';
-            }, 3000);
-
-            return;
-        }
-
         this.cartService.toggleCart();
     }
 
