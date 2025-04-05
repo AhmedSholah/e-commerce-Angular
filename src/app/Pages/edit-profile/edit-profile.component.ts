@@ -9,14 +9,14 @@ import { CartComponent } from '../../Components/cart/cart.component';
     selector: 'app-edit-profile',
     standalone: true,
     templateUrl: './edit-profile.component.html',
-    imports: [CommonModule, ReactiveFormsModule, LoaderComponent,CartComponent],
+    imports: [CommonModule, ReactiveFormsModule, LoaderComponent, CartComponent],
 })
 export class EditProfileComponent {
     loading: boolean = false;
     loadingAvatar: boolean = true;
     form: FormGroup;
     imagePreview: string | ArrayBuffer | null = null;
-    defaultImage: string = 'person.svg';
+    defaultImage: string = 'defaultImage.jpg';
     selectedFile: File | null = null;
     showPopup: boolean = false;
     user: any = null;
@@ -117,4 +117,3 @@ export class EditProfileComponent {
         });
     }
 }
-
