@@ -114,28 +114,6 @@ fetchFavorite() {
   });
 }
 
-
-
-// addFavorite(productId: string){
-//   const flag = this.favoriteCards.includes(productId);
-//   if(!flag){
-//     this.favoriteService.addFavorite(productId).subscribe({
-//       next: (res) => {
-//         this.favoriteCards.push(productId);
-//         console.log("favorite Card Added", this.favoriteCards);
-//       },
-//       error : (err) => {
-//         console.log(err);
-//       }
-//     });
-//   }
-//   else{
-//     this.favoriteCards = this.favoriteCards.filter((id) => id !== productId);
-//     this.removeFavorite(productId);
-//     console.log("favorite Card Deleted", this.favoriteCards);
-//   }
-// }
-
 removeFavorite(productId : string){
   this.favoriteService.deleteFavorite(productId).subscribe({
     next: (res) => {
