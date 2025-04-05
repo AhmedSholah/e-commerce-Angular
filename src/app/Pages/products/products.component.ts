@@ -302,19 +302,27 @@ loadProducts(){
   this.totalPages = this.getTotalPages();
 }
 
-fetchFavorite(){
+fetchFavorite() {
   this.favoriteService.getFavorite().subscribe({
     next: (res: any) => {
       this.favoriteCards = [];
+      if (!res.data || !res.data.items || res.data.items.length === 0) {
+        this.emptyState = true;
+        return;
+      }
+      
       res.data.items.forEach((item: any) => {
-        if (item.product) {  
+        if (item && item.product) {  
           this.favoriteCards.push(item.product._id);
         }
       });
+      
+      this.emptyState = this.favoriteCards.length === 0;
       console.log("Favorite Cards IDs:", this.favoriteCards);
     },
     error: (err) => {
       console.log(err);
+      this.emptyState = true;
     }
   });
 }
