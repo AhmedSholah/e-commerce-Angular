@@ -1,15 +1,20 @@
 <section class="bg-main m-4 sm:m-6 md:m-10 rounded-[16px] p-6 sm:p-8 md:p-10 flex flex-col gap-4">
     <h2 class="text-main-50 text-2xl sm:text-3xl font-semibold">My Order</h2>
 
+    <div *ngIf="orders?.length === 0" class="text-main-50 text-center text-lg sm:text-xl mt-4">
+        Oops! You haven’t placed any orders yet.<br />
+        Let’s fix that — your next favorite product is just a click away!
+    </div>
+
     <div *ngFor="let order of orders" class="bg-main-50 p-4 sm:p-3 rounded-[13px]">
         <div class="flex justify-between relative">
-            <div 
+            <div
                 [ngClass]="{
                     'bg-[#FFA640]': order.orderStatus === 'processing',
                     'bg-[#61B162]': order.orderStatus === 'shipped',
                     'bg-[#4CAF50]': order.orderStatus === 'delivered',
-                    'bg-[#E74747]': order.orderStatus === 'cancelled', 
-                    'bg-[#5D9F53]': order.orderStatus === 'completed'
+                    'bg-[#E74747]': order.orderStatus === 'cancelled',
+                    'bg-[#5D9F53]': order.orderStatus === 'completed',
                 }"
                 class="text-[14px] sm:text-[16px] md:text-[18px] rounded-[8px] text-white px-3 py-1 absolute top-2 right-2"
             >
@@ -17,25 +22,31 @@
             </div>
         </div>
 
-        <h3 class="text-main text-lg sm:text-xl font-semibold">Date: 
-            <span class="text-[#545454] text-base sm:text-lg">{{ order.createdAt | date: 'dd-MM-yyyy' }}</span>
+        <h3 class="text-main text-lg sm:text-xl font-semibold">
+            Date:
+            <span class="text-[#545454] text-base sm:text-lg">{{
+                order.createdAt | date: 'dd-MM-yyyy'
+            }}</span>
         </h3>
 
-        <h3 class="text-main text-lg sm:text-xl font-semibold">Order Number: 
-            <span class="text-[#545454] text-base sm:text-lg">{{ order.orderNumber}}</span>
+        <h3 class="text-main text-lg sm:text-xl font-semibold">
+            Order Number:
+            <span class="text-[#545454] text-base sm:text-lg">{{ order.orderNumber }}</span>
         </h3>
 
-        <h3 class="text-main text-lg sm:text-xl font-semibold">Total: 
+        <h3 class="text-main text-lg sm:text-xl font-semibold">
+            Total:
             <span class="text-[#545454] text-base sm:text-lg">${{ order.totalPrice }}</span>
         </h3>
 
-        <h3 class="text-main text-lg sm:text-xl font-semibold">Payment Status: 
-            <span 
+        <h3 class="text-main text-lg sm:text-xl font-semibold">
+            Payment Status:
+            <span
                 [ngClass]="{
                     'text-[#FFA640]': order.paymentStatus === 'pending',
                     'text-[#61B162]': order.paymentStatus === 'paid',
                     'text-[#E74747]': order.paymentStatus === 'failed',
-                    'text-[#B1B1B1]': order.paymentStatus === 'refunded'
+                    'text-[#B1B1B1]': order.paymentStatus === 'refunded',
                 }"
                 class="text-base sm:text-lg"
             >
@@ -43,19 +54,17 @@
             </span>
         </h3>
 
-        <button 
-        class="text-main-50 px-4 sm:px-5 py-1 text-[16px] sm:text-[18px] rounded-[8px] mt-3"
-        [ngClass]="{
-            'bg-gray-400 cursor-not-allowed': order.orderStatus === 'cancelled', 
-            'bg-main': order.orderStatus !== 'cancelled'
-        }"
-        [disabled]="order.orderStatus === 'cancelled'"
-        (click)="cancelOrder(order._id); disableButton(order._id)"
-    >
-        Cancel
-    </button>
-    
-    
+        <button
+            class="text-main-50 px-4 sm:px-5 py-1 text-[16px] sm:text-[18px] rounded-[8px] mt-3"
+            [ngClass]="{
+                'bg-gray-400 cursor-not-allowed': order.orderStatus === 'cancelled',
+                'bg-main': order.orderStatus !== 'cancelled',
+            }"
+            [disabled]="order.orderStatus === 'cancelled'"
+            (click)="cancelOrder(order._id); disableButton(order._id)"
+        >
+            Cancel
+        </button>
     </div>
 </section>
 

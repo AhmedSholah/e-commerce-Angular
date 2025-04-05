@@ -1,59 +1,72 @@
-<div class="bg-main-50 mt-10 mx-4 md:mx-10 h-auto md:h-[800px] flex justify-center items-center">
+<div
+    *ngIf="showSuccess"
+    class="fixed top-2 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-500"
+>
+    {{ successMessage }}
+</div>
+
+<div class="bg-main-50 mx-4 md:mx-10 h-auto md:h-[800px] flex justify-center items-center">
     <div
-        class="flex flex-col md:flex-row rounded-[20px] w-full max-w-[1400px] h-auto md:h-[650px] shadow-lg"
+        class="flex flex-col md:flex-row rounded-[20px] w-full max-w-[1400px] h-auto md:h-[600px] shadow-lg"
     >
         <img
+            *ngIf="product?.images?.length > 0"
             class="w-full h-[350px] sm:h-1/4 md:h-1/4 md:w-1/2 lg:h-full rounded-tl-[20px] rounded-tr-[20px] lg:rounded-tr-none lg:rounded-bl-[20px] object-cover"
-            src="Product-details.png"
-            alt=""
+            [src]="product.images[0]"
+            alt="{{ product.name }}"
         />
 
         <div
-            class="bg-main w-full md:w-1/2 border-0 rounded-tr-none rounded-bl-[20px] rounded-br-[20px] lg:rounded-tr-[20px] lg:rounded-br-[20px] lg:rounded-bl-none p-4 md:p-10 flex flex-col gap-3"
+            class="bg-main w-full md:w-1/2 border-0 rounded-tr-none rounded-bl-[20px] rounded-br-[20px] lg:rounded-tr-[20px] lg:rounded-br-[20px] lg:rounded-bl-none p-4 md:p-8 flex flex-col gap-2"
         >
-            <div class="flex justify-between items-center">
-                <h2 class="text-main-50 font-semibold text-2xl md:text-4xl">Generic</h2>
-                <img class="w-6 md:w-8" src="icons/exit-icon.svg" alt="" />
+            <div class="flex justify-between items-center relative">
+                <h2 class="text-main-50 font-semibold text-sm md:text-2xl">{{ product?.name }}</h2>
+                <img
+                    class="w-5 md:w-7 absolute top-[-10px] right-0"
+                    src="icons/exit-icon.svg"
+                    alt=""
+                    (click)="goBack()"
+                />
             </div>
 
-            <div class="flex gap-3 text-center md:text-left">
-                <h1 class="text-main-50 font-semibold text-xl md:text-3xl">Price:</h1>
-                <span class="text-[#FDF6F3] text-lg md:text-2xl mt-1">$350.00</span>
-                <span class="text-[#B8B2B2] text-lg md:text-2xl line-through mt-1">$500.00</span>
+            <div class="flex gap-2 text-center md:text-left">
+                <h1 class="text-main-50 font-semibold text-sm md:text-2xl">Price:</h1>
+                <span class="text-[#FDF6F3] text-sm md:text-xl mt-1"
+                    >${{ product?.priceAfterDiscount || product?.price }}</span
+                >
+                <span
+                    *ngIf="product?.discountPercentage"
+                    class="text-[#B8B2B2] text-sm md:text-lg line-through mt-1"
+                    >${{ product?.price }}</span
+                >
             </div>
 
-            <div class="flex gap-3 text-center md:text-left">
-                <h1 class="text-main-50 font-semibold text-xl md:text-3xl">Material:</h1>
-                <span class="text-[#FDF6F3] text-lg md:text-2xl mt-1">Handwoven Raafia</span>
+            <div class="flex gap-2 text-center md:text-left">
+                <h1 class="text-main-50 font-semibold text-sm md:text-2xl">Item Width:</h1>
+                <span class="text-[#FDF6F3] text-sm md:text-xl mt-1"
+                    >{{ product?.dimensions?.width }} cm</span
+                >
             </div>
-
-            <div class="flex gap-3 text-center md:text-left">
-                <h1 class="text-main-50 font-semibold text-xl md:text-3xl">Item Width:</h1>
-                <span class="text-[#FDF6F3] text-lg md:text-2xl mt-1">35 cm</span>
-            </div>
-            <div class="flex gap-3 text-center md:text-left">
-                <h1 class="text-main-50 font-semibold text-xl md:text-3xl">Item Height:</h1>
-                <span class="text-[#FDF6F3] text-lg md:text-2xl mt-1">30 cm</span>
+            <div class="flex gap-2 text-center md:text-left">
+                <h1 class="text-main-50 font-semibold text-sm md:text-2xl">Item Height:</h1>
+                <span class="text-[#FDF6F3] text-sm md:text-xl mt-1"
+                    >{{ product?.dimensions?.height }} cm</span
+                >
             </div>
 
             <div class="text-center md:text-left">
-                <p class="text-[#FDF6F3] text-lg md:text-2xl mt-1 text-left">
-                    <span class="text-main-50 font-semibold text-xl md:text-3xl">
-                        Description:
-                    </span>
-                    The Morning Glory Raafia Handbag is a beautifully handwoven bag made from
-                    natural raafia fibers. Designed for casual outings, this eco-friendly tote
-                    features a spacious interior, sturdy handles, and a lightweight design, making
-                    it perfect for everyday use.
+                <p class="text-[#FDF6F3] text-sm md:text-lg mt-1 text-left">
+                    <span class="text-main-50 font-semibold text-sm md:text-2xl">Description:</span>
+                    {{ product?.description }}
                 </p>
             </div>
 
             <div class="flex items-center justify-center mt-3">
                 <div class="flex bg-main-50 shadow-md">
-                    <button class="p-2">
+                    <button class="p-2 cursor-pointer" (click)="decreaseQuantity()">
                         <svg
-                            width="25"
-                            height="25"
+                            width="20"
+                            height="20"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="#6B3A27"
@@ -65,13 +78,13 @@
                         </svg>
                     </button>
                     <span
-                        class="flex flex items-center justify-center bg-main h-[41px] w-[40px] border-b-[4px] border-main-50 text-main-50 text-3xl mt-1"
-                        >1</span
+                        class="flex flex items-center justify-center bg-main h-[35px] w-[35px] border-b-[4px] border-main-50 text-main-50 text-xl mt-1"
+                        >{{ quantity }}</span
                     >
-                    <button class="p-2">
+                    <button class="p-2 cursor-pointer" (click)="increaseQuantity()">
                         <svg
-                            width="25"
-                            height="25"
+                            width="20"
+                            height="20"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="#6B3A27"
@@ -86,14 +99,16 @@
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-4 justify-center items-center mt-6">
+            <div class="flex flex-col md:flex-row gap-3 justify-center items-center mt-6">
                 <button
-                    class="w-full md:w-[200px] h-[50px] bg-main-50 text-main font-semibold text-lg rounded-[10px] shadow-md"
+                    class="w-full md:w-[180px] h-[45px] bg-main-50 text-main font-semibold text-sm md:text-lg rounded-[8px] shadow-md cursor-pointer"
+                    (click)="addToCart()"
                 >
                     Add to Cart
                 </button>
                 <button
-                    class="w-full md:w-[200px] h-[50px] bg-main-50 text-main font-semibold text-lg rounded-[10px] shadow-md"
+                    class="w-full md:w-[180px] h-[45px] bg-main-50 text-main font-semibold text-sm md:text-lg rounded-[8px] shadow-md cursor-pointer"
+                    (click)="addToWishlist()"
                 >
                     Add to Wishlist
                 </button>
