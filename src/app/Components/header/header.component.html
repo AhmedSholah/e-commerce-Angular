@@ -28,11 +28,25 @@
         </a>
         <div>
             <ul class="text-white gap-8 hidden md:flex">
-                <li class="hover:font-bold" routerLinkActive="font-bold underline" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
-                <li class="hover:font-bold" ><a (click)="navigateToSection('category')">Category</a></li>
-                <li class="hover:font-bold" routerLinkActive="font-bold underline"><a routerLink="/about-us">About</a></li>
-                <li class="hover:font-bold" routerLinkActive="font-bold underline"><a routerLink="/products">Products</a></li>
-                <li class="hover:font-bold" routerLinkActive="font-bold underline"><a routerLink="/contact-us">Contact Us</a></li>
+                <li
+                    class="hover:font-bold"
+                    routerLinkActive="font-bold underline"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                >
+                    <a routerLink="/">Home</a>
+                </li>
+                <li class="hover:font-bold">
+                    <a (click)="navigateToSection('category')">Category</a>
+                </li>
+                <li class="hover:font-bold" routerLinkActive="font-bold underline">
+                    <a routerLink="/about-us">About</a>
+                </li>
+                <li class="hover:font-bold" routerLinkActive="font-bold underline">
+                    <a routerLink="/products">Products</a>
+                </li>
+                <li class="hover:font-bold" routerLinkActive="font-bold underline">
+                    <a routerLink="/contact-us">Contact Us</a>
+                </li>
 
                 <li>
                     <button (click)="toggleCart($event)" class="hover:fill-red-500 cursor-pointer">
@@ -50,6 +64,7 @@
                         </svg>
                     </button>
                 </li>
+
                 <li>
                     <a routerLink="/favorite-products"
                         ><svg
@@ -78,13 +93,12 @@
                         (click)="toggleDropdown()"
                     />
                     <ul
-
-                    class="bg-main-50 absolute top-[120%] left-[-250px] lg:left-[-115px] w-auto flex flex-col rounded shadow z-50 opacity-0 scale-95 translate-y-[-10px] transition-all duration-300 ease-out origin-top p-3 pointer-events-none"
-                    [ngClass]="{
-                        'opacity-100 scale-100 translate-y-0 pointer-events-auto': dropdownOpen,
-                        'opacity-0 scale-95 translate-y-[-10px] pointer-events-none': !dropdownOpen
-                    }"
-
+                        class="bg-main-50 absolute top-[120%] left-[-250px] lg:left-[-115px] w-auto flex flex-col rounded shadow z-50 opacity-0 scale-95 translate-y-[-10px] transition-all duration-300 ease-out origin-top p-3 pointer-events-none"
+                        [ngClass]="{
+                            'opacity-100 scale-100 translate-y-0 pointer-events-auto': dropdownOpen,
+                            'opacity-0 scale-95 translate-y-[-10px] pointer-events-none':
+                                !dropdownOpen,
+                        }"
                     >
                         <li class="border-b border-gray-300 w-full px-5 py-2">
                             <div class="flex items-center gap-3">
@@ -116,9 +130,7 @@
                             class="border-b border-gray-300 w-full px-5 py-2 cursor-pointer hover:bg-main-200 transition-all flex gap-2"
                         >
                             <img src="icons/myorder.svg" alt="" />
-                            <a routerLink="/myOrder" class="text-gray-700"
-                                >My Order</a
-                            >
+                            <a routerLink="/myOrder" class="text-gray-700">My Order</a>
                         </li>
 
                         <li
