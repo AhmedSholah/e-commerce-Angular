@@ -1,8 +1,9 @@
-<div
-    *ngIf="showSuccess"
-    class="fixed top-2 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-500"
->
-    {{ successMessage }}
+<div *ngIf="showSuccess" class="fixed top-10 left-1/2 transform -translate-x-1/2 z-50">
+    <div
+        class="bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg text-lg font-semibold animate-bounce"
+    >
+        {{ successMessage }}
+    </div>
 </div>
 
 <div class="bg-main-50 mx-4 md:mx-10 h-auto md:h-[800px] flex justify-center items-center">
