@@ -68,7 +68,6 @@ export const routes: Routes = [
             {
                 path: 'checkout-confirmation',
                 component: CheckoutConfirmationComponent,
-                canActivate: [authGuard],
             },
             {
                 path: '**',
@@ -80,4 +79,3 @@ export const routes: Routes = [
         ],
     },
 ];
-
