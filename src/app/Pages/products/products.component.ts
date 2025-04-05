@@ -12,6 +12,7 @@ import { SkelatonProductCardsComponent } from '../../Components/skelaton-product
 import { CartComponent } from '../../Components/cart/cart.component';
 import { CartServiceService } from '../../Services/cart-service.service';
 import { FavoriteService } from '../../Services/favorite.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-products',
   imports: [CommonModule, HeaderComponent, OurReviewsComponent,FooterComponent, FormsModule, SkelatonProductCardsComponent,CartComponent],
@@ -21,7 +22,7 @@ import { FavoriteService } from '../../Services/favorite.service';
 export class ProductsComponent {
 
   constructor(private product: ProductsService, private categoryService: CatogriesService, private cartServiceService: CartServiceService
-    ,private favoriteService: FavoriteService
+    ,private favoriteService: FavoriteService, private router: Router
   ){
   }
 
@@ -349,6 +350,9 @@ removeFavorite(productId : string){
   });
 }
 
+navigateToProductDetails(ProductID : string){
+  this.router.navigate([`/product/${ProductID}`]);
+}
   ngOnInit(){
     this.loadProducts();
     this.fetchCategories();
