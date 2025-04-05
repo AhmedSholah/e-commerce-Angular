@@ -13,8 +13,8 @@ import { CartServiceService } from '../../Services/cart-service.service';
   templateUrl: './checkout.component.html'
 })
 export class CheckoutComponent {
-  paymentMethod: string = 'paypal';
-  paymentForm: FormGroup;
+  paymentMethod: string = 'visa';
+  shippingForm: FormGroup;
   loading: boolean = false;
   cartItems: any[] = [];
 
@@ -53,12 +53,12 @@ export class CheckoutComponent {
   }
   constructor(private fb: FormBuilder,private checkoutService:CheckoutService, private router: Router,private cartService: CartServiceService) {
 
-    this.paymentForm = this.fb.group({
-      cardholderName: ['', Validators.required], 
-      cardNumber: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]], 
-      expirationDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])/(\\d{2})$')]], 
-      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],
-      address:['',[Validators.required, Validators.pattern(/^[a-zA-Z0-9\s,.\-\/]+$/)]]
+    this.shippingForm = this.fb.group({
+      city: ['', Validators.required],
+      streetaddress: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s,.\-\/]+$/)]],
+      streetnumber: ['', [Validators.required, Validators.pattern(/^\d{1,5}$/)]],
+      apartment: ['', [Validators.required, Validators.pattern(/^\d{1,4}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^(010|011|012)\d{8}$/)]]
     });
   }
   ngOnInit() {
@@ -68,27 +68,27 @@ export class CheckoutComponent {
     })
   }
 
-  get cardholderName() {
-    return this.paymentForm.get('cardholderName');
+  get city() {
+    return this.shippingForm.get('city');
   }
 
-  get cardNumber() {
-    return this.paymentForm.get('cardNumber');
+  get streetaddress() {
+    return this.shippingForm.get('streetaddress');
   }
 
-  get expirationDate() {
-    return this.paymentForm.get('expirationDate');
+  get streetnumber() {
+    return this.shippingForm.get('streetnumber');
   }
 
-  get cvv() {
-    return this.paymentForm.get('cvv');
+  get apartment() {
+    return this.shippingForm.get('apartment');
   }
-  get address() {
-    return this.paymentForm.get('address');
+  get phone() {
+    return this.shippingForm.get('phone');
   }
 
   onSubmit() {
-    if (this.paymentForm.invalid) {
+    if (this.shippingForm.invalid) {
       console.log('Form is not valid');
       return;
     }
@@ -97,19 +97,19 @@ export class CheckoutComponent {
     console.log('Cart Items before sending:', this.cartItems);
     console.log('Total:', this.total);
     const paymentData = {
-      ...this.paymentForm.value,
+      ...this.shippingForm.value,
       paymentMethod: this.paymentMethod,
       cartItems: this.cartItems,
       total: this.total
     };
     console.log('Cart Items:', this.cartItems);
     console.log('Payment Data:', paymentData);
-
+    const stripeUrl="https://checkout.stripe.com/c/pay/cs_test_b1eymhM2EVsI9USJ8kioj1ohMxIpUFJIA22I4Y6LfoJWZgudaM0YzowyJK#fidkdWxOYHwnPyd1blpxYHZxWjA0VHNuY0dDdlViU0owa1VEQGJWSEZ%2FT39iQjx1VUJdSjJtSlA9dF1QM2BtSEhBVXddbUpTQTVzb2pgM2AzNFByXHxPVkQwdDdCZEM9Rko8VEB2N0B8MXNpNTU9dnZSME1qZCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl";
 
     this.checkoutService.processPayment(paymentData).subscribe({
       next: (response) => {
         console.log('Payment Successful:', response);
-        this.router.navigate(['/checkout-confirmation']); 
+        window.location.href = stripeUrl;
         this.loading = false;
         this.resetForm();
       },
@@ -123,6 +123,10 @@ export class CheckoutComponent {
 
 
   resetForm() {
-    this.paymentForm.reset();
+    this.shippingForm.reset();
+  }
+  goToProducts() {
+    this.cartService.toggleCart();
+    this.router.navigate(['/products']); 
   }
 }
