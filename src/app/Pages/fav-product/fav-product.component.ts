@@ -99,7 +99,7 @@ fetchFavorite() {
       res.data.items.forEach((item: any) => {
         if (item.product) {  
           this.favoriteCards.push(item.product._id);
-          this.cards.push(item.product); // Push the product object, not the item
+          this.cards.push(item.product); 
         }
       });
       this.loading = false;
