@@ -12,6 +12,7 @@ import { SkelatonProductCardsComponent } from '../../Components/skelaton-product
 import { CartComponent } from '../../Components/cart/cart.component';
 import { CartServiceService } from '../../Services/cart-service.service';
 import { FavoriteService } from '../../Services/favorite.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-products',
   imports: [CommonModule, HeaderComponent, OurReviewsComponent,FooterComponent, FormsModule, SkelatonProductCardsComponent,CartComponent],
@@ -21,7 +22,7 @@ import { FavoriteService } from '../../Services/favorite.service';
 export class ProductsComponent {
 
   constructor(private product: ProductsService, private categoryService: CatogriesService, private cartServiceService: CartServiceService
-    ,private favoriteService: FavoriteService
+    ,private favoriteService: FavoriteService, private router: Router
   ){
   }
 
@@ -301,19 +302,27 @@ loadProducts(){
   this.totalPages = this.getTotalPages();
 }
 
-fetchFavorite(){
+fetchFavorite() {
   this.favoriteService.getFavorite().subscribe({
     next: (res: any) => {
       this.favoriteCards = [];
+      if (!res.data || !res.data.items || res.data.items.length === 0) {
+        this.emptyState = true;
+        return;
+      }
+      
       res.data.items.forEach((item: any) => {
-        if (item.product) {  
+        if (item && item.product) {  
           this.favoriteCards.push(item.product._id);
         }
       });
+      
+      this.emptyState = this.favoriteCards.length === 0;
       console.log("Favorite Cards IDs:", this.favoriteCards);
     },
     error: (err) => {
       console.log(err);
+      this.emptyState = true;
     }
   });
 }
@@ -349,6 +358,9 @@ removeFavorite(productId : string){
   });
 }
 
+navigateToProductDetails(ProductID : string){
+  this.router.navigate([`/product/${ProductID}`]);
+}
   ngOnInit(){
     this.loadProducts();
     this.fetchCategories();
