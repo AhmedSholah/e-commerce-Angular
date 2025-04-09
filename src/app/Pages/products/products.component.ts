@@ -315,10 +315,7 @@ fetchFavorite() {
         if (item && item.product) {  
           this.favoriteCards.push(item.product._id);
         }
-      });
-      
-      this.emptyState = this.favoriteCards.length === 0;
-      console.log("Favorite Cards IDs:", this.favoriteCards);
+      });      
     },
     error: (err) => {
       console.log(err);
