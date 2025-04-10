@@ -1,7 +1,7 @@
 import { ProductsService } from './../../Services/products.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FavoriteService } from '../../Services/favorite.service';
 import { CatogriesService } from '../../Services/catogries.service';
 import { Products } from '../products/product_interface';
@@ -21,7 +21,8 @@ export class TrendingComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private favoriteService: FavoriteService,
-    private cartService: CartServiceService
+    private cartService: CartServiceService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -67,6 +68,10 @@ export class TrendingComponent implements OnInit {
         error: (err) => console.error('Error adding favorite:', err)
       });
     }
+  }
+
+  navigateToProductDetails(ProductID : string){
+    this.router.navigate([`/product/${ProductID}`]);
   }
 
   addToCart(productId: string) {
