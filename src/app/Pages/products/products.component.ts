@@ -319,7 +319,7 @@ fetchFavorite() {
     },
     error: (err) => {
       console.log(err);
-      this.emptyState = true;
+      // this.emptyState = true;
     }
   });
 }
