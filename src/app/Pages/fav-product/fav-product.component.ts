@@ -128,6 +128,10 @@ removeFavorite(productId : string){
   });
 }
 
+navigateToProductDetails(ProductID : string){
+  this.router.navigate([`/product/${ProductID}`]);
+}
+
 navigateToProducts(){
   this.router.navigate(['/products']);
 }
