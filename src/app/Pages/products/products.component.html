@@ -408,7 +408,7 @@
 
         <!-- Cards -->
         <div class="flex flex-col cursor-pointer">
-            <div *ngIf="!loading && !emptyState" class="grid lg:grid-cols-4 md:grid-cols-2 justify-items-center mb-5 ">
+            <div *ngIf="!loading && !emptyState" class="grid  xl:lg:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 justify-items-center mb-5 ">
                 <div
                     class="flex flex-col bg-main rounded-[1rem] m-2 max-w-[20rem] "
                     *ngFor="let card of cards | slice: 0 : paginationNumber; index as i"
