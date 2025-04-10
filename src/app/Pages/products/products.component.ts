@@ -244,7 +244,7 @@ export class ProductsComponent {
         const Products = res.data.products;
         this.cards = Products;
         if(this.cards.length === 0) {
-          this.emptyState = true;
+          // this.emptyState = true;
           console.log('display empty');
         }
         console.log(this.cards);
@@ -306,11 +306,10 @@ fetchFavorite() {
   this.favoriteService.getFavorite().subscribe({
     next: (res: any) => {
       this.favoriteCards = [];
-      if (!res.data || !res.data.items || res.data.items.length === 0) {
-        this.emptyState = true;
-        return;
-      }
-      
+      // if (!res.data || !res.data.items || res.data.items.length === 0) {
+      //   this.emptyState = true;
+      //   return;
+      // }
       res.data.items.forEach((item: any) => {
         if (item && item.product) {  
           this.favoriteCards.push(item.product._id);
