@@ -3,6 +3,8 @@
 ## Overview
 Craftopia is a modern e-commerce platform specializing in handcrafted products. Built with Angular and powered by a robust backend, it offers a seamless shopping experience for artisanal products.
 
+![Demo](media/output.gif)
+
 
 ### Technical Features
 
