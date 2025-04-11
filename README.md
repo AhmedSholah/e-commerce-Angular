@@ -5,6 +5,8 @@ Craftopia is a modern e-commerce platform specializing in handcrafted products. 
 
 ![Demo](media/output.gif)
 
+# check the website:
+https://e-commerce-angular-orcin.vercel.app/
 
 ### Technical Features
 
