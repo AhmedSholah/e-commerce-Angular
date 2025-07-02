@@ -57,17 +57,37 @@ export class CartServiceService {
         return token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : null;
     }
 
+    // addToCart(productId: string, quantity: number): Observable<any> {
+    //     const headers = this.getAuthHeaders();
+    //     if (!headers) {
+    //         this.setErrorMessage('You need to be logged in to add items to the cart.');
+    //         return new Observable();
+    //     }
+    //     return this.http.post(
+    //         `${this.baseUrl}${API.cartEndPoint}`,
+    //         { productId, quantity },
+    //         { headers }
+    //     );
+    // }
     addToCart(productId: string, quantity: number): Observable<any> {
         const headers = this.getAuthHeaders();
         if (!headers) {
             this.setErrorMessage('You need to be logged in to add items to the cart.');
             return new Observable();
         }
-        return this.http.post(
-            `${this.baseUrl}${API.cartEndPoint}`,
-            { productId, quantity },
-            { headers }
-        );
+
+        return this.http
+            .post(`${this.baseUrl}${API.cartEndPoint}`, { productId, quantity }, { headers })
+            .pipe(
+                tap(() => {
+                    this.loadCart();
+                }),
+                catchError((error) => {
+                    this.setErrorMessage('Failed to add item to cart.');
+                    console.error('Error adding to cart:', error);
+                    return [];
+                })
+            );
     }
 
     loadCart() {

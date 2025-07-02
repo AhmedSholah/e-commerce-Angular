@@ -1,59 +1,49 @@
-# Test
+# Craftopia - Handcrafted E-Commerce Platform
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+## Overview
+Craftopia is a modern e-commerce platform specializing in handcrafted products. Built with Angular and powered by a robust backend, it offers a seamless shopping experience for artisanal products.
 
-## Development server
+![Demo](media/output.gif)
 
-To start a local development server, run:
+# check the website:
+https://e-commerce-angular-orcin.vercel.app/
 
-```bash
-ng serve
-```
+### Technical Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Responsive design for all devices
+- Dynamic loading states
+- Error handling
+- Form validation
+- API integration
+- State management
 
-## Code scaffolding
+## Technology Stack
+- **Frontend**: Angular 17
+- **Styling**: TailwindCSS
+- **State Management**: Angular Services
+- **HTTP Client**: Angular HttpClient
+- **Routing**: Angular Router
+- **API Integration**: RESTful API
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Features
 
-```bash
-ng generate component component-name
-```
+### User Features
+- **Authentication & Profile Management**
+  - User registration and login
+  - Profile customization
+  - Secure authentication system
+    
+- **Shopping Experience**
+  - Product browsing with advanced filtering
+  - Dynamic product sorting (price, date, name)
+  - Responsive product grid layout
+  - Wishlist/Favorites management
+  - Shopping cart functionality
+  - Real-time cart updates
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Product Management**
+  - Detailed product views
+  - Multiple product images
+  - Product categories
+  - Price filtering
+  - Stock status tracking
