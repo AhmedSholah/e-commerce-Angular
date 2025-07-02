@@ -70,10 +70,13 @@ ngOnInit() {
     return Number(total.toFixed(2)) ;
   }
 
-  increaseQuantity(index: number): void {
-    this.cartItems[index].quantity++;
-  }
-  
+increaseQuantity(index: number): void {
+  const item = this.cartItems[index];
+  item.quantity++;
+  this.cartService.updateQuantity(item.id, +1); 
+}
+
+
 decreaseQuantity(index: number) {
   const item = this.cartItems[index];
 
