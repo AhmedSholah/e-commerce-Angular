@@ -9,12 +9,12 @@
 </div>
 
 <div class="flex mb-8">
-  <div class="text-main font-bold text-xl xl:ml-90 lg:ml-75 md:ml-52 sm:ml-24 ml-3">Order</div>
+  <div class="text-main font-bold text-xl xl:ml-90 lg:ml-75 md:ml-52 sm:ml-36 ml-5">Order</div>
   <div class="text-main font-bold text-xl xl:ml-80 lg:ml-64 md:ml-52 sm:ml-40 ml-28">Payment</div>
   <div class="text-gray-300 font-bold text-xl xl:ml-72 lg:ml-56 md:ml-44 sm:ml-32 ml-16">Checkout</div>
 </div>
 
-<div class="flex xl:flex-row lg:flex-row md:flex-row justify-center flex-col-reverse sm:flex-row gap-2 xl:gap-20 lg:gap-20 md:gap-14">
+<div class="flex xl:flex-row lg:flex-row md:flex-row justify-center flex-col-reverse  sm:flex-row gap-2 xl:gap-20 lg:gap-20 md:gap-14">
   <!-- left -->
   <div class="flex flex-col">
     <div class="ml-5 w-94 sm:w-72 md:w-90 lg:w-120 xl:w-150 lg:h-48 xl:h-50  border rounded-2xl border-gray-200">
@@ -42,62 +42,77 @@
     </div>
 </div>
  <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
-    <div class="ml-5 w-94 h-148 sm:w-72 md:w-90 lg:w-120 xl:w-150 sm:h-147 md:h-150 lg:h-130 xl:h-130  border rounded-2xl border-gray-200 mt-5 mb-10 p-6">
-      <h2 class="text-3xl font-bold text-main mt-8 ml-5 mb-8">Shipping Address</h2>  
+    <div class="ml-5 w-94 h-183 sm:w-72 md:w-90 lg:w-120 xl:w-150 sm:h-193 md:h-183 lg:h-183 xl:h-158  border rounded-2xl border-gray-200 mt-5 mb-10 p-6">
+      <h2 class="text-3xl font-bold text-main mt-3 ml-5 mb-6">Shipping Address</h2>  
       <div class="flex flex-col">
-        <select formControlName="city" class=" lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl">
-          <option value="" disabled selected >Select your city</option>
-          <option value="Cairo">Cairo</option>
-          <option value="Alexandria">Alexandria</option>
-          <option value="Giza">Giza</option>
-          <option value="Port Said">Port Said</option>
-          <option value="Suez">Suez</option>
-          <option value="Luxor">Luxor</option>
-          <option value="Aswan">Aswan</option>
-          <option value="Mansoura">Mansoura</option>
-          <option value="Tanta">Tanta</option>
-          <option value="Zagazig">Zagazig</option>
-          <option value="Ismailia">Ismailia</option>
-          <option value="Fayoum">Fayoum</option>
-          <option value="Beni Suef">Beni Suef</option>
-          <option value="Minya">Minya</option>
-          <option value="Sohag">Sohag</option>
-          <option value="Qena">Qena</option>
-          <option value="Asyut">Asyut</option>
-          <option value="Damietta">Damietta</option>
-          <option value="Shibin El Kom">Shibin El Kom</option>
-          <option value="Banha">Banha</option>
-          <option value="Kafr El Sheikh">Kafr El Sheikh</option>
-          <option value="Hurghada">Hurghada</option>
-          <option value="Marsa Matruh">Marsa Matruh</option>
-          <option value="Damanhour">Damanhour</option>
-        </select>
-        <div class="text-red-500 text-sm h-6" [ngClass]="{'invisible': city?.valid || !city?.touched}">City is required</div>
-      
+        <!-- city -->
+        <div class="flex flex-col gap-2">
+          <label for="" class="text-gray-950 text-xl">City</label>
+          <select formControlName="city" class=" lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl">
+            <option value="" disabled selected >Select your city</option>
+            <option value="Cairo">Cairo</option>
+            <option value="Alexandria">Alexandria</option>
+            <option value="Giza">Giza</option>
+            <option value="Port Said">Port Said</option>
+            <option value="Suez">Suez</option>
+            <option value="Luxor">Luxor</option>
+            <option value="Aswan">Aswan</option>
+            <option value="Mansoura">Mansoura</option>
+            <option value="Tanta">Tanta</option>
+            <option value="Zagazig">Zagazig</option>
+            <option value="Ismailia">Ismailia</option>
+            <option value="Fayoum">Fayoum</option>
+            <option value="Beni Suef">Beni Suef</option>
+            <option value="Minya">Minya</option>
+            <option value="Sohag">Sohag</option>
+            <option value="Qena">Qena</option>
+            <option value="Asyut">Asyut</option>
+            <option value="Damietta">Damietta</option>
+            <option value="Shibin El Kom">Shibin El Kom</option>
+            <option value="Banha">Banha</option>
+            <option value="Kafr El Sheikh">Kafr El Sheikh</option>
+            <option value="Hurghada">Hurghada</option>
+            <option value="Marsa Matruh">Marsa Matruh</option>
+            <option value="Damanhour">Damanhour</option>
+          </select>
+        </div>
+        <div class="text-red-500 text-sm h-6" [ngClass]="{ 'invisible': city?.valid || (!city?.dirty && !formSubmitted) }">City is required</div>
+        <!-- street address  -->
+      <div class="flex flex-col gap-2">
+        <label for="" class="text-gray-950 text-xl">Street Address</label>
         <input formControlName="streetaddress" class="lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl" placeholder="Street Address">
-        <div class="text-red-500 text-sm h-6 text-left" [ngClass]="{'invisible': streetaddress?.valid || !streetaddress?.touched}">Street address must contain letters only</div>
+      </div>
+        <div class="text-red-500 text-sm h-6 text-left mb-4 md:mb-0" [ngClass]="{ 'invisible': streetaddress?.valid || (!streetaddress?.dirty && !formSubmitted) }">Street address must contain letters only</div>
       
         <div class="flex gap-2 flex-wrap sm:flex-wrap ">
           <div class="flex flex-col">
-            <input formControlName="streetnumber" class="w-[325px] sm:w-[240px] md:w-[310px] lg:w-[210px] xl:w-[270px] p-2 border border-main rounded-xl" placeholder="Street No.">
-            <div class="text-red-500 text-sm h-6" [ngClass]="{'invisible': streetnumber?.valid || !streetnumber?.touched}">Street Number must be 1-5 digits</div>
+            <div class="flex flex-col gap-2">
+              <label for="" class="text-gray-950 text-xl">Street Number</label>
+              <input formControlName="streetnumber" class="w-[325px] sm:w-[240px] md:w-[310px] lg:w-[210px] xl:w-[270px] p-2 border border-main rounded-xl" placeholder="Street No.">
+            </div>
+            <div class="text-red-500 text-sm h-6" [ngClass]="{ 'invisible': streetnumber?.valid || (!streetnumber?.dirty && !formSubmitted) }">Street Number must be 1-5 digits</div>
           </div>
           <div class="flex flex-col">
-            <input formControlName="apartment" class="w-[325px] sm:w-[240px] md:w-[310px] lg:w-[210px] xl:w-[270px] p-2 border border-main rounded-xl" placeholder="Apartment No.">
-            <div class="text-red-500 text-sm h-5" [ngClass]="{'invisible': apartment?.valid || !apartment?.touched}">Apartment must be 1-4 digits</div>
+            <div class="flex flex-col gap-2">
+              <label for="" class="text-gray-950 text-xl">Apartment Number</label>
+              <input formControlName="apartment" class="w-[325px] sm:w-[240px] md:w-[310px] lg:w-[210px] xl:w-[270px] p-2 border border-main rounded-xl" placeholder="Apartment No.">
+            </div>
+            <div class="text-red-500 text-sm h-5" [ngClass]="{ 'invisible': apartment?.valid || (!apartment?.dirty && !formSubmitted) }">Apartment must be 1-4 digits</div>
           </div>
         </div>
-      
-        <input formControlName="phone" class="lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl" placeholder="Phone Number">
-        <div class="text-red-500 text-sm h-6 text-left" [ngClass]="{'invisible': phone?.valid || !phone?.touched}">
+      <div class="flex flex-col gap-2">
+              <label for="" class="text-gray-950 text-xl">Phone Number</label>
+              <input formControlName="phone" class="lg:w-[430px] xl:w-[550px] p-2 border border-main rounded-xl" placeholder="Phone Number">
+            </div>
+        <div class="text-red-500 text-sm h-6 text-left " [ngClass]="{ 'invisible': phone?.valid || (!phone?.dirty && !formSubmitted) }">
           Phone Number must be 11 digits 
         </div>
 
       
 
-        <button type="submit" [disabled]="shippingForm.invalid" class="lg:w-[430px] xl:w-[550px] mt-2 bg-main text-white p-2 rounded-xl" >Confirm</button>
+        <button type="submit" class="lg:w-[430px] xl:w-[550px] mt-2 bg-main text-white p-2 rounded-xl cursor-pointer" >Confirm</button>
       
-        <button type="button" class="lg:w-[430px] xl:w-[550px] mt-2 text-main p-2 border rounded-xl" (click)="resetForm()">Cancel</button>       
+        <button type="button" class="lg:w-[430px] xl:w-[550px] mt-2 text-main p-2 border rounded-xl cursor-pointer" (click)="resetForm()">Cancel</button>       
       </div>
     </div>
   </form>
@@ -162,7 +177,7 @@
         <h2 class="font-bold text-main text-[2rem]">Summary</h2>
       </div>
       <div class="flex flex-col">
-        <div class="flex justify-between mx-5 mb-4 mt-8">
+        <div class="flex justify-between mx-5 mt-8">
           <h4 class="text-gray-600 text-lg">Subtotal</h4>
           <h4 class="text-gray-600 text-lg">${{ subtotal }}</h4>
         </div>
@@ -170,7 +185,7 @@
           <h4 class="text-gray-600 text-lg">Vat</h4>
           <h4 class="text-gray-600 text-lg">${{ vat }}</h4>
         </div>
-        <div class="flex justify-between mx-5 ">
+        <div class="flex justify-between mx-5 mb-4">
           <h4 class="text-gray-600 text-lg">Shipping</h4>
           <h4 class="text-gray-600 text-lg">${{ shipping }}</h4>
         </div>
