@@ -35,12 +35,22 @@ export class CheckoutComponent {
     });
   }
 
-  ngOnInit() {
+//   ngOnInit() {
+//     this.cartService.cartItems$.subscribe((items) => {
+//       this.cartItems = [...items];
+//       console.log('Cart Items in Checkout:', this.cartItems);
+//     });
+//   }
+ngOnInit() {
+  const storedCart = localStorage.getItem('cartItems');
+  if (storedCart) {
+    this.cartItems = JSON.parse(storedCart);
+  } else {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = [...items];
-      console.log('Cart Items in Checkout:', this.cartItems);
     });
   }
+}
 
   get subtotal(): number {
     return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -63,12 +73,18 @@ export class CheckoutComponent {
   increaseQuantity(index: number): void {
     this.cartItems[index].quantity++;
   }
+  
+decreaseQuantity(index: number) {
+  const item = this.cartItems[index];
 
-  decreaseQuantity(index: number) {
-    if (this.cartItems[index].quantity > 1) {
-      this.cartItems[index].quantity--;
-    }
+  if (item.quantity > 1) {
+    item.quantity--;
+    this.cartService.updateQuantity(item.id, -1);
+  } else {
+    this.removeItem(index);
+    this.cartService.removeFromCart(item.id).subscribe(); 
   }
+}
 
   removeItem(index: number): void {
     this.cartItems.splice(index, 1);
