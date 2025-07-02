@@ -1,10 +1,8 @@
 <div
     *ngIf="isCartVisible"
-
-    class="z-10 fixed top-0 right-0 h-full w-[410px] bg-main-50 shadow-lg transition-transform duration-300 ease-in-out transform translate-x-0 flex flex-col"
-
+    class="z-10 fixed top-0 right-0 h-full w-[410px] bg-main-50 shadow-lg transition-transform duration-300 ease-in-out transform translate-x-0 flex flex-col px-4 py-2"
 >
-    <div class="flex justify-between p-2 shadow-lg mb-1">
+    <div class="flex justify-between items-center mb-4 border-b pb-2">
         <h2 class="font-bold text-main text-[2rem]">Your Cart</h2>
         <button (click)="closeCart()" class="hover:cursor-pointer">
             <img class="w-8 h-8" src="icons/exit.svg" alt="Close" />
@@ -22,13 +20,13 @@
 
     <div
         *ngIf="!isLoading && !errorMessage && (cartItems.length === 0 || !isLoggedIn)"
-        class="flex flex-col items-center justify-center h-full"
+        class="flex flex-col items-center justify-center h-full text-center space-y-3"
     >
-        <img src="trolley.svg" alt="Empty Cart" class="w-32 h-32 mb-4 mr-6" />
+        <img src="trolley.svg" alt="Empty Cart" class="w-32 h-32 mb-2" />
         <p class="text-main text-lg font-semibold">Your cart is empty!</p>
-        <p class="text-gray-500 text-sm mb-4">Start shopping to fill it up.</p>
+        <p class="text-gray-500 text-sm">Start shopping to fill it up.</p>
         <button
-            class="bg-main text-white px-4 py-2 rounded-lg cursor-pointer"
+            class="bg-main text-white px-5 py-2 rounded-lg hover:bg-main/90 transition"
             (click)="goToProducts()"
         >
             Shop Now
@@ -37,35 +35,41 @@
 
     <div
         *ngIf="!isLoading && !errorMessage && cartItems.length > 0"
-        class="flex-grow overflow-y-scroll py-5 px-2 gap-3"
+        class="flex-grow overflow-y-auto space-y-1"
     >
         <div
             *ngFor="let item of cartItems; let i = index"
-            class="flex gap-2 items-center h-[120px] flex-grow-0 mb-5"
+            class="flex gap-3 p-3 rounded-lg h-[150px]"
         >
             <img
-                class="rounded-[10px] w-[114px] h-[140px] border border-main object-cover"
+                class="rounded-[10px] w-[100px] h-full object-cover border border-main"
                 [src]="item.image"
                 alt="{{ item.name }}"
             />
-            <div class="bg-main rounded-[10px] w-full flex flex-col gap-1 p-2">
-                <div class="flex justify-between relative">
-                    <p class="font-bold text-white max-w-[90%] break-words">{{ item.name }}</p>
+
+            <div class="bg-main rounded-[10px] flex flex-col justify-between p-2 w-full h-full">
+                <div class="flex justify-between relative mb-1">
+                    <p class="font-bold text-white text-sm leading-snug max-w-[85%] break-words">
+                        {{ item.name }}
+                    </p>
                     <img
                         src="icons/delete-item.svg"
                         alt="Delete"
                         (click)="removeItem(item)"
-                        class="cursor-pointer absolute top-0 right-0"
+                        class="cursor-pointer absolute top-0 right-0 w-8 h-6"
                     />
                 </div>
-                <div class="flex gap-2">
-                    <span class="text-white">${{ item.price.toFixed(2) }}</span>
-                    <span class="text-[#A8A8A8] line-through">${{ item.oldPrice.toFixed(2) }}</span>
+
+                <div class="flex gap-2 items-center">
+                    <span class="text-white text-sm">${{ item.price.toFixed(2) }}</span>
+                    <span class="text-[#A8A8A8] line-through text-xs"
+                        >${{ item.oldPrice.toFixed(2) }}</span
+                    >
                 </div>
 
-                <div class="flex items-center justify-center mt-3">
-                    <div class="flex bg-main-50">
-                        <button class="p-2 bg-main-50" (click)="decreaseQuantity(item)">
+                <div class="flex items-center justify-center mt-1">
+                    <div class="flex bg-main-50 rounded overflow-hidden">
+                        <button class="px-2 py-1" (click)="decreaseQuantity(item)">
                             <svg
                                 width="16"
                                 height="16"
@@ -80,11 +84,11 @@
                             </svg>
                         </button>
                         <span
-                            class="flex items-center justify-center bg-main h-[30px] w-[30px] border-t-3 border-main-50 text-main-50"
+                            class="w-[30px] h-[30px] bg-main text-main-50 flex items-center justify-center font-bold border-t border-b border-main-50"
                         >
                             {{ item.quantity }}
                         </span>
-                        <button class="p-2 bg-main-50" (click)="increaseQuantity(item)">
+                        <button class="px-2 py-1" (click)="increaseQuantity(item)">
                             <svg
                                 width="16"
                                 height="16"
@@ -105,13 +109,14 @@
         </div>
     </div>
 
-    <div class="flex flex-col mt-4 px-2 mb-4">
-        <div class="flex justify-between">
-            <h2 class="text-main text-[24px] font-semibold">Total Price</h2>
-            <span class="text-[20px] text-[#7B7B7B]">${{ getTotalPrice() }}</span>
+    <div class="mt-4 space-y-3 border-t pt-3 px-1 mb-2">
+        <div class="flex justify-between items-center">
+            <h2 class="text-main text-[20px] font-semibold">Total Price</h2>
+            <span class="text-[18px] text-[#7B7B7B]">${{ getTotalPrice() }}</span>
         </div>
+
         <button
-            class="mt-2 bg-main text-white py-2 px-4 rounded-lg text-center"
+            class="w-full bg-main text-white py-2 rounded-lg hover:bg-main/90 transition"
             [routerLink]="'/checkout'"
             [disabled]="cartItems.length === 0 || !isLoggedIn"
         >
@@ -119,7 +124,7 @@
         </button>
 
         <button
-            class="w-full rounded-[8px] px-10 py-[8px] mt-2 text-main font-bold border border-main"
+            class="w-full text-main font-semibold border border-main py-2 rounded-lg hover:bg-main-100 transition"
             (click)="clearCart()"
         >
             Clear All
