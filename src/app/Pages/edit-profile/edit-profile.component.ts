@@ -38,7 +38,7 @@ export class EditProfileComponent {
             phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
             country: ['Egypt', [Validators.required, Validators.pattern(/^Egypt$/)]],
             city: ['', Validators.required],
-            bio: ['', [Validators.minLength(3), Validators.maxLength(200)]],
+            // bio: ['', [Validators.minLength(3), Validators.maxLength(200)]],
             image: [''],
         });
 
