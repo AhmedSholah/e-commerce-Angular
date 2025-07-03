@@ -42,6 +42,7 @@ export class CartServiceService {
 
     setCart(items: any[]) {
         this.cartItemsSubject.next(items);
+        localStorage.setItem('cartItems', JSON.stringify(items));
     }
 
     getCart() {
@@ -57,65 +58,130 @@ export class CartServiceService {
         return token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : null;
     }
 
+    // addToCart(productId: string, quantity: number): Observable<any> {
+    //     const headers = this.getAuthHeaders();
+    //     if (!headers) {
+    //         this.setErrorMessage('You need to be logged in to add items to the cart.');
+    //         return new Observable();
+    //     }
+    //     return this.http.post(
+    //         `${this.baseUrl}${API.cartEndPoint}`,
+    //         { productId, quantity },
+    //         { headers }
+    //     );
+    // }
     addToCart(productId: string, quantity: number): Observable<any> {
         const headers = this.getAuthHeaders();
         if (!headers) {
             this.setErrorMessage('You need to be logged in to add items to the cart.');
             return new Observable();
         }
-        return this.http.post(
-            `${this.baseUrl}${API.cartEndPoint}`,
-            { productId, quantity },
-            { headers }
-        );
-    }
 
-    loadCart() {
-        const headers = this.getAuthHeaders();
-        if (!headers) {
-            this.setErrorMessage('You need to be logged in to view your cart.');
-            this.cartItemsSubject.next([]);
-            return;
-        }
-
-        this.isLoadingSubject.next(true);
-        this.errorMessageSubject.next('');
-
-        this.http
-            .get(`${this.baseUrl}${API.cartEndPoint}`, { headers })
+        return this.http
+            .post(`${this.baseUrl}${API.cartEndPoint}`, { productId, quantity }, { headers })
             .pipe(
-                tap((response: any) => {
-                    if (response.status === 'success' && response.data.items) {
-                        const items = response.data.items.map((item: any) => ({
-                            id: item.product._id,
-                            name: item.product.name,
-                            price: item.product.priceAfterDiscount || item.product.price,
-                            oldPrice: item.product.price,
-                            quantity: item.quantity,
-                            image:
-                                item.product.images.length > 0
-                                    ? item.product.images[0]
-                                    : 'default-image.png',
-                        }));
-                        this.cartItemsSubject.next(items);
-                    } else {
-                        this.setErrorMessage('Failed to load cart items.');
-                        this.cartItemsSubject.next([]);
-                    }
+                tap(() => {
+                    this.loadCart();
                 }),
                 catchError((error) => {
-                    this.setErrorMessage('Failed to load cart items.');
-                    console.error('Error loading cart:', error);
-                    if (error.status === 401) {
-                        this.setErrorMessage('Unauthorized: Please log in');
-                    }
+                    this.setErrorMessage('Failed to add item to cart.');
+                    console.error('Error adding to cart:', error);
                     return [];
-                }),
-                tap(() => this.isLoadingSubject.next(false))
-            )
-            .subscribe();
+                })
+            );
     }
 
+    // loadCart() {
+    //     const headers = this.getAuthHeaders();
+    //     if (!headers) {
+    //         this.setErrorMessage('You need to be logged in to view your cart.');
+    //         this.cartItemsSubject.next([]);
+    //         return;
+    //     }
+
+    //     this.isLoadingSubject.next(true);
+    //     this.errorMessageSubject.next('');
+
+    //     this.http
+    //         .get(`${this.baseUrl}${API.cartEndPoint}`, { headers })
+    //         .pipe(
+    //             tap((response: any) => {
+    //                 if (response.status === 'success' && response.data.items) {
+    //                     const items = response.data.items.map((item: any) => ({
+    //                         id: item.product._id,
+    //                         name: item.product.name,
+    //                         price: item.product.priceAfterDiscount || item.product.price,
+    //                         oldPrice: item.product.price,
+    //                         quantity: item.quantity,
+    //                         image:
+    //                             item.product.images.length > 0
+    //                                 ? item.product.images[0]
+    //                                 : 'default-image.png',
+    //                     }));
+    //                     this.cartItemsSubject.next(items);
+    //                 } else {
+    //                     this.setErrorMessage('Failed to load cart items.');
+    //                     this.cartItemsSubject.next([]);
+    //                 }
+    //             }),
+    //             catchError((error) => {
+    //                 this.setErrorMessage('Failed to load cart items.');
+    //                 console.error('Error loading cart:', error);
+    //                 if (error.status === 401) {
+    //                     this.setErrorMessage('Unauthorized: Please log in');
+    //                 }
+    //                 return [];
+    //             }),
+    //             tap(() => this.isLoadingSubject.next(false))
+    //         )
+    //         .subscribe();
+    // }
+loadCart() {
+  const headers = this.getAuthHeaders();
+
+  if (!headers) {
+    this.setErrorMessage('You need to be logged in to view your cart.');
+    
+    // ✅ لو فيه بيانات في localStorage نرجعها
+    const storedItems = localStorage.getItem('cartItems');
+    if (storedItems) {
+      this.cartItemsSubject.next(JSON.parse(storedItems));
+    } else {
+      this.cartItemsSubject.next([]);
+    }
+    return;
+  }
+
+  this.isLoadingSubject.next(true);
+  this.errorMessageSubject.next('');
+
+  this.http.get(`${this.baseUrl}${API.cartEndPoint}`, { headers })
+    .pipe(
+      tap((response: any) => {
+        if (response.status === 'success' && response.data.items) {
+          const items = response.data.items.map((item: any) => ({
+            id: item.product._id,
+            name: item.product.name,
+            price: item.product.priceAfterDiscount || item.product.price,
+            oldPrice: item.product.price,
+            quantity: item.quantity,
+            image: item.product.images.length > 0 ? item.product.images[0] : 'default-image.png',
+          }));
+          this.setCart(items); 
+        } else {
+          this.setErrorMessage('Failed to load cart items.');
+          this.cartItemsSubject.next([]);
+        }
+      }),
+      catchError((error) => {
+        this.setErrorMessage('Failed to load cart items.');
+        console.error('Error loading cart:', error);
+        return [];
+      }),
+      tap(() => this.isLoadingSubject.next(false))
+    )
+    .subscribe();
+}
     updateQuantity(productId: string, change: number): void {
         const headers = this.getAuthHeaders();
         if (!headers) {

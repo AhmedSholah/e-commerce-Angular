@@ -17,10 +17,15 @@ import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { CheckoutConfirmationComponent } from './Components/checkout-confirmation/checkout-confirmation.component';
 
 import { authGuard } from './guards/auth.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    {
+        path: 'dashboard/*',
+        component: DashboardComponent,
+    },
     {
         path: '',
         component: MainLayoutComponent,
